@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoAdmin.Server", "src\Tod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoAdmin.Server.Tests", "test\TodoAdmin.Server.Tests\TodoAdmin.Server.Tests.csproj", "{A220E288-FA2B-4073-B352-4D814AD3CF68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoAdmin.Persistence.Tests", "test\TodoAdmin.Persistence.Tests\TodoAdmin.Persistence.Tests.csproj", "{549E8485-484E-4DFE-9542-7B64F754FD9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoAdmin.Domain.Tests", "test\TodoAdmin.Domain.Tests\TodoAdmin.Domain.Tests.csproj", "{549E8485-484E-4DFE-9542-7B64F754FD9C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoAdmin.Persistence", "src\TodoAdmin.Persistence\TodoAdmin.Persistence.csproj", "{9E7819CC-42BA-4B9F-A6B1-7F19A946F254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoAdmin.Domain", "src\TodoAdmin.Domain\TodoAdmin.Domain.csproj", "{9E7819CC-42BA-4B9F-A6B1-7F19A946F254}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoAdmin.Types", "src\TodoAdmin.Types\TodoAdmin.Types.csproj", "{6191B3DF-F1E9-4055-95C4-40F15B1FAAA9}"
 EndProject

@@ -16,24 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace TodoAdmin.Persistence
+namespace TodoAdmin.Domain
 {
     using System;
-    using System.Linq;
 
-    internal partial class AuthenticationEntity
+    public class AuthenticationModel
     {
-        public Guid AppId { get; internal set; }
+        public Guid AppId { get; set; }
 
-        public string AccountName { get; internal set; }
+        public string AccountName { get; set; }
 
-        public byte[] Secret { get; internal set; }
-
-        public DateTime Created { get; internal set; }
+        public DateTime? Created { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (obj == null || obj is AuthenticationEntity == false)
+            if (obj == null || obj is AuthenticationModel == false)
             {
                 return false;
             }
@@ -43,11 +40,10 @@ namespace TodoAdmin.Persistence
                 return true;
             }
 
-            var otherEntity = (AuthenticationEntity)obj;
-            return AppId.Equals(otherEntity.AppId)
-                && AccountName.Equals(otherEntity.AccountName)
-                && Created.Equals(otherEntity.Created)
-                && Secret.SequenceEqual(otherEntity.Secret);
+            var otherModel = (AuthenticationModel)obj;
+            return AppId.Equals(otherModel.AppId)
+                && AccountName.Equals(otherModel.AccountName)
+                && Created.Equals(otherModel.Created);
         }
 
         public override int GetHashCode()
@@ -57,12 +53,6 @@ namespace TodoAdmin.Persistence
                 var hash = (17 * 486187739) + AppId.GetHashCode();
                 hash = (hash * 486187739) + AccountName.GetHashCode();
                 hash = (hash * 486187739) + Created.GetHashCode();
-
-                foreach (var b in Secret)
-                {
-                    hash = (hash * 486187739) + b;
-                }
-
                 return hash;
             }
         }

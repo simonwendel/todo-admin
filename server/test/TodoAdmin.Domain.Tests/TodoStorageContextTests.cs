@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace TodoAdmin.Persistence.Tests
+namespace TodoAdmin.Domain.Tests
 {
     using System;
     using FluentAssertions;

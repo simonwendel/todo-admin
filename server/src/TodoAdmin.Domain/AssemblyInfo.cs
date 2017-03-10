@@ -18,4 +18,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("TodoAdmin.Persistence.Tests")]
+[assembly: InternalsVisibleTo("TodoAdmin.Domain.Tests")]
