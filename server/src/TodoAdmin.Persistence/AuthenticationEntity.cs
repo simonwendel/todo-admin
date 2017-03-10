@@ -21,7 +21,7 @@ namespace TodoAdmin.Persistence
     using System;
     using System.Linq;
 
-    public partial class AuthenticationEntity
+    internal partial class AuthenticationEntity
     {
         public Guid AppId { get; internal set; }
 
