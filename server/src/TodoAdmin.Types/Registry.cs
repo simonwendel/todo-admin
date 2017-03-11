@@ -16,7 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System.Runtime.CompilerServices;
+namespace TodoAdmin.Types
+{
+    using Microsoft.Extensions.DependencyInjection;
+    using TodoAdmin.Domain;
 
-[assembly: InternalsVisibleTo("TodoAdmin.Domain.Tests")]
-[assembly: InternalsVisibleTo("TodoAdmin.Types")]
+    public class Registry
+    {
+        public void AddServicesTo(IServiceCollection services)
+        {
+            services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+        }
+    }
+}

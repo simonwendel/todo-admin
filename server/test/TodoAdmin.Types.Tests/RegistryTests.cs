@@ -16,7 +16,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System.Runtime.CompilerServices;
+namespace TodoAdmin.Types.Tests
+{
+    using FluentAssertions;
+    using Microsoft.Extensions.DependencyInjection;
+    using TodoAdmin.Types;
+    using Xunit;
 
-[assembly: InternalsVisibleTo("TodoAdmin.Domain.Tests")]
-[assembly: InternalsVisibleTo("TodoAdmin.Types")]
+    public class RegistryTests
+    {
+        private readonly IServiceCollection services;
+
+        private readonly Registry sut;
+
+        public RegistryTests()
+        {
+            services = new ServiceCollection();
+            sut = new Registry();
+        }
+
+        [Fact]
+        public void AddServicesTo_ShouldRegisterServices()
+        {
+            sut.AddServicesTo(services);
+
+            services.Count
+                .Should().Be(1);
+        }
+    }
+}
