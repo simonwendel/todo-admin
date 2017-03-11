@@ -22,12 +22,16 @@ namespace TodoAdmin.Server
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using TodoAdmin.Types;
 
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var registry = new Registry();
+            registry.AddServicesTo(services);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
