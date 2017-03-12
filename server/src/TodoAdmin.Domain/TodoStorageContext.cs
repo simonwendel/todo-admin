@@ -22,7 +22,7 @@ namespace TodoAdmin.Domain
 
     internal partial class TodoStorageContext : DbContext
     {
-        public virtual DbSet<AuthenticationEntity> Authentication { get; set; }
+        public virtual DbSet<Authentication> Authentication { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,7 +32,7 @@ namespace TodoAdmin.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AuthenticationEntity>(entity =>
+            modelBuilder.Entity<Authentication>(entity =>
             {
                 entity
                     .HasKey(e => e.AppId)

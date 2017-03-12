@@ -26,12 +26,12 @@ namespace TodoAdmin.Domain.Tests
     {
         /// <summary>
         /// Not terribly elegant integration test making sure complete roundtripping 
-        /// of <see cref="AuthenticationEntity" /> object works as expected.
+        /// of <see cref="Authentication" /> object works as expected.
         /// </summary>
         [Fact]
         public void Context_ShouldRoundTripEntity()
         {
-            var entity = new AuthenticationEntity
+            var entity = new Authentication
             {
                 AppId = Guid.NewGuid(),
                 AccountName = "SomeAccount",

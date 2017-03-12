@@ -21,7 +21,7 @@ namespace TodoAdmin.Domain
     using System;
     using System.Linq;
 
-    internal partial class AuthenticationEntity
+    internal partial class Authentication
     {
         public Guid AppId { get; internal set; }
 
@@ -33,7 +33,7 @@ namespace TodoAdmin.Domain
 
         public override bool Equals(object obj)
         {
-            if (obj == null || obj is AuthenticationEntity == false)
+            if (obj == null || obj is Authentication == false)
             {
                 return false;
             }
@@ -43,7 +43,7 @@ namespace TodoAdmin.Domain
                 return true;
             }
 
-            var otherEntity = (AuthenticationEntity)obj;
+            var otherEntity = (Authentication)obj;
             return AppId.Equals(otherEntity.AppId)
                 && AccountName.Equals(otherEntity.AccountName)
                 && Created.Equals(otherEntity.Created)

@@ -24,7 +24,7 @@ namespace TodoAdmin.Domain.Tests
     using FluentAssertions;
     using Xunit;
 
-    public class AuthenticationEntityTests
+    public class AuthenticationTests
     {
         [Fact]
         public void Equals_GivenSameObject_ReturnsTrue()
@@ -96,9 +96,9 @@ namespace TodoAdmin.Domain.Tests
                 .Should().Be(hash);
         }
 
-        private static AuthenticationEntity BuildAuthenticationEntity()
+        private static Authentication BuildAuthenticationEntity()
         {
-            return new AuthenticationEntity
+            return new Authentication
             {
                 AppId = new Guid("d3d6289e-5612-433f-82cd-6cff35683aa1"),
                 AccountName = "autoFixtureOn.NETCoreWouldBeNice",
@@ -111,7 +111,7 @@ namespace TodoAdmin.Domain.Tests
             };
         }
 
-        private static IEnumerable<AuthenticationEntity> BuildDifferingEntities()
+        private static IEnumerable<Authentication> BuildDifferingEntities()
         {
             var otherEntity1 = BuildAuthenticationEntity();
             otherEntity1.AppId = Guid.NewGuid();
