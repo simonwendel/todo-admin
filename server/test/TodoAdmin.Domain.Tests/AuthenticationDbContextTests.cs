@@ -22,7 +22,7 @@ namespace TodoAdmin.Domain.Tests
     using FluentAssertions;
     using Xunit;
 
-    public class TodoStorageContextTests
+    public class AuthenticationDbContextTests
     {
         /// <summary>
         /// Not terribly elegant integration test making sure complete roundtripping 
@@ -40,28 +40,28 @@ namespace TodoAdmin.Domain.Tests
             };
 
             // save
-            using (var sut = new TodoStorageContext())
+            using (var sut = new AuthenticationDbContext())
             {
                 sut.Add(entity);
                 sut.SaveChanges();
             }
 
             // query
-            using (var sut = new TodoStorageContext())
+            using (var sut = new AuthenticationDbContext())
             {
                 sut.Authentication
                     .Should().ContainSingle(e => e.Equals(entity));
             }
 
             // delete
-            using (var sut = new TodoStorageContext())
+            using (var sut = new AuthenticationDbContext())
             {
                 sut.Authentication.Remove(entity);
                 sut.SaveChanges();
             }
 
             // query
-            using (var sut = new TodoStorageContext())
+            using (var sut = new AuthenticationDbContext())
             {
                 sut.Authentication
                     .Should().NotContain(e => e.Equals(entity));

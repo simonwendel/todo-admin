@@ -20,7 +20,7 @@ namespace TodoAdmin.Domain
 {
     using Microsoft.EntityFrameworkCore;
 
-    internal partial class TodoStorageContext : DbContext
+    internal partial class AuthenticationDbContext : DbContext
     {
         public virtual DbSet<Authentication> Authentication { get; set; }
 
