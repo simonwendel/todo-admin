@@ -25,7 +25,7 @@ namespace TodoAdmin.Domain.Tests
     public class AuthenticationDbContextTests
     {
         /// <summary>
-        /// Not terribly elegant integration test making sure complete roundtripping 
+        /// Not terribly elegant integration test making sure complete roundtripping
         /// of <see cref="Authentication" /> object works as expected.
         /// </summary>
         [Fact]
