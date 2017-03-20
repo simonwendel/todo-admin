@@ -21,8 +21,12 @@ namespace TodoAdmin.Domain
     using System;
     using System.Linq;
 
-    internal partial class Authentication
+    public partial class Authentication
     {
+        internal Authentication()
+        {
+        }
+
         public Guid AppId { get; internal set; }
 
         public string AccountName { get; internal set; }
