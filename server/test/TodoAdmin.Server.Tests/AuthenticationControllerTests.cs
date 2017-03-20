@@ -19,11 +19,32 @@
 namespace TodoAdmin.Server.Tests
 {
     using System;
+    using System.Collections.Generic;
     using FluentAssertions;
+    using Moq;
+    using TodoAdmin.Domain;
     using Xunit;
 
     public class AuthenticationControllerTests
     {
+        private readonly Mock<IAuthenticationRepository> repository;
+
+        private readonly IEnumerable<Authentication> persistedEntities;
+
+        private readonly AuthenticationController sut;
+
+        public AuthenticationControllerTests()
+        {
+            persistedEntities = new Authentication[0];
+
+            repository = new Mock<IAuthenticationRepository>();
+            repository
+                .Setup(r => r.GetAll())
+                .Returns(persistedEntities);
+
+            sut = new AuthenticationController(repository.Object);
+        }
+
         [Fact]
         public void Ctor_GivenNullRepository_ThrowsException()
         {
@@ -32,6 +53,19 @@ namespace TodoAdmin.Server.Tests
 
             constructorCall
                 .ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Get_ReturnsAllFromRepository()
+        {
+            var retrievedEntities = sut.Get();
+
+            retrievedEntities
+                .Should().BeSameAs(persistedEntities);
+
+            repository.Verify(
+                r => r.GetAll(),
+                Times.Once);
         }
     }
 }

@@ -19,6 +19,7 @@
 namespace TodoAdmin.Server
 {
     using System;
+    using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using TodoAdmin.Domain;
 
@@ -31,6 +32,12 @@ namespace TodoAdmin.Server
         {
             this.repository = repository
                 ?? throw new ArgumentNullException(nameof(repository));
+        }
+
+        [HttpGet]
+        public IEnumerable<Authentication> Get()
+        {
+            return repository.GetAll();
         }
     }
 }
