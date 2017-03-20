@@ -18,7 +18,10 @@
 
 namespace TodoAdmin.Domain
 {
+    using System.Collections.Generic;
+
     public interface IAuthenticationRepository
     {
+        IEnumerable<Authentication> GetAll();
     }
 }

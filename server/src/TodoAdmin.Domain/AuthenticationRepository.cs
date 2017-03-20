@@ -18,7 +18,14 @@
 
 namespace TodoAdmin.Domain
 {
+    using System;
+    using System.Collections.Generic;
+
     internal class AuthenticationRepository : IAuthenticationRepository
     {
+        public IEnumerable<Authentication> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
