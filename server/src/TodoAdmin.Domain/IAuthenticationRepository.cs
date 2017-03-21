@@ -25,5 +25,7 @@ namespace TodoAdmin.Domain
         IEnumerable<Authentication> GetAll();
 
         Authentication Get(int id);
+
+        bool Delete(int id);
     }
 }
