@@ -27,5 +27,10 @@ namespace TodoAdmin.Domain
         {
             throw new NotImplementedException();
         }
+
+        public Authentication Get(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

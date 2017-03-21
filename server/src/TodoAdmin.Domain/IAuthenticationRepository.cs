@@ -23,5 +23,7 @@ namespace TodoAdmin.Domain
     public interface IAuthenticationRepository
     {
         IEnumerable<Authentication> GetAll();
+
+        Authentication Get(int id);
     }
 }
