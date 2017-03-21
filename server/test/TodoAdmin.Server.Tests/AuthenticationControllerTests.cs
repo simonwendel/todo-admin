@@ -21,6 +21,7 @@ namespace TodoAdmin.Server.Tests
     using System;
     using System.Collections.Generic;
     using FluentAssertions;
+    using Microsoft.AspNetCore.Mvc;
     using Moq;
     using TodoAdmin.Domain;
     using Xunit;
@@ -31,16 +32,34 @@ namespace TodoAdmin.Server.Tests
 
         private readonly IEnumerable<Authentication> persistedEntities;
 
+        private readonly Authentication persistedEntity;
+
+        private readonly int existingId;
+
+        private readonly int nonExistingId;
+
         private readonly AuthenticationController sut;
 
         public AuthenticationControllerTests()
         {
             persistedEntities = new Authentication[0];
+            persistedEntity = new Authentication();
+
+            existingId = 8;
+            nonExistingId = 9;
 
             repository = new Mock<IAuthenticationRepository>();
             repository
                 .Setup(r => r.GetAll())
                 .Returns(persistedEntities);
+
+            repository
+                .Setup(r => r.Get(It.Is<int>(i => i == nonExistingId)))
+                .Returns((Authentication)null);
+
+            repository
+                .Setup(r => r.Get(It.Is<int>(i => i == existingId)))
+                .Returns(persistedEntity);
 
             sut = new AuthenticationController(repository.Object);
         }
@@ -65,6 +84,34 @@ namespace TodoAdmin.Server.Tests
 
             repository.Verify(
                 r => r.GetAll(),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Get_GivenNonExistingId_ReturnsNotFound()
+        {
+            var response = sut.Get(nonExistingId);
+
+            response
+                .Should().BeOfType<NotFoundResult>();
+
+            repository.Verify(
+                r => r.Get(It.Is<int>(i => i == nonExistingId)),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Get_GivenExistingId_ReturnsOk()
+        {
+            var response = sut.Get(existingId);
+
+            response
+                .Should().BeOfType<OkObjectResult>()
+                .Which.Value
+                    .Should().BeSameAs(persistedEntity);
+
+            repository.Verify(
+                r => r.Get(It.Is<int>(i => i == existingId)),
                 Times.Once);
         }
     }

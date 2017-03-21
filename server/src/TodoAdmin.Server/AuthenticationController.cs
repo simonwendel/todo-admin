@@ -39,5 +39,17 @@ namespace TodoAdmin.Server
         {
             return repository.GetAll();
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var result = repository.Get(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
 }
