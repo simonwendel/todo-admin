@@ -23,10 +23,6 @@ namespace TodoAdmin.Domain
 
     public partial class Authentication
     {
-        internal Authentication()
-        {
-        }
-
         public Guid AppId { get; internal set; }
 
         public string AccountName { get; internal set; }
