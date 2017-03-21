@@ -61,6 +61,14 @@ namespace TodoAdmin.Server.Tests
                 .Setup(r => r.Get(It.Is<int>(i => i == existingId)))
                 .Returns(persistedEntity);
 
+            repository
+                .Setup(r => r.Delete(It.Is<int>(i => i == nonExistingId)))
+                .Returns(false);
+
+            repository
+                .Setup(r => r.Delete(It.Is<int>(i => i == existingId)))
+                .Returns(true);
+
             sut = new AuthenticationController(repository.Object);
         }
 
@@ -112,6 +120,32 @@ namespace TodoAdmin.Server.Tests
 
             repository.Verify(
                 r => r.Get(It.Is<int>(i => i == existingId)),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Delete_GivenNonExistingId_ReturnsNotFound()
+        {
+            var response = sut.Delete(nonExistingId);
+
+            response
+                .Should().BeOfType<NotFoundResult>();
+
+            repository.Verify(
+                r => r.Delete(It.Is<int>(i => i == nonExistingId)),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Delete_GivenExistingId_ReturnsNoContent()
+        {
+            var response = sut.Delete(existingId);
+
+            response
+                .Should().BeOfType<NoContentResult>();
+
+            repository.Verify(
+                r => r.Delete(It.Is<int>(i => i == existingId)),
                 Times.Once);
         }
     }

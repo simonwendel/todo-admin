@@ -51,5 +51,17 @@ namespace TodoAdmin.Server
 
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var success = repository.Delete(id);
+            if (success)
+            {
+                return NoContent();
+            }
+
+            return NotFound();
+        }
     }
 }
