@@ -19,7 +19,6 @@
 namespace TodoAdmin.Server
 {
     using System;
-    using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using TodoAdmin.Domain;
 
@@ -35,9 +34,9 @@ namespace TodoAdmin.Server
         }
 
         [HttpGet]
-        public IEnumerable<Authentication> Get()
+        public IActionResult Get()
         {
-            return repository.GetAll();
+            return Ok(repository.GetAll());
         }
 
         [HttpGet("{id}")]

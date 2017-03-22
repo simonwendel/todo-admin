@@ -83,12 +83,14 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
-        public void Get_ReturnsAllFromRepository()
+        public void Get_ReturnsOkWithAllFromRepository()
         {
-            var retrievedEntities = sut.Get();
+            var response = sut.Get();
 
-            retrievedEntities
-                .Should().BeSameAs(persistedEntities);
+            response
+                .Should().BeOfType<OkObjectResult>()
+                .Which.Value
+                    .Should().BeSameAs(persistedEntities);
 
             repository.Verify(
                 r => r.GetAll(),
