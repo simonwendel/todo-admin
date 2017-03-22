@@ -33,6 +33,11 @@ namespace TodoAdmin.Domain
             throw new NotImplementedException();
         }
 
+        public Authentication Create(Authentication authentication)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();

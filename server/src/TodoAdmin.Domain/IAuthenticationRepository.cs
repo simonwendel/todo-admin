@@ -26,6 +26,8 @@ namespace TodoAdmin.Domain
 
         Authentication Get(int id);
 
+        Authentication Create(Authentication authentication);
+
         bool Delete(int id);
     }
 }
