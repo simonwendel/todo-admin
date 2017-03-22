@@ -109,7 +109,7 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
-        public void Get_GivenExistingId_ReturnsOk()
+        public void Get_GivenExistingId_ReturnsOkWithResult()
         {
             var response = sut.Get(existingId);
 
