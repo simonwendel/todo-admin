@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TodoAdmin.Core\TodoAdmin.Core.csproj" />
     <ProjectReference Include="..\TodoAdmin.Types\TodoAdmin.Types.csproj" />
   </ItemGroup>
 

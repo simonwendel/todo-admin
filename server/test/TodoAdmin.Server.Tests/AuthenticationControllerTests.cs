@@ -23,7 +23,7 @@ namespace TodoAdmin.Server.Tests
     using FluentAssertions;
     using Microsoft.AspNetCore.Mvc;
     using Moq;
-    using TodoAdmin.Domain;
+    using TodoAdmin.Core;
     using Xunit;
 
     public class AuthenticationControllerTests

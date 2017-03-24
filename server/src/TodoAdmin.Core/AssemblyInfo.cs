@@ -16,31 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace TodoAdmin.Domain
-{
-    using System;
-    using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
-    internal class AuthenticationRepository : IAuthenticationRepository
-    {
-        public IEnumerable<Authentication> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Authentication Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Authentication Create(Authentication authentication)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
+[assembly: InternalsVisibleTo("TodoAdmin.Core.Tests")]
+[assembly: InternalsVisibleTo("TodoAdmin.Types")]

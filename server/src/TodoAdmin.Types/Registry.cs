@@ -19,7 +19,7 @@
 namespace TodoAdmin.Types
 {
     using Microsoft.Extensions.DependencyInjection;
-    using TodoAdmin.Domain;
+    using TodoAdmin.Core;
 
     public class Registry
     {

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TodoAdmin.Domain\TodoAdmin.Domain.csproj" />
+    <ProjectReference Include="..\..\src\TodoAdmin.Core\TodoAdmin.Core.csproj" />
   </ItemGroup>
 
 </Project>

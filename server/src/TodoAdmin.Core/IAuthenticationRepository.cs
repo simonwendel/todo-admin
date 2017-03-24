@@ -16,7 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System.Runtime.CompilerServices;
+namespace TodoAdmin.Core
+{
+    using System.Collections.Generic;
 
-[assembly: InternalsVisibleTo("TodoAdmin.Domain.Tests")]
-[assembly: InternalsVisibleTo("TodoAdmin.Types")]
+    public interface IAuthenticationRepository
+    {
+        IEnumerable<Authentication> GetAll();
+
+        Authentication Get(int id);
+
+        Authentication Create(Authentication authentication);
+
+        bool Delete(int id);
+    }
+}

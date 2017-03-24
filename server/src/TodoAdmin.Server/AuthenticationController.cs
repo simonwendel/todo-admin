@@ -20,7 +20,7 @@ namespace TodoAdmin.Server
 {
     using System;
     using Microsoft.AspNetCore.Mvc;
-    using TodoAdmin.Domain;
+    using TodoAdmin.Core;
 
     [Route("api/[controller]")]
     public class AuthenticationController : Controller
