@@ -22,6 +22,7 @@ namespace TodoAdmin.Server
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Swashbuckle.AspNetCore.Swagger;
     using TodoAdmin.Types;
 
     public class Startup
@@ -29,6 +30,10 @@ namespace TodoAdmin.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Todo Cloud Admin API", Version = "v1" });
+            });
 
             var registry = new Registry();
             registry.AddServicesTo(services);
@@ -44,6 +49,12 @@ namespace TodoAdmin.Server
             }
 
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }
