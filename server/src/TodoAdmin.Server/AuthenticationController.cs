@@ -51,6 +51,20 @@ namespace TodoAdmin.Server
             return Ok(result);
         }
 
+        [HttpPost]
+        public IActionResult Post(Authentication authentication)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return StatusCode(422);
+            }
+
+            var newEntity = repository.Create(authentication);
+            var url = $"/api/authentication/{newEntity.AppId}";
+
+            return Created(url, newEntity);
+        }
+
         [HttpDelete("{appId}")]
         public IActionResult Delete(Guid appId)
         {

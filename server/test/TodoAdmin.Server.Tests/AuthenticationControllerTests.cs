@@ -34,6 +34,8 @@ namespace TodoAdmin.Server.Tests
 
         private readonly Authentication persistedEntity;
 
+        private readonly Authentication nonPersistedEntity;
+
         private readonly Guid existingId;
 
         private readonly Guid nonExistingId;
@@ -43,7 +45,9 @@ namespace TodoAdmin.Server.Tests
         public AuthenticationControllerTests()
         {
             persistedEntities = new Authentication[0];
-            persistedEntity = new Authentication();
+
+            persistedEntity = Authentication.New();
+            nonPersistedEntity = Authentication.New();
 
             existingId = Guid.NewGuid();
             nonExistingId = Guid.NewGuid();
@@ -59,6 +63,10 @@ namespace TodoAdmin.Server.Tests
 
             repository
                 .Setup(r => r.Get(It.Is<Guid>(i => i == existingId)))
+                .Returns(persistedEntity);
+
+            repository
+                .Setup(r => r.Create(It.Is<Authentication>(a => a == nonPersistedEntity)))
                 .Returns(persistedEntity);
 
             repository
@@ -123,6 +131,40 @@ namespace TodoAdmin.Server.Tests
             repository.Verify(
                 r => r.Get(It.Is<Guid>(i => i == existingId)),
                 Times.Once);
+        }
+
+        [Fact]
+        public void Post_GivenModelError_ReturnsUnprocessableEntity()
+        {
+            sut.ModelState.AddModelError("error, dawg", "Something fishy with the dataz");
+
+            var response = sut.Post(nonPersistedEntity);
+
+            response
+                .Should().BeOfType<StatusCodeResult>()
+                .Which.StatusCode
+                    .Should().Be(422);
+        }
+
+        [Fact]
+        public void Post_GivenAuthentication_PersistsEntity()
+        {
+            sut.Post(nonPersistedEntity);
+
+            repository.Verify(
+                r => r.Create(It.Is<Authentication>(a => a == nonPersistedEntity)),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Post_GivenAuthentication_ReturnsCreatedResult()
+        {
+            var response = sut.Post(nonPersistedEntity);
+
+            response
+                .Should().BeOfType<CreatedResult>()
+                .Which.Location
+                    .Should().Be($"/api/authentication/{persistedEntity.AppId}");
         }
 
         [Fact]
