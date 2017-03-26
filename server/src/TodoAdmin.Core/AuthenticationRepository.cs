@@ -38,6 +38,11 @@ namespace TodoAdmin.Core
             throw new NotImplementedException();
         }
 
+        public void Update(Authentication authentication)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Delete(Guid appId)
         {
             throw new NotImplementedException();
