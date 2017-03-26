@@ -49,8 +49,8 @@ namespace TodoAdmin.Server.Tests
             persistedEntity = Authentication.New();
             nonPersistedEntity = Authentication.New();
 
-            existingId = Guid.NewGuid();
-            nonExistingId = Guid.NewGuid();
+            existingId = persistedEntity.AppId;
+            nonExistingId = nonPersistedEntity.AppId;
 
             repository = new Mock<IAuthenticationRepository>();
             repository
