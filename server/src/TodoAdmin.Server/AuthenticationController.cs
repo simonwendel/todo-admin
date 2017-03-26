@@ -52,7 +52,7 @@ namespace TodoAdmin.Server
         }
 
         [HttpPost]
-        public IActionResult Post(Authentication authentication)
+        public IActionResult Post([FromBody]Authentication authentication)
         {
             if (ModelState.IsValid == false)
             {
