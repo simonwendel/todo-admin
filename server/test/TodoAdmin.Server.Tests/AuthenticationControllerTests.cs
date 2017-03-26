@@ -168,6 +168,51 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
+        public void Put_GivenNonMatchingAppIds_ReturnsNotFound()
+        {
+            var response = sut.Put(Guid.NewGuid(), nonPersistedEntity);
+
+            response
+                .Should().BeOfType<NotFoundResult>();
+
+            repository.Verify(
+                r => r.Update(It.IsAny<Authentication>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public void Put_GivenNonExistingAuthentication_ReturnsNotFound()
+        {
+            var response = sut.Put(nonExistingId, nonPersistedEntity);
+
+            response
+                .Should().BeOfType<NotFoundResult>();
+
+            repository.Verify(
+                r => r.Update(It.IsAny<Authentication>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public void Put_GivenAuthentication_UpdatesEntity()
+        {
+            sut.Put(persistedEntity.AppId, persistedEntity);
+
+            repository.Verify(
+                r => r.Update(It.Is<Authentication>(a => a == persistedEntity)),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Put_GivenAuthentication_ReturnsNoContentResult()
+        {
+            var response = sut.Put(persistedEntity.AppId, persistedEntity);
+
+            response
+                .Should().BeOfType<NoContentResult>();
+        }
+
+        [Fact]
         public void Delete_GivenNonExistingId_ReturnsNotFound()
         {
             var response = sut.Delete(nonExistingId);

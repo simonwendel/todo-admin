@@ -66,6 +66,18 @@ namespace TodoAdmin.Server
             return Created(url, newEntity);
         }
 
+        [HttpPut("{appId}")]
+        public IActionResult Put(Guid appId, [FromBody]Authentication authentication)
+        {
+            if (appId != authentication.AppId || repository.Get(appId) == null)
+            {
+                return NotFound();
+            }
+
+            repository.Update(authentication);
+            return NoContent();
+        }
+
         [HttpDelete("{appId}")]
         public IActionResult Delete(Guid appId)
         {
