@@ -27,6 +27,17 @@ namespace TodoAdmin.Core.Tests
     public class AuthenticationTests
     {
         [Fact]
+        public void New_BuildsNewAuthenticationObject()
+        {
+            var result = Authentication.New();
+
+            result.AppId.Should().NotBeEmpty();
+            result.AccountName.Should().Be("N/A");
+            result.Secret.Should().HaveCount(32);
+            result.Created.Should().NotBe(default(DateTime));
+        }
+
+        [Fact]
         public void Equals_GivenSameObject_ReturnsTrue()
         {
             var sut = BuildAuthenticationEntity();

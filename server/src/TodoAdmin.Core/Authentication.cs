@@ -20,6 +20,7 @@ namespace TodoAdmin.Core
 {
     using System;
     using System.Linq;
+    using System.Security.Cryptography;
 
     public partial class Authentication
     {
@@ -30,6 +31,17 @@ namespace TodoAdmin.Core
         public byte[] Secret { get; internal set; }
 
         public DateTime Created { get; internal set; }
+
+        public static Authentication New()
+        {
+            return new Authentication
+            {
+                AppId = Guid.NewGuid(),
+                AccountName = "N/A",
+                Secret = TellMeASecret(),
+                Created = DateTime.Now
+            };
+        }
 
         public override bool Equals(object obj)
         {
@@ -64,6 +76,16 @@ namespace TodoAdmin.Core
                 }
 
                 return hash;
+            }
+        }
+
+        private static byte[] TellMeASecret()
+        {
+            using (var cryptoProvider = RandomNumberGenerator.Create())
+            {
+                var secretKey = new byte[32];
+                cryptoProvider.GetBytes(secretKey);
+                return secretKey;
             }
         }
     }
