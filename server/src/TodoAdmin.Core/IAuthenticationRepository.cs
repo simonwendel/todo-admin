@@ -18,16 +18,17 @@
 
 namespace TodoAdmin.Core
 {
+    using System;
     using System.Collections.Generic;
 
     public interface IAuthenticationRepository
     {
         IEnumerable<Authentication> GetAll();
 
-        Authentication Get(int id);
+        Authentication Get(Guid appId);
 
         Authentication Create(Authentication authentication);
 
-        bool Delete(int id);
+        bool Delete(Guid appId);
     }
 }

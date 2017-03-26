@@ -39,10 +39,10 @@ namespace TodoAdmin.Server
             return Ok(repository.GetAll());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{appId}")]
+        public IActionResult Get(Guid appId)
         {
-            var result = repository.Get(id);
+            var result = repository.Get(appId);
             if (result == null)
             {
                 return NotFound();
@@ -51,10 +51,10 @@ namespace TodoAdmin.Server
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{appId}")]
+        public IActionResult Delete(Guid appId)
         {
-            var success = repository.Delete(id);
+            var success = repository.Delete(appId);
             if (success)
             {
                 return NoContent();

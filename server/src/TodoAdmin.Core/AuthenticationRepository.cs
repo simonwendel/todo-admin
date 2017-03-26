@@ -28,7 +28,7 @@ namespace TodoAdmin.Core
             throw new NotImplementedException();
         }
 
-        public Authentication Get(int id)
+        public Authentication Get(Guid appId)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace TodoAdmin.Core
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Delete(Guid appId)
         {
             throw new NotImplementedException();
         }

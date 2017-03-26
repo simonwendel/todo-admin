@@ -34,9 +34,9 @@ namespace TodoAdmin.Server.Tests
 
         private readonly Authentication persistedEntity;
 
-        private readonly int existingId;
+        private readonly Guid existingId;
 
-        private readonly int nonExistingId;
+        private readonly Guid nonExistingId;
 
         private readonly AuthenticationController sut;
 
@@ -45,8 +45,8 @@ namespace TodoAdmin.Server.Tests
             persistedEntities = new Authentication[0];
             persistedEntity = new Authentication();
 
-            existingId = 8;
-            nonExistingId = 9;
+            existingId = Guid.NewGuid();
+            nonExistingId = Guid.NewGuid();
 
             repository = new Mock<IAuthenticationRepository>();
             repository
@@ -54,19 +54,19 @@ namespace TodoAdmin.Server.Tests
                 .Returns(persistedEntities);
 
             repository
-                .Setup(r => r.Get(It.Is<int>(i => i == nonExistingId)))
+                .Setup(r => r.Get(It.Is<Guid>(i => i == nonExistingId)))
                 .Returns((Authentication)null);
 
             repository
-                .Setup(r => r.Get(It.Is<int>(i => i == existingId)))
+                .Setup(r => r.Get(It.Is<Guid>(i => i == existingId)))
                 .Returns(persistedEntity);
 
             repository
-                .Setup(r => r.Delete(It.Is<int>(i => i == nonExistingId)))
+                .Setup(r => r.Delete(It.Is<Guid>(i => i == nonExistingId)))
                 .Returns(false);
 
             repository
-                .Setup(r => r.Delete(It.Is<int>(i => i == existingId)))
+                .Setup(r => r.Delete(It.Is<Guid>(i => i == existingId)))
                 .Returns(true);
 
             sut = new AuthenticationController(repository.Object);
@@ -106,7 +106,7 @@ namespace TodoAdmin.Server.Tests
                 .Should().BeOfType<NotFoundResult>();
 
             repository.Verify(
-                r => r.Get(It.Is<int>(i => i == nonExistingId)),
+                r => r.Get(It.Is<Guid>(i => i == nonExistingId)),
                 Times.Once);
         }
 
@@ -121,7 +121,7 @@ namespace TodoAdmin.Server.Tests
                     .Should().BeSameAs(persistedEntity);
 
             repository.Verify(
-                r => r.Get(It.Is<int>(i => i == existingId)),
+                r => r.Get(It.Is<Guid>(i => i == existingId)),
                 Times.Once);
         }
 
@@ -134,7 +134,7 @@ namespace TodoAdmin.Server.Tests
                 .Should().BeOfType<NotFoundResult>();
 
             repository.Verify(
-                r => r.Delete(It.Is<int>(i => i == nonExistingId)),
+                r => r.Delete(It.Is<Guid>(i => i == nonExistingId)),
                 Times.Once);
         }
 
@@ -147,7 +147,7 @@ namespace TodoAdmin.Server.Tests
                 .Should().BeOfType<NoContentResult>();
 
             repository.Verify(
-                r => r.Delete(It.Is<int>(i => i == existingId)),
+                r => r.Delete(It.Is<Guid>(i => i == existingId)),
                 Times.Once);
         }
     }
