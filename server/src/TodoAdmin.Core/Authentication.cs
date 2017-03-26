@@ -24,6 +24,8 @@ namespace TodoAdmin.Core
 
     public partial class Authentication
     {
+        private const int SecretLength = 32;
+
         public Guid AppId { get; internal set; }
 
         public string AccountName { get; internal set; }
@@ -83,7 +85,7 @@ namespace TodoAdmin.Core
         {
             using (var cryptoProvider = RandomNumberGenerator.Create())
             {
-                var secretKey = new byte[32];
+                var secretKey = new byte[SecretLength];
                 cryptoProvider.GetBytes(secretKey);
                 return secretKey;
             }
