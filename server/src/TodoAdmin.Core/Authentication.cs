@@ -19,6 +19,7 @@
 namespace TodoAdmin.Core
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Security.Cryptography;
 
@@ -28,8 +29,11 @@ namespace TodoAdmin.Core
 
         public Guid AppId { get; internal set; }
 
+        [MaxLength(255)]
         public string AccountName { get; internal set; }
 
+        [MinLength(SecretLength)]
+        [MaxLength(SecretLength)]
         public byte[] Secret { get; internal set; }
 
         public DateTime Created { get; internal set; }
