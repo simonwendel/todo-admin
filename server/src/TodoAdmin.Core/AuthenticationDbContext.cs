@@ -34,7 +34,7 @@ namespace TodoAdmin.Core
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(configuration.ConnectionString);
+            optionsBuilder.UseSqlServer(configuration.ConnectionStrings.TodoStorage);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

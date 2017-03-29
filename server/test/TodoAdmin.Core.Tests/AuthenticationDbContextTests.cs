@@ -22,19 +22,12 @@ namespace TodoAdmin.Core.Tests
     using FluentAssertions;
     using Xunit;
 
-    public class AuthenticationDbContextTests
+    public class AuthenticationDbContextTests : ConfiguredTestFixtureBase
     {
-        private readonly Configuration configuration;
-
         private readonly Authentication entity;
 
         public AuthenticationDbContextTests()
         {
-            configuration = new Configuration
-            {
-                ConnectionString = @"Server=localhost\sqlexpress;Database=TodoStorage_Stage;User Id=sa;Password=sa;"
-            };
-
             entity = new Authentication
             {
                 AppId = Guid.NewGuid(),
@@ -62,28 +55,28 @@ namespace TodoAdmin.Core.Tests
         public void Context_ShouldRoundTripEntity()
         {
             // save
-            using (var sut = new AuthenticationDbContext(configuration))
+            using (var sut = new AuthenticationDbContext(Configuration))
             {
                 sut.Add(entity);
                 sut.SaveChanges();
             }
 
             // query
-            using (var sut = new AuthenticationDbContext(configuration))
+            using (var sut = new AuthenticationDbContext(Configuration))
             {
                 sut.Authentication
                     .Should().ContainSingle(e => e.Equals(entity));
             }
 
             // delete
-            using (var sut = new AuthenticationDbContext(configuration))
+            using (var sut = new AuthenticationDbContext(Configuration))
             {
                 sut.Authentication.Remove(entity);
                 sut.SaveChanges();
             }
 
             // query
-            using (var sut = new AuthenticationDbContext(configuration))
+            using (var sut = new AuthenticationDbContext(Configuration))
             {
                 sut.Authentication
                     .Should().NotContain(e => e.Equals(entity));

@@ -18,8 +18,8 @@
 
 namespace TodoAdmin.Core
 {
-    public class Configuration
+    public class ConnectionStrings
     {
-        public ConnectionStrings ConnectionStrings { get; set; }
+        public string TodoStorage { get; set; }
     }
 }

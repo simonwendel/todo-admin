@@ -16,10 +16,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace TodoAdmin.Core
+namespace TodoAdmin.Core.Tests
 {
-    public class Configuration
+    using System.IO;
+    using Microsoft.Extensions.Configuration;
+
+    public abstract class ConfiguredTestFixtureBase
     {
-        public ConnectionStrings ConnectionStrings { get; set; }
+        public ConfiguredTestFixtureBase()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+            var config = builder.Build();
+            Configuration = config.Get<Configuration>();
+        }
+
+        protected Configuration Configuration { get; private set; }
     }
 }
