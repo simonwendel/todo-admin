@@ -18,16 +18,23 @@
 
 namespace TodoAdmin.Core
 {
+    using System;
     using Microsoft.EntityFrameworkCore;
 
     internal partial class AuthenticationDbContext : DbContext
     {
+        private readonly Configuration configuration;
+
+        public AuthenticationDbContext(Configuration configuration)
+        {
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
+
         public virtual DbSet<Authentication> Authentication { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=localhost\sqlexpress;Database=TodoStorage_Stage;User Id=sa;Password=sa;");
+            optionsBuilder.UseSqlServer(configuration.ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

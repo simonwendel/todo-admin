@@ -24,6 +24,36 @@ namespace TodoAdmin.Core.Tests
 
     public class AuthenticationDbContextTests
     {
+        private readonly Configuration configuration;
+
+        private readonly Authentication entity;
+
+        public AuthenticationDbContextTests()
+        {
+            configuration = new Configuration
+            {
+                ConnectionString = @"Server=localhost\sqlexpress;Database=TodoStorage_Stage;User Id=sa;Password=sa;"
+            };
+
+            entity = new Authentication
+            {
+                AppId = Guid.NewGuid(),
+                AccountName = "SomeAccount",
+                Created = new DateTime(2017, 1, 2, 1, 32, 45),
+                Secret = new byte[] { 1, 2, 3 }
+            };
+        }
+
+        [Fact]
+        public void Ctor_GivenNullConfiguration_ThrowsException()
+        {
+            Action constructorCall =
+                () => new AuthenticationDbContext(null);
+
+            constructorCall
+                .ShouldThrow<ArgumentNullException>();
+        }
+
         /// <summary>
         /// Not terribly elegant integration test making sure complete roundtripping
         /// of <see cref="Authentication" /> object works as expected.
@@ -31,37 +61,29 @@ namespace TodoAdmin.Core.Tests
         [Fact]
         public void Context_ShouldRoundTripEntity()
         {
-            var entity = new Authentication
-            {
-                AppId = Guid.NewGuid(),
-                AccountName = "SomeAccount",
-                Created = new DateTime(2017, 1, 2, 1, 32, 45),
-                Secret = new byte[] { 1, 2, 3 }
-            };
-
             // save
-            using (var sut = new AuthenticationDbContext())
+            using (var sut = new AuthenticationDbContext(configuration))
             {
                 sut.Add(entity);
                 sut.SaveChanges();
             }
 
             // query
-            using (var sut = new AuthenticationDbContext())
+            using (var sut = new AuthenticationDbContext(configuration))
             {
                 sut.Authentication
                     .Should().ContainSingle(e => e.Equals(entity));
             }
 
             // delete
-            using (var sut = new AuthenticationDbContext())
+            using (var sut = new AuthenticationDbContext(configuration))
             {
                 sut.Authentication.Remove(entity);
                 sut.SaveChanges();
             }
 
             // query
-            using (var sut = new AuthenticationDbContext())
+            using (var sut = new AuthenticationDbContext(configuration))
             {
                 sut.Authentication
                     .Should().NotContain(e => e.Equals(entity));
