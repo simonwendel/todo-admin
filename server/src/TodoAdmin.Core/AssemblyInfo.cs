@@ -20,3 +20,5 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("TodoAdmin.Core.Tests")]
 [assembly: InternalsVisibleTo("TodoAdmin.Types")]
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
