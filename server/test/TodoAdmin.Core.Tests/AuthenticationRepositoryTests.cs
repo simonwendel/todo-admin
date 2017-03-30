@@ -69,7 +69,7 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
-        public void GetAll_CallsAuthenticationPropertyGet()
+        public void GetAll_GetsDataFromDbContext()
         {
             sut.GetAll();
 
@@ -90,7 +90,7 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
-        public void Get_GivenAppId_CallsAuthenticationPropertyGet()
+        public void Get_GivenAppId_GetsDataFromDbContext()
         {
             sut.Get(oneAuthentication.AppId);
 
