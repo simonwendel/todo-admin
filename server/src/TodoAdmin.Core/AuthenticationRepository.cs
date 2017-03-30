@@ -20,12 +20,23 @@ namespace TodoAdmin.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     internal class AuthenticationRepository : IAuthenticationRepository
     {
+        private readonly AuthenticationDbContext context;
+
+        public AuthenticationRepository(AuthenticationDbContext context)
+        {
+            this.context = context
+                ?? throw new ArgumentNullException(nameof(context));
+        }
+
         public IEnumerable<Authentication> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Authentication
+                .ToList()
+                .AsReadOnly();
         }
 
         public Authentication Get(Guid appId)
