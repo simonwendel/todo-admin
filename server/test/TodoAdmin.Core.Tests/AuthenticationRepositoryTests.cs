@@ -31,6 +31,8 @@ namespace TodoAdmin.Core.Tests
     {
         private readonly IEnumerable<Authentication> someAuthentication;
 
+        private readonly Authentication oneAuthentication;
+
         private readonly Mock<DbSet<Authentication>> authenticationSet;
 
         private readonly Mock<AuthenticationDbContext> context;
@@ -41,6 +43,8 @@ namespace TodoAdmin.Core.Tests
         {
             someAuthentication =
                 Enumerable.Range(0, 5).Select(s => Authentication.New()).ToList();
+
+            oneAuthentication = someAuthentication.Skip(2).First();
 
             authenticationSet = new Mock<DbSet<Authentication>>();
 
@@ -83,6 +87,34 @@ namespace TodoAdmin.Core.Tests
                 .Should().BeOfType<ReadOnlyCollection<Authentication>>()
                 .Which
                 .Should().Equal(someAuthentication);
+        }
+
+        [Fact]
+        public void Get_GivenAppId_CallsAuthenticationPropertyGet()
+        {
+            sut.Get(oneAuthentication.AppId);
+
+            context.VerifyGet(
+                c => c.Authentication,
+                Times.Once);
+        }
+
+        [Fact]
+        public void Get_GivenNonExistingAppId_ReturnsNull()
+        {
+            var entity = sut.Get(Guid.NewGuid());
+
+            entity
+                .Should().BeNull();
+        }
+
+        [Fact]
+        public void Get_GivenValidAppId_ReturnsAuthentication()
+        {
+            var entity = sut.Get(oneAuthentication.AppId);
+
+            entity
+                .Should().BeSameAs(oneAuthentication);
         }
 
         private static void SetupDbSetQueryability(Mock<DbSet<Authentication>> targetSet, IEnumerable<Authentication> collection)

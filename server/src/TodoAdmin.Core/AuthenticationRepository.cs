@@ -41,7 +41,8 @@ namespace TodoAdmin.Core
 
         public Authentication Get(Guid appId)
         {
-            throw new NotImplementedException();
+            return context.Authentication
+                .SingleOrDefault(e => e.AppId.Equals(appId));
         }
 
         public Authentication Create(Authentication authentication)
