@@ -170,6 +170,30 @@ namespace TodoAdmin.Core.Tests
                 Times.Once);
         }
 
+        [Fact]
+        public void Update_GivenNullAuthentication_ThrowsException()
+        {
+            Action updateCall =
+                () => sut.Update(null);
+
+            updateCall
+                .ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Update_GivenAuthentication_UpdatesAuthentication()
+        {
+            sut.Update(oneAuthentication);
+
+            authenticationSet.Verify(
+                s => s.Update(It.Is<Authentication>(a => a == oneAuthentication)),
+                Times.Once);
+
+            context.Verify(
+                c => c.SaveChanges(),
+                Times.Once);
+        }
+
         private static void SetupDbSetQueryability(Mock<DbSet<Authentication>> targetSet, IEnumerable<Authentication> collection)
         {
             var enumerable = targetSet.As<IQueryable<Authentication>>();
