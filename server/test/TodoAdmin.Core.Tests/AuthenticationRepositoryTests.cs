@@ -194,6 +194,30 @@ namespace TodoAdmin.Core.Tests
                 Times.Once);
         }
 
+        [Fact]
+        public void Delete_GivenNullAuthentication_ThrowsException()
+        {
+            Action deleteCall =
+                () => sut.Delete(null);
+
+            deleteCall
+                .ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Delete_GivenAuthentication_DeletesAuthentication()
+        {
+            sut.Delete(oneAuthentication);
+
+            authenticationSet.Verify(
+                s => s.Remove(It.Is<Authentication>(a => a == oneAuthentication)),
+                Times.Once);
+
+            context.Verify(
+                c => c.SaveChanges(),
+                Times.Once);
+        }
+
         private static void SetupDbSetQueryability(Mock<DbSet<Authentication>> targetSet, IEnumerable<Authentication> collection)
         {
             var enumerable = targetSet.As<IQueryable<Authentication>>();

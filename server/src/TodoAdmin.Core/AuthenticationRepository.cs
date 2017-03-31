@@ -76,7 +76,13 @@ namespace TodoAdmin.Core
 
         public void Delete(Authentication authentication)
         {
-            throw new NotImplementedException();
+            if (authentication == null)
+            {
+                throw new ArgumentNullException(nameof(authentication));
+            }
+
+            context.Authentication.Remove(authentication);
+            context.SaveChanges();
         }
     }
 }
