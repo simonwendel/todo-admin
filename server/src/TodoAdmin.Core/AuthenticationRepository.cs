@@ -57,6 +57,11 @@ namespace TodoAdmin.Core
                 authentication.AppId = Guid.NewGuid();
             }
 
+            if (authentication.Secret == null || authentication.Secret.Length == 0)
+            {
+                authentication.RefreshSecret();
+            }
+
             context.Authentication.Add(authentication);
             context.SaveChanges();
 

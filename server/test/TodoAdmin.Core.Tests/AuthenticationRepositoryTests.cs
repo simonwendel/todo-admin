@@ -171,6 +171,36 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
+        public void Create_GivenAuthenticationWithNullSecret_GivesAuthenticationNewSecret()
+        {
+            notPersistedAuthentication.Secret = null;
+
+            var entity = sut.Create(notPersistedAuthentication);
+
+            entity
+                .ShouldBeEquivalentTo(notPersistedAuthentication);
+
+            entity.Secret
+                .Should().NotBeNull()
+                .And.HaveCount(32);
+        }
+
+        [Fact]
+        public void Create_GivenAuthenticationWithEmptySecret_GivesAuthenticationNewSecret()
+        {
+            notPersistedAuthentication.Secret = new byte[0];
+
+            var entity = sut.Create(notPersistedAuthentication);
+
+            entity
+                .ShouldBeEquivalentTo(notPersistedAuthentication);
+
+            entity.Secret
+                .Should().NotBeNull()
+                .And.HaveCount(32);
+        }
+
+        [Fact]
         public void Update_GivenNullAuthentication_ThrowsException()
         {
             Action updateCall =
