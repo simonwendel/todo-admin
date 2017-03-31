@@ -27,16 +27,16 @@ namespace TodoAdmin.Core
     {
         private const int SecretLength = 32;
 
-        public Guid AppId { get; internal set; }
+        public Guid AppId { get; set; }
 
         [MaxLength(255)]
-        public string AccountName { get; internal set; }
+        public string AccountName { get; set; }
 
         [MinLength(SecretLength)]
         [MaxLength(SecretLength)]
-        public byte[] Secret { get; internal set; }
+        public byte[] Secret { get; set; }
 
-        public DateTime Created { get; internal set; }
+        public DateTime Created { get; set; }
 
         public static Authentication New()
         {
