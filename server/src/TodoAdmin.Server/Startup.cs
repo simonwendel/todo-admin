@@ -20,17 +20,35 @@ namespace TodoAdmin.Server
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Swashbuckle.AspNetCore.Swagger;
+    using TodoAdmin.Core;
     using TodoAdmin.Types;
 
     public class Startup
     {
+        private Configuration configuration;
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            var configurationRoot = builder.Build();
+            configuration = configurationRoot.Get<Configuration>();
+        }
+
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            services.AddMvc();
-            services.AddSwaggerGen(c =>
+            serviceCollection.AddSingleton(configuration);
+
+            serviceCollection.AddMvc();
+            serviceCollection.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Todo Cloud Admin API", Version = "v1" });
             });
