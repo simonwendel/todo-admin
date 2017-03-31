@@ -160,6 +160,17 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
+        public void Post_GivenAuthenticationWithExistingAppId_ReturnsConflictResult()
+        {
+            var response = sut.Post(persistedEntity);
+
+            response
+                .Should().BeOfType<StatusCodeResult>()
+                .Which.StatusCode
+                    .Should().Be(409);
+        }
+
+        [Fact]
         public void Put_GivenNonMatchingAppIds_ReturnsNotFound()
         {
             var response = sut.Put(Guid.NewGuid(), nonPersistedEntity);

@@ -60,6 +60,12 @@ namespace TodoAdmin.Server
                 return StatusCode(422);
             }
 
+            if (repository.Get(authentication.AppId) != null)
+            {
+                // 409 -> Conflict
+                return StatusCode(409);
+            }
+
             var newEntity = repository.Create(authentication);
             var url = $"/api/authentication/{newEntity.AppId}";
 
