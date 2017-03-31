@@ -109,6 +109,8 @@ namespace TodoAdmin.Core.Tests
 
         private static Authentication BuildAuthenticationEntity()
         {
+            // we need more control over this entity, so simply calling factory
+            // method Authentication.New() won't be good for us
             return new Authentication
             {
                 AppId = new Guid("d3d6289e-5612-433f-82cd-6cff35683aa1"),
