@@ -33,6 +33,8 @@ namespace TodoAdmin.Core.Tests
 
         private readonly Authentication oneAuthentication;
 
+        private readonly Authentication notPersistedAuthentication;
+
         private readonly Mock<DbSet<Authentication>> authenticationSet;
 
         private readonly Mock<AuthenticationDbContext> context;
@@ -45,6 +47,8 @@ namespace TodoAdmin.Core.Tests
                 Enumerable.Range(0, 5).Select(s => Authentication.New()).ToList();
 
             oneAuthentication = someAuthentication.Skip(2).First();
+
+            notPersistedAuthentication = Authentication.New();
 
             authenticationSet = new Mock<DbSet<Authentication>>();
 
@@ -115,6 +119,55 @@ namespace TodoAdmin.Core.Tests
 
             entity
                 .Should().BeSameAs(oneAuthentication);
+        }
+
+        [Fact]
+        public void Create_GivenNullAuthentication_ThrowsException()
+        {
+            Action createCall =
+                () => sut.Create(null);
+
+            createCall
+                .ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Create_GivenAuthentication_PersistsAuthentication()
+        {
+            var entity = sut.Create(notPersistedAuthentication);
+
+            entity
+                .ShouldBeEquivalentTo(notPersistedAuthentication);
+
+            authenticationSet.Verify(
+                s => s.Add(It.Is<Authentication>(a => a == notPersistedAuthentication)),
+                Times.Once);
+
+            context.Verify(
+                c => c.SaveChanges(),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Create_GivenAuthenticationWithEmptyId_GivesAuthenticationNewId()
+        {
+            notPersistedAuthentication.AppId = Guid.Empty;
+
+            var entity = sut.Create(notPersistedAuthentication);
+
+            entity
+                .ShouldBeEquivalentTo(notPersistedAuthentication);
+
+            entity.AppId
+                .Should().NotBe(Guid.Empty);
+
+            authenticationSet.Verify(
+                s => s.Add(It.Is<Authentication>(a => a == notPersistedAuthentication)),
+                Times.Once);
+
+            context.Verify(
+                c => c.SaveChanges(),
+                Times.Once);
         }
 
         private static void SetupDbSetQueryability(Mock<DbSet<Authentication>> targetSet, IEnumerable<Authentication> collection)

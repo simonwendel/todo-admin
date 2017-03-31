@@ -47,7 +47,20 @@ namespace TodoAdmin.Core
 
         public Authentication Create(Authentication authentication)
         {
-            throw new NotImplementedException();
+            if (authentication == null)
+            {
+                throw new ArgumentNullException(nameof(authentication));
+            }
+
+            if (authentication.AppId.Equals(Guid.Empty))
+            {
+                authentication.AppId = Guid.NewGuid();
+            }
+
+            context.Authentication.Add(authentication);
+            context.SaveChanges();
+
+            return authentication;
         }
 
         public void Update(Authentication authentication)
