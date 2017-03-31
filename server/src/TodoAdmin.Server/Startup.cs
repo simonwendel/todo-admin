@@ -27,7 +27,7 @@ namespace TodoAdmin.Server
 
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection serviceCollection)
         {
             services.AddMvc();
             services.AddSwaggerGen(c =>
@@ -36,7 +36,7 @@ namespace TodoAdmin.Server
             });
 
             var registry = new Registry();
-            registry.AddServicesTo(services);
+            registry.AddServicesTo(serviceCollection);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
