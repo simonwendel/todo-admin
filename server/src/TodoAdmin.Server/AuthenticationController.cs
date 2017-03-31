@@ -81,13 +81,14 @@ namespace TodoAdmin.Server
         [HttpDelete("{appId}")]
         public IActionResult Delete(Guid appId)
         {
-            var success = repository.Delete(appId);
-            if (success)
+            var authentication = repository.Get(appId);
+            if (authentication == null)
             {
-                return NoContent();
+                return NotFound();
             }
 
-            return NotFound();
+            repository.Delete(authentication);
+            return NoContent();
         }
     }
 }

@@ -74,7 +74,7 @@ namespace TodoAdmin.Core
             context.SaveChanges();
         }
 
-        public bool Delete(Guid appId)
+        public void Delete(Authentication authentication)
         {
             throw new NotImplementedException();
         }
