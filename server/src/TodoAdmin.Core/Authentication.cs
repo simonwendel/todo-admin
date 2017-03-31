@@ -49,6 +49,11 @@ namespace TodoAdmin.Core
             };
         }
 
+        public void RefreshSecret()
+        {
+            Secret = TellMeASecret();
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null || obj is Authentication == false)

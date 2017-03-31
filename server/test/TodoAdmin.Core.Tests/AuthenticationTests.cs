@@ -38,6 +38,19 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
+        public void RefreshSecret_CreatesNewSecret()
+        {
+            var sut = Authentication.New();
+            var oldSecret = sut.Secret;
+
+            sut.RefreshSecret();
+
+            sut.Secret
+                .Should().NotBeNull()
+                .And.NotBeEquivalentTo(oldSecret);
+        }
+
+        [Fact]
         public void Equals_GivenSameObject_ReturnsTrue()
         {
             var sut = BuildAuthenticationEntity();
