@@ -27,7 +27,7 @@ namespace TodoAdmin.Core
 
         IAuthentication Get(Guid appId);
 
-        Authentication Create(Authentication authentication);
+        IAuthentication Create(Authentication authentication);
 
         void Update(Authentication authentication);
 

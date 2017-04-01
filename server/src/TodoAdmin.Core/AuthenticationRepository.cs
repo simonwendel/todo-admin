@@ -45,7 +45,7 @@ namespace TodoAdmin.Core
                 .SingleOrDefault(e => e.AppId.Equals(appId));
         }
 
-        public Authentication Create(Authentication authentication)
+        public IAuthentication Create(Authentication authentication)
         {
             if (authentication == null)
             {
