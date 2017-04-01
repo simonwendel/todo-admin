@@ -49,11 +49,6 @@ namespace TodoAdmin.Core
             };
         }
 
-        public void RefreshSecret()
-        {
-            Secret = TellMeASecret();
-        }
-
         public override bool Equals(object obj)
         {
             if (obj == null || obj is Authentication == false)
@@ -88,6 +83,11 @@ namespace TodoAdmin.Core
 
                 return hash;
             }
+        }
+
+        internal void RefreshSecret()
+        {
+            Secret = TellMeASecret();
         }
 
         private static byte[] TellMeASecret()
