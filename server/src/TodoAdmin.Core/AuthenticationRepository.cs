@@ -50,24 +50,14 @@ namespace TodoAdmin.Core
                 .SingleOrDefault(e => e.AppId.Equals(appId));
         }
 
-        public IAuthentication Create(Authentication authentication)
+        public IAuthentication Create(string accountName)
         {
-            if (authentication == null)
+            if (accountName == null)
             {
-                throw new ArgumentNullException(nameof(authentication));
+                throw new ArgumentNullException(nameof(accountName));
             }
 
-            if (authentication.AppId.Equals(Guid.Empty))
-            {
-                authentication.AppId = Guid.NewGuid();
-            }
-
-            if (authentication.Secret == null || authentication.Secret.Length == 0)
-            {
-                authentication.RefreshSecret();
-            }
-
-            authentication.Created = DateTime.Now;
+            var authentication = factory.BuildWithName(accountName);
 
             context.Authentication.Add(authentication);
             context.SaveChanges();

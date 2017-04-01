@@ -53,6 +53,9 @@ namespace TodoAdmin.Core.Tests
             oneAuthentication = someAuthentication.Skip(2).First();
 
             notPersistedAuthentication = Authentication.New();
+            authFactory
+                .Setup(f => f.BuildWithName(It.Is<string>(n => n.Equals(notPersistedAuthentication.AccountName))))
+                .Returns(notPersistedAuthentication);
 
             authenticationSet = new Mock<DbSet<Authentication>>();
 
@@ -136,7 +139,7 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
-        public void Create_GivenNullAuthentication_ThrowsException()
+        public void Create_GivenNullAccountName_ThrowsException()
         {
             Action createCall =
                 () => sut.Create(null);
@@ -146,12 +149,22 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
-        public void Create_GivenAuthentication_PersistsAuthentication()
+        public void Create_GivenAccountName_BuildsAuthentication()
         {
-            var entity = sut.Create(notPersistedAuthentication);
+            sut.Create(notPersistedAuthentication.AccountName);
+
+            authFactory.Verify(
+                f => f.BuildWithName(It.Is<string>(s => s.Equals(notPersistedAuthentication.AccountName))),
+                Times.Once);
+        }
+
+        [Fact]
+        public void Create_GivenAccountName_PersistsAuthentication()
+        {
+            var entity = sut.Create(notPersistedAuthentication.AccountName);
 
             entity
-                .ShouldBeEquivalentTo(notPersistedAuthentication);
+                .Should().BeSameAs(notPersistedAuthentication);
 
             authenticationSet.Verify(
                 s => s.Add(It.Is<Authentication>(a => a == notPersistedAuthentication)),
@@ -160,70 +173,6 @@ namespace TodoAdmin.Core.Tests
             context.Verify(
                 c => c.SaveChanges(),
                 Times.Once);
-        }
-
-        [Fact]
-        public void Create_GivenAuthenticationWithEmptyId_GivesAuthenticationNewId()
-        {
-            notPersistedAuthentication.AppId = Guid.Empty;
-
-            var entity = sut.Create(notPersistedAuthentication);
-
-            entity
-                .ShouldBeEquivalentTo(notPersistedAuthentication);
-
-            entity.AppId
-                .Should().NotBe(Guid.Empty);
-
-            authenticationSet.Verify(
-                s => s.Add(It.Is<Authentication>(a => a == notPersistedAuthentication)),
-                Times.Once);
-
-            context.Verify(
-                c => c.SaveChanges(),
-                Times.Once);
-        }
-
-        [Fact]
-        public void Create_GivenAuthenticationWithNullSecret_GivesAuthenticationNewSecret()
-        {
-            notPersistedAuthentication.Secret = null;
-
-            var entity = sut.Create(notPersistedAuthentication);
-
-            entity
-                .ShouldBeEquivalentTo(notPersistedAuthentication);
-
-            entity.Secret
-                .Should().NotBeNull()
-                .And.HaveCount(32);
-        }
-
-        [Fact]
-        public void Create_GivenAuthenticationWithEmptySecret_GivesAuthenticationNewSecret()
-        {
-            notPersistedAuthentication.Secret = new byte[0];
-
-            var entity = sut.Create(notPersistedAuthentication);
-
-            entity
-                .ShouldBeEquivalentTo(notPersistedAuthentication);
-
-            entity.Secret
-                .Should().NotBeNull()
-                .And.HaveCount(32);
-        }
-
-        [Fact]
-        public void Create_GivenAuthentication_PopulatesCreatedPropertyWithPresentTime()
-        {
-            notPersistedAuthentication.Created = DateTime.Now.AddDays(-1);
-            var oldDate = notPersistedAuthentication.Created;
-
-            var entity = sut.Create(notPersistedAuthentication);
-
-            entity.Created
-                .Should().BeAfter(oldDate);
         }
 
         [Fact]

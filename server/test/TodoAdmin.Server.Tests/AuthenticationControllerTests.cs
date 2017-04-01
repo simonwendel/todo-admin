@@ -66,7 +66,7 @@ namespace TodoAdmin.Server.Tests
                 .Returns(persistedEntity);
 
             repository
-                .Setup(r => r.Create(It.Is<Authentication>(a => a == nonPersistedEntity)))
+                .Setup(r => r.Create(It.Is<string>(a => a == nonPersistedEntity.AccountName)))
                 .Returns(persistedEntity);
 
             sut = new AuthenticationController(repository.Object);
@@ -144,7 +144,7 @@ namespace TodoAdmin.Server.Tests
             sut.Post(nonPersistedEntity);
 
             repository.Verify(
-                r => r.Create(It.Is<Authentication>(a => a == nonPersistedEntity)),
+                r => r.Create(It.Is<string>(a => a == nonPersistedEntity.AccountName)),
                 Times.Once);
         }
 
