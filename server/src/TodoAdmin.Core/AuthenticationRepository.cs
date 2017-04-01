@@ -83,7 +83,7 @@ namespace TodoAdmin.Core
 
         public void Delete(Guid appId)
         {
-            var authentication = 
+            var authentication =
                 context.Authentication.Single(a => a.AppId == appId);
 
             context.Authentication.Remove(authentication);
