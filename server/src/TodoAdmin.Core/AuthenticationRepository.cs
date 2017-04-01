@@ -26,10 +26,15 @@ namespace TodoAdmin.Core
     {
         private readonly AuthenticationDbContext context;
 
-        public AuthenticationRepository(AuthenticationDbContext context)
+        private readonly IAuthenticationFactory factory;
+
+        public AuthenticationRepository(AuthenticationDbContext context, IAuthenticationFactory factory)
         {
             this.context = context
                 ?? throw new ArgumentNullException(nameof(context));
+
+            this.factory = factory
+                ?? throw new ArgumentNullException(nameof(factory));
         }
 
         public IEnumerable<IAuthentication> GetAll()

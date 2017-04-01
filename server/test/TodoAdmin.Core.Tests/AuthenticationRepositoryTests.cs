@@ -29,6 +29,8 @@ namespace TodoAdmin.Core.Tests
 
     public class AuthenticationRepositoryTests
     {
+        private readonly Mock<IAuthenticationFactory> authFactory;
+
         private readonly IEnumerable<Authentication> someAuthentication;
 
         private readonly Authentication oneAuthentication;
@@ -43,6 +45,8 @@ namespace TodoAdmin.Core.Tests
 
         public AuthenticationRepositoryTests()
         {
+            authFactory = new Mock<IAuthenticationFactory>();
+
             someAuthentication =
                 Enumerable.Range(0, 5).Select(s => Authentication.New()).ToList();
 
@@ -59,14 +63,24 @@ namespace TodoAdmin.Core.Tests
                 .SetupGet(c => c.Authentication)
                 .Returns(authenticationSet.Object);
 
-            sut = new AuthenticationRepository(context.Object);
+            sut = new AuthenticationRepository(context.Object, authFactory.Object);
         }
 
         [Fact]
         public void Ctor_GivenNullDbContext_ThrowsException()
         {
             Action constructorCall =
-                () => new AuthenticationRepository(null);
+                () => new AuthenticationRepository(null, authFactory.Object);
+
+            constructorCall
+                .ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Ctor_GivenNullAuthenticationFactory_ThrowsException()
+        {
+            Action constructorCall =
+                () => new AuthenticationRepository(context.Object, null);
 
             constructorCall
                 .ShouldThrow<ArgumentNullException>();
