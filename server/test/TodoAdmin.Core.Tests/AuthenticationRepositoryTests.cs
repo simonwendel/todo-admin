@@ -237,19 +237,9 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
-        public void Delete_GivenNullAuthentication_ThrowsException()
-        {
-            Action deleteCall =
-                () => sut.Delete(null);
-
-            deleteCall
-                .ShouldThrow<ArgumentNullException>();
-        }
-
-        [Fact]
         public void Delete_GivenAuthentication_DeletesAuthentication()
         {
-            sut.Delete(oneAuthentication);
+            sut.Delete(oneAuthentication.AppId);
 
             authenticationSet.Verify(
                 s => s.Remove(It.Is<Authentication>(a => a == oneAuthentication)),

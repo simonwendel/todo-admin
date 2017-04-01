@@ -224,7 +224,7 @@ namespace TodoAdmin.Server.Tests
                 .Should().BeOfType<NotFoundResult>();
 
             repository.Verify(
-                r => r.Delete(It.IsAny<Authentication>()),
+                r => r.Delete(It.IsAny<Guid>()),
                 Times.Never);
         }
 
@@ -237,7 +237,7 @@ namespace TodoAdmin.Server.Tests
                 .Should().BeOfType<NoContentResult>();
 
             repository.Verify(
-                r => r.Delete(It.Is<Authentication>(a => a == persistedEntity)),
+                r => r.Delete(It.Is<Guid>(g => g == persistedEntity.AppId)),
                 Times.Once);
         }
     }

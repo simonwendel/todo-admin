@@ -31,6 +31,6 @@ namespace TodoAdmin.Core
 
         void Update(Authentication authentication);
 
-        void Delete(Authentication authentication);
+        void Delete(Guid appId);
     }
 }

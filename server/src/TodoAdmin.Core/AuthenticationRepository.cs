@@ -81,12 +81,10 @@ namespace TodoAdmin.Core
             context.SaveChanges();
         }
 
-        public void Delete(Authentication authentication)
+        public void Delete(Guid appId)
         {
-            if (authentication == null)
-            {
-                throw new ArgumentNullException(nameof(authentication));
-            }
+            var authentication = 
+                context.Authentication.Single(a => a.AppId == appId);
 
             context.Authentication.Remove(authentication);
             context.SaveChanges();
