@@ -39,7 +39,7 @@ namespace TodoAdmin.Core
                 .AsReadOnly();
         }
 
-        public Authentication Get(Guid appId)
+        public IAuthentication Get(Guid appId)
         {
             return context.Authentication
                 .SingleOrDefault(e => e.AppId.Equals(appId));
