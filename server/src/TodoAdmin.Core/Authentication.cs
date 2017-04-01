@@ -38,12 +38,12 @@ namespace TodoAdmin.Core
 
         public DateTime Created { get; internal set; }
 
-        public static Authentication New()
+        public static Authentication New(string accountName = "N/A")
         {
             return new Authentication
             {
                 AppId = Guid.NewGuid(),
-                AccountName = "N/A",
+                AccountName = accountName,
                 Secret = TellMeASecret(),
                 Created = DateTime.Now
             };
