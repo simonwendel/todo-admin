@@ -20,6 +20,6 @@ namespace TodoAdmin.Core
 {
     public interface IAuthenticationFactory
     {
-        IAuthentication BuildWithName(string accountName);
+        Authentication BuildWithName(string accountName);
     }
 }

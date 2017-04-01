@@ -20,7 +20,7 @@ namespace TodoAdmin.Core
 {
     internal class AuthenticationFactory : IAuthenticationFactory
     {
-        public IAuthentication BuildWithName(string accountName)
+        public Authentication BuildWithName(string accountName)
         {
             return Authentication.New(accountName);
         }
