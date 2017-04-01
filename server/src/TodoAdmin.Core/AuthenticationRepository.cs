@@ -62,6 +62,8 @@ namespace TodoAdmin.Core
                 authentication.RefreshSecret();
             }
 
+            authentication.Created = DateTime.Now;
+
             context.Authentication.Add(authentication);
             context.SaveChanges();
 

@@ -201,6 +201,18 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
+        public void Create_GivenAuthentication_PopulatesCreatedPropertyWithPresentTime()
+        {
+            notPersistedAuthentication.Created = DateTime.Now.AddDays(-1);
+            var oldDate = notPersistedAuthentication.Created;
+
+            var entity = sut.Create(notPersistedAuthentication);
+
+            entity.Created
+                .Should().BeAfter(oldDate);
+        }
+
+        [Fact]
         public void Update_GivenNullAuthentication_ThrowsException()
         {
             Action updateCall =
