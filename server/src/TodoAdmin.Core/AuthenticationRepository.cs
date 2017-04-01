@@ -32,7 +32,7 @@ namespace TodoAdmin.Core
                 ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IEnumerable<Authentication> GetAll()
+        public IEnumerable<IAuthentication> GetAll()
         {
             return context.Authentication
                 .ToList()

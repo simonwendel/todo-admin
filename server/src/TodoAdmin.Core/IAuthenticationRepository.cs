@@ -23,7 +23,7 @@ namespace TodoAdmin.Core
 
     public interface IAuthenticationRepository
     {
-        IEnumerable<Authentication> GetAll();
+        IEnumerable<IAuthentication> GetAll();
 
         Authentication Get(Guid appId);
 
