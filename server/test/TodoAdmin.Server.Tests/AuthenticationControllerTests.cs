@@ -153,9 +153,9 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
-        public void Put_GivenNonMatchingAppIds_ReturnsNotFound()
+        public void Put_GivenNonExistingAppId_ReturnsNotFound()
         {
-            var response = sut.Put(Guid.NewGuid(), nonPersistedEntity);
+            var response = sut.Put(nonPersistedEntity.AppId, nonPersistedEntity.AccountName);
 
             response
                 .Should().BeOfType<NotFoundResult>();
@@ -166,32 +166,19 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
-        public void Put_GivenNonExistingAuthentication_ReturnsNotFound()
+        public void Put_GivenAppIdAndAccountName_UpdatesEntity()
         {
-            var response = sut.Put(nonPersistedEntity.AppId, nonPersistedEntity);
-
-            response
-                .Should().BeOfType<NotFoundResult>();
+            sut.Put(persistedEntity.AppId, "new name");
 
             repository.Verify(
-                r => r.Update(It.IsAny<Guid>(), It.IsAny<string>()),
-                Times.Never);
-        }
-
-        [Fact]
-        public void Put_GivenAuthentication_UpdatesEntity()
-        {
-            sut.Put(persistedEntity.AppId, persistedEntity);
-
-            repository.Verify(
-                r => r.Update(It.Is<Guid>(i => i == persistedEntity.AppId), It.Is<string>(n => n.Equals(persistedEntity.AccountName))),
+                r => r.Update(It.Is<Guid>(i => i == persistedEntity.AppId), It.Is<string>(n => n.Equals("new name"))),
                 Times.Once);
         }
 
         [Fact]
-        public void Put_GivenAuthentication_ReturnsNoContentResult()
+        public void Put_GivenAppIdAndAccountName_ReturnsNoContentResult()
         {
-            var response = sut.Put(persistedEntity.AppId, persistedEntity);
+            var response = sut.Put(persistedEntity.AppId, "new name");
 
             response
                 .Should().BeOfType<NoContentResult>();

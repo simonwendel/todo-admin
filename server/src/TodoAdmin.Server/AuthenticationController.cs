@@ -67,14 +67,14 @@ namespace TodoAdmin.Server
         }
 
         [HttpPut("{appId}")]
-        public IActionResult Put(Guid appId, [FromBody]Authentication authentication)
+        public IActionResult Put(Guid appId, [FromBody]string accountName)
         {
-            if (appId != authentication.AppId || repository.Get(appId) == null)
+            if (repository.Get(appId) == null)
             {
                 return NotFound();
             }
 
-            repository.Update(authentication.AppId, authentication.AccountName);
+            repository.Update(appId, accountName);
             return NoContent();
         }
 
