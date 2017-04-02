@@ -130,7 +130,7 @@ namespace TodoAdmin.Server.Tests
         {
             sut.ModelState.AddModelError("error, dawg", "Something fishy with the dataz");
 
-            var response = sut.Post(nonPersistedEntity);
+            var response = sut.Post(nonPersistedEntity.AccountName);
 
             response
                 .Should().BeOfType<StatusCodeResult>()
@@ -139,9 +139,9 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
-        public void Post_GivenAuthentication_PersistsEntity()
+        public void Post_GivenAccountName_PersistsNewEntity()
         {
-            sut.Post(nonPersistedEntity);
+            sut.Post(nonPersistedEntity.AccountName);
 
             repository.Verify(
                 r => r.Create(It.Is<string>(a => a == nonPersistedEntity.AccountName)),
@@ -149,25 +149,14 @@ namespace TodoAdmin.Server.Tests
         }
 
         [Fact]
-        public void Post_GivenAuthentication_ReturnsCreatedResult()
+        public void Post_GivenAccountName_ReturnsCreatedResult()
         {
-            var response = sut.Post(nonPersistedEntity);
+            var response = sut.Post(nonPersistedEntity.AccountName);
 
             response
                 .Should().BeOfType<CreatedResult>()
                 .Which.Location
                     .Should().Be($"/api/authentication/{persistedEntity.AppId}");
-        }
-
-        [Fact]
-        public void Post_GivenAuthenticationWithExistingAppId_ReturnsConflictResult()
-        {
-            var response = sut.Post(persistedEntity);
-
-            response
-                .Should().BeOfType<StatusCodeResult>()
-                .Which.StatusCode
-                    .Should().Be(409);
         }
 
         [Fact]

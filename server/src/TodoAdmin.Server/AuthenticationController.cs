@@ -52,7 +52,7 @@ namespace TodoAdmin.Server
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Authentication authentication)
+        public IActionResult Post([FromBody]string accountName)
         {
             if (ModelState.IsValid == false)
             {
@@ -60,13 +60,7 @@ namespace TodoAdmin.Server
                 return StatusCode(422);
             }
 
-            if (repository.Get(authentication.AppId) != null)
-            {
-                // 409 -> Conflict
-                return StatusCode(409);
-            }
-
-            var newEntity = repository.Create(authentication.AccountName);
+            var newEntity = repository.Create(accountName);
             var url = $"/api/authentication/{newEntity.AppId}";
 
             return Created(url, newEntity);
