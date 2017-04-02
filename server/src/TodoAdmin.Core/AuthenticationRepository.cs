@@ -46,8 +46,7 @@ namespace TodoAdmin.Core
 
         public IAuthentication Get(Guid appId)
         {
-            return context.Authentication
-                .SingleOrDefault(e => e.AppId.Equals(appId));
+            return GetBy(appId);
         }
 
         public IAuthentication Create(string accountName)
@@ -78,8 +77,7 @@ namespace TodoAdmin.Core
 
         public void Delete(Guid appId)
         {
-            var authentication =
-                context.Authentication.Single(a => a.AppId == appId);
+            var authentication = GetBy(appId);
 
             context.Authentication.Remove(authentication);
             context.SaveChanges();
