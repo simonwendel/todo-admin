@@ -29,6 +29,7 @@ namespace TodoAdmin.Core
 
         public Guid AppId { get; internal set; }
 
+        [MinLength(1)]
         [MaxLength(255)]
         public string AccountName { get; internal set; }
 
