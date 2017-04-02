@@ -80,7 +80,7 @@ namespace TodoAdmin.Server
                 return NotFound();
             }
 
-            repository.Update(authentication);
+            repository.Update(authentication.AppId, authentication.AccountName);
             return NoContent();
         }
 

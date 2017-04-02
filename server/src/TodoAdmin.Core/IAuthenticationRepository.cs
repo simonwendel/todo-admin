@@ -29,7 +29,7 @@ namespace TodoAdmin.Core
 
         IAuthentication Create(string accountName);
 
-        void Update(Authentication authentication);
+        void Update(Guid appId, string accountName);
 
         void Delete(Guid appId);
     }

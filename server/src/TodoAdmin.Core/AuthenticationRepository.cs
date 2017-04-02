@@ -65,12 +65,12 @@ namespace TodoAdmin.Core
             return authentication;
         }
 
-        public void Update(Authentication authentication)
+        public void Update(Guid appId, string accountName)
         {
-            if (authentication == null)
-            {
-                throw new ArgumentNullException(nameof(authentication));
-            }
+            var authentication = GetBy(appId);
+
+            authentication.AccountName =
+                accountName ?? throw new ArgumentNullException(nameof(accountName));
 
             context.Authentication.Update(authentication);
             context.SaveChanges();
@@ -83,6 +83,12 @@ namespace TodoAdmin.Core
 
             context.Authentication.Remove(authentication);
             context.SaveChanges();
+        }
+
+        private Authentication GetBy(Guid appId)
+        {
+            return context.Authentication
+                .SingleOrDefault(a => a.AppId == appId);
         }
     }
 }

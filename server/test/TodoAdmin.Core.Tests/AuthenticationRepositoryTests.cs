@@ -176,19 +176,22 @@ namespace TodoAdmin.Core.Tests
         }
 
         [Fact]
-        public void Update_GivenNullAuthentication_ThrowsException()
+        public void Update_GivenNullAccountName_ThrowsException()
         {
             Action updateCall =
-                () => sut.Update(null);
+                () => sut.Update(oneAuthentication.AppId, null);
 
             updateCall
                 .ShouldThrow<ArgumentNullException>();
         }
 
         [Fact]
-        public void Update_GivenAuthentication_UpdatesAuthentication()
+        public void Update_GivenNewName_UpdatesAuthentication()
         {
-            sut.Update(oneAuthentication);
+            sut.Update(oneAuthentication.AppId, "new name");
+
+            oneAuthentication.AccountName
+                .Should().Be("new name");
 
             authenticationSet.Verify(
                 s => s.Update(It.Is<Authentication>(a => a == oneAuthentication)),

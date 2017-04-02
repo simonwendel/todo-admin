@@ -179,7 +179,7 @@ namespace TodoAdmin.Server.Tests
                 .Should().BeOfType<NotFoundResult>();
 
             repository.Verify(
-                r => r.Update(It.IsAny<Authentication>()),
+                r => r.Update(It.IsAny<Guid>(), It.IsAny<string>()),
                 Times.Never);
         }
 
@@ -192,7 +192,7 @@ namespace TodoAdmin.Server.Tests
                 .Should().BeOfType<NotFoundResult>();
 
             repository.Verify(
-                r => r.Update(It.IsAny<Authentication>()),
+                r => r.Update(It.IsAny<Guid>(), It.IsAny<string>()),
                 Times.Never);
         }
 
@@ -202,7 +202,7 @@ namespace TodoAdmin.Server.Tests
             sut.Put(persistedEntity.AppId, persistedEntity);
 
             repository.Verify(
-                r => r.Update(It.Is<Authentication>(a => a == persistedEntity)),
+                r => r.Update(It.Is<Guid>(i => i == persistedEntity.AppId), It.Is<string>(n => n.Equals(persistedEntity.AccountName))),
                 Times.Once);
         }
 
