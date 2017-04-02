@@ -36,10 +36,6 @@ namespace TodoAdmin.Server.Tests
 
         private readonly Authentication nonPersistedEntity;
 
-        private readonly Guid existingId;
-
-        private readonly Guid nonExistingId;
-
         private readonly AuthenticationController sut;
 
         public AuthenticationControllerTests()
@@ -49,20 +45,17 @@ namespace TodoAdmin.Server.Tests
             persistedEntity = Authentication.New();
             nonPersistedEntity = Authentication.New();
 
-            existingId = persistedEntity.AppId;
-            nonExistingId = nonPersistedEntity.AppId;
-
             repository = new Mock<IAuthenticationRepository>();
             repository
                 .Setup(r => r.GetAll())
                 .Returns(persistedEntities);
 
             repository
-                .Setup(r => r.Get(It.Is<Guid>(i => i == nonExistingId)))
+                .Setup(r => r.Get(It.Is<Guid>(i => i == nonPersistedEntity.AppId)))
                 .Returns((Authentication)null);
 
             repository
-                .Setup(r => r.Get(It.Is<Guid>(i => i == existingId)))
+                .Setup(r => r.Get(It.Is<Guid>(i => i == persistedEntity.AppId)))
                 .Returns(persistedEntity);
 
             repository
@@ -100,20 +93,20 @@ namespace TodoAdmin.Server.Tests
         [Fact]
         public void Get_GivenNonExistingId_ReturnsNotFound()
         {
-            var response = sut.Get(nonExistingId);
+            var response = sut.Get(nonPersistedEntity.AppId);
 
             response
                 .Should().BeOfType<NotFoundResult>();
 
             repository.Verify(
-                r => r.Get(It.Is<Guid>(i => i == nonExistingId)),
+                r => r.Get(It.Is<Guid>(i => i == nonPersistedEntity.AppId)),
                 Times.Once);
         }
 
         [Fact]
         public void Get_GivenExistingId_ReturnsOkWithResult()
         {
-            var response = sut.Get(existingId);
+            var response = sut.Get(persistedEntity.AppId);
 
             response
                 .Should().BeOfType<OkObjectResult>()
@@ -121,7 +114,7 @@ namespace TodoAdmin.Server.Tests
                     .Should().BeSameAs(persistedEntity);
 
             repository.Verify(
-                r => r.Get(It.Is<Guid>(i => i == existingId)),
+                r => r.Get(It.Is<Guid>(i => i == persistedEntity.AppId)),
                 Times.Once);
         }
 
@@ -175,7 +168,7 @@ namespace TodoAdmin.Server.Tests
         [Fact]
         public void Put_GivenNonExistingAuthentication_ReturnsNotFound()
         {
-            var response = sut.Put(nonExistingId, nonPersistedEntity);
+            var response = sut.Put(nonPersistedEntity.AppId, nonPersistedEntity);
 
             response
                 .Should().BeOfType<NotFoundResult>();
@@ -207,7 +200,7 @@ namespace TodoAdmin.Server.Tests
         [Fact]
         public void Delete_GivenNonExistingId_ReturnsNotFound()
         {
-            var response = sut.Delete(nonExistingId);
+            var response = sut.Delete(nonPersistedEntity.AppId);
 
             response
                 .Should().BeOfType<NotFoundResult>();
@@ -220,7 +213,7 @@ namespace TodoAdmin.Server.Tests
         [Fact]
         public void Delete_GivenExistingId_ReturnsNoContent()
         {
-            var response = sut.Delete(existingId);
+            var response = sut.Delete(persistedEntity.AppId);
 
             response
                 .Should().BeOfType<NoContentResult>();
