@@ -20,6 +20,7 @@ namespace TodoAdmin.Server
 {
     using System;
     using Microsoft.AspNetCore.Mvc;
+    using Swashbuckle.AspNetCore.SwaggerGen;
     using TodoAdmin.Core;
 
     [Route("api/[controller]")]
@@ -34,12 +35,15 @@ namespace TodoAdmin.Server
         }
 
         [HttpGet]
+        [SwaggerResponse(200, description: "All items returned with response.")]
         public IActionResult Get()
         {
             return Ok(repository.GetAll());
         }
 
         [HttpGet("{appId}")]
+        [SwaggerResponse(200, description: "Item found and returned with response.")]
+        [SwaggerResponse(404, description: "No item with specified AppId found.")]
         public IActionResult Get(Guid appId)
         {
             var result = repository.Get(appId);
@@ -52,6 +56,8 @@ namespace TodoAdmin.Server
         }
 
         [HttpPost]
+        [SwaggerResponse(201, description: "Item created and location returned with response.")]
+        [SwaggerResponse(422, description: "Item could not be created due to model errors.")]
         public IActionResult Post([FromBody]string accountName)
         {
             if (ModelState.IsValid == false)
@@ -67,6 +73,8 @@ namespace TodoAdmin.Server
         }
 
         [HttpPut("{appId}")]
+        [SwaggerResponse(204, description: "Item updated. No content.")]
+        [SwaggerResponse(404, description: "No item with specified AppId found.")]
         public IActionResult Put(Guid appId, [FromBody]string accountName)
         {
             if (repository.Get(appId) == null)
@@ -79,6 +87,8 @@ namespace TodoAdmin.Server
         }
 
         [HttpDelete("{appId}")]
+        [SwaggerResponse(204, description: "Item deleted. No content.")]
+        [SwaggerResponse(404, description: "No item with specified AppId found.")]
         public IActionResult Delete(Guid appId)
         {
             var authentication = repository.Get(appId);
