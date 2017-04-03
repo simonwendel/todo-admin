@@ -30,20 +30,25 @@ namespace TodoAdmin.Server.Tests
     {
         private readonly Mock<IAuthenticationRepository> repository;
 
-        private readonly IEnumerable<Authentication> persistedEntities;
+        private readonly IEnumerable<IAuthentication> persistedEntities;
 
-        private readonly Authentication persistedEntity;
+        private readonly IAuthentication persistedEntity;
 
-        private readonly Authentication nonPersistedEntity;
+        private readonly IAuthentication nonPersistedEntity;
 
         private readonly AuthenticationController sut;
 
         public AuthenticationControllerTests()
         {
-            persistedEntities = new Authentication[0];
+            persistedEntities = new IAuthentication[0];
 
-            persistedEntity = Authentication.New();
-            nonPersistedEntity = Authentication.New();
+            var mockPersistedEntity = new Mock<IAuthentication>();
+            mockPersistedEntity.SetupGet(a => a.AppId).Returns(Guid.NewGuid());
+            persistedEntity = mockPersistedEntity.Object;
+
+            var mockNonPersistedEntity = new Mock<IAuthentication>();
+            mockNonPersistedEntity.SetupGet(a => a.AppId).Returns(Guid.NewGuid());
+            nonPersistedEntity = mockNonPersistedEntity.Object;
 
             repository = new Mock<IAuthenticationRepository>();
             repository
@@ -52,7 +57,7 @@ namespace TodoAdmin.Server.Tests
 
             repository
                 .Setup(r => r.Get(It.Is<Guid>(i => i == nonPersistedEntity.AppId)))
-                .Returns((Authentication)null);
+                .Returns((IAuthentication)null);
 
             repository
                 .Setup(r => r.Get(It.Is<Guid>(i => i == persistedEntity.AppId)))
