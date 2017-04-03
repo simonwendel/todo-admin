@@ -18,7 +18,7 @@
 
 namespace TodoAdmin.Core
 {
-    public interface IAuthenticationFactory
+    internal interface IAuthenticationFactory
     {
         Authentication BuildWithName(string accountName);
     }
