@@ -81,7 +81,7 @@ namespace TodoAdmin.Server
         [HttpDelete("{appId}")]
         public IActionResult Delete(Guid appId)
         {
-            var authentication = repository.Get(appId) as Authentication;
+            var authentication = repository.Get(appId);
             if (authentication == null)
             {
                 return NotFound();
