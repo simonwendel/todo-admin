@@ -23,7 +23,7 @@ namespace TodoAdmin.Core
     using System.Linq;
     using System.Security.Cryptography;
 
-    public partial class Authentication : IAuthentication
+    internal partial class Authentication : IAuthentication
     {
         private const int SecretLength = 32;
 
