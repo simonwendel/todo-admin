@@ -1,6 +1,6 @@
 ﻿/*
  * Todo Storage for wifeys Todo app.
- * Copyright (C) 2016  Simon Wendel
+ * Copyright (C) 2017  Simon Wendel
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +25,9 @@ namespace TodoAdmin.Types
     {
         public void AddServicesTo(IServiceCollection services)
         {
+            services.AddDbContext<AuthenticationDbContext>();
+
+            services.AddTransient<IAuthenticationFactory, AuthenticationFactory>();
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         }
     }
