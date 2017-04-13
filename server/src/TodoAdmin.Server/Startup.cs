@@ -66,6 +66,7 @@ namespace TodoAdmin.Server
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseFileServer();
             app.UseMvc();
 
             app.UseSwagger();
