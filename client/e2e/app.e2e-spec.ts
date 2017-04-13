@@ -20,7 +20,7 @@
 import {TodoAdminClientPage} from './app.po';
 
 describe('todo-admin-client App', () => {
-    let page:TodoAdminClientPage;
+    let page: TodoAdminClientPage;
 
     beforeEach(() => {
         page = new TodoAdminClientPage();

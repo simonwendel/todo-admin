@@ -29,8 +29,8 @@ import {
     platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
-declare var __karma__:any;
-declare var require:any;
+declare var __karma__: any;
+declare var require: any;
 
 __karma__.loaded = function () {
 };
