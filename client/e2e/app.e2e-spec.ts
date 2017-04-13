@@ -20,14 +20,14 @@
 import {TodoAdminClientPage} from './app.po';
 
 describe('todo-admin-client App', () => {
-    let page: TodoAdminClientPage;
+    let adminPage: TodoAdminClientPage;
 
     beforeEach(() => {
-        page = new TodoAdminClientPage();
+        adminPage = new TodoAdminClientPage();
     });
 
     it('should display message saying app works', () => {
-        page.navigateTo();
-        expect(page.getParagraphText()).toEqual('App works!');
+        adminPage.navigateTo();
+        expect(adminPage.getParagraphText()).toEqual('App works!');
     });
 });
