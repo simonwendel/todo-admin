@@ -22,7 +22,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
-import {AuthenticationService} from './authentication';
+import {AuthenticationService} from './shared';
 import {AppComponent} from './app.component';
 
 @NgModule({
