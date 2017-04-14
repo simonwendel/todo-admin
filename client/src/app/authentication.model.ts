@@ -23,7 +23,7 @@ export class Authentication {
     public secret: string;
 
     constructor(fields: Authentication = undefined) {
-        if(fields) {
+        if (fields) {
             Object.assign(this, fields);
         }
     }
