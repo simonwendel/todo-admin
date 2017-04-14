@@ -18,8 +18,11 @@
  */
 
 export class Authentication {
+
     public appId: string;
+
     public accountName: string;
+
     public secret: string;
 
     constructor(fields: Authentication = undefined) {

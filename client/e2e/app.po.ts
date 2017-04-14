@@ -20,6 +20,7 @@
 import {browser, element, by} from 'protractor';
 
 export class TodoAdminClientPage {
+
     navigateTo() {
         return browser.get('/');
     }
