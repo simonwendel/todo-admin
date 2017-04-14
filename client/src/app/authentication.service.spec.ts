@@ -19,11 +19,13 @@
 
 import {TestBed, inject} from '@angular/core/testing';
 
+import {Authentication} from './authentication.model';
 import {AuthenticationService} from './authentication.service';
 
 describe('service: AuthenticationService', () => {
 
     let sut: AuthenticationService;
+    let expectedItems: Authentication[];
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -33,9 +35,20 @@ describe('service: AuthenticationService', () => {
 
     beforeEach(inject([AuthenticationService], (service: AuthenticationService) => {
         sut = service;
+        expectedItems = [
+            new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
+            new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
+            new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
+        ];
     }));
 
     it('should be instantiable.', () => {
         expect(sut).toBeTruthy();
+    });
+
+    it('should fetch array of authentication items.', () => {
+        const items = sut.GetAll();
+
+        expect(items).toEqual(expectedItems);
     });
 });

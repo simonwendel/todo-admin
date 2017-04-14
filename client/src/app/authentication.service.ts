@@ -19,8 +19,20 @@
 
 import {Injectable} from '@angular/core';
 
+import {Authentication} from './authentication.model';
+
 @Injectable()
 export class AuthenticationService {
+    private items = [
+        new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
+        new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
+        new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
+    ];
+
     constructor() {
+    }
+
+    GetAll() {
+        return this.items;
     }
 }
