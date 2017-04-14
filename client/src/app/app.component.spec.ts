@@ -17,11 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {TestBed, async} from '@angular/core/testing';
+import {TestBed, async, ComponentFixture} from '@angular/core/testing';
 
 import {AppComponent} from './app.component';
 
 describe('component: AppComponent', () => {
+
+    let sut: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -31,21 +34,21 @@ describe('component: AppComponent', () => {
         }).compileComponents();
     }));
 
+    beforeEach(() => {
+        fixture = TestBed.createComponent(AppComponent);
+        sut = fixture.debugElement.componentInstance;
+        fixture.detectChanges();
+    });
+
     it('should create the app', async(() => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance;
-        expect(app).toBeTruthy();
+        expect(sut).toBeTruthy();
     }));
 
     it(`should have as title 'App works!'`, async(() => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('App works!');
+        expect(sut.title).toEqual('App works!');
     }));
 
     it('should render title in a h1 tag', async(() => {
-        const fixture = TestBed.createComponent(AppComponent);
-        fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('h1').textContent).toContain('App works!');
     }));
