@@ -23,7 +23,7 @@ import {AuthenticationListComponent} from './authentication-list.component';
 
 describe('component: AuthenticationListComponent', () => {
 
-    let component: AuthenticationListComponent;
+    let sut: AuthenticationListComponent;
     let fixture: ComponentFixture<AuthenticationListComponent>;
 
     beforeEach(async(() => {
@@ -35,11 +35,11 @@ describe('component: AuthenticationListComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AuthenticationListComponent);
-        component = fixture.componentInstance;
+        sut = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should be instantiable.', () => {
-        expect(component).toBeTruthy();
+        expect(sut).toBeTruthy();
     });
 });
