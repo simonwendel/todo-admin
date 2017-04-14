@@ -19,7 +19,7 @@
 
 import {TodoAdminClientPage} from './app.po';
 
-describe('todo-admin-client App', () => {
+describe('e2e: Authentication admin page', () => {
 
     let adminPage: TodoAdminClientPage;
 

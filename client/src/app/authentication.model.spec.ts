@@ -19,7 +19,7 @@
 
 import {Authentication} from './authentication.model';
 
-describe('Authentication model', () => {
+describe('model: Authentication', () => {
 
     it('should be instantiable without an object to copy.', () => {
         const sut = new Authentication();
