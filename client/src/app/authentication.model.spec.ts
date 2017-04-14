@@ -33,7 +33,8 @@ describe('model: Authentication', () => {
         const sut = new Authentication({
             appId: 'it\'s me',
             accountName: 'acct',
-            secret: 'shush'});
+            secret: 'shush'
+        });
 
         expect(sut.appId).toBe('it\'s me');
         expect(sut.accountName).toBe('acct');
