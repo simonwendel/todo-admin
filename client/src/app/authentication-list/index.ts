@@ -17,27 +17,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-
-import {AuthenticationService} from './shared';
-import {AppComponent} from './app.component';
-import {AuthenticationListComponent} from './authentication-list';
-
-@NgModule({
-    declarations: [
-        AppComponent,
-        AuthenticationListComponent
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule
-    ],
-    providers: [AuthenticationService],
-    bootstrap: [AppComponent]
-})
-export class AppModule {
-}
+export {AuthenticationListComponent} from './authentication-list.component';

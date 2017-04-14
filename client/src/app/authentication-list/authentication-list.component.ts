@@ -17,27 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {Component, OnInit} from '@angular/core';
 
-import {AuthenticationService} from './shared';
-import {AppComponent} from './app.component';
-import {AuthenticationListComponent} from './authentication-list';
-
-@NgModule({
-    declarations: [
-        AppComponent,
-        AuthenticationListComponent
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule
-    ],
-    providers: [AuthenticationService],
-    bootstrap: [AppComponent]
+@Component({
+    selector: 'tc-authentication-list',
+    templateUrl: './authentication-list.component.html',
+    styleUrls: ['./authentication-list.component.css']
 })
-export class AppModule {
+export class AuthenticationListComponent implements OnInit {
+
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
+
 }
