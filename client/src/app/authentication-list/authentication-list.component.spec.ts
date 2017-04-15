@@ -51,12 +51,17 @@ describe('component: AuthenticationListComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should be instantiable.', () => {
+    it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('should retrieve all authentication items from the backend.', () => {
+    it('(ctor) should retrieve no authentication items when constructed.', () => {
+        expect(sut.items).toEqual([]);
+    });
+
+    it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
+        sut.ngOnInit();
+
         expect(sut.items).toEqual(items);
-        expect(service.GetAll.called).toBeTruthy();
     });
 });
