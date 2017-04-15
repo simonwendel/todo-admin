@@ -18,7 +18,7 @@
  */
 
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {stub} from 'sinon';
+import * as sinon from 'sinon';
 
 import {AuthenticationListComponent} from './authentication-list.component';
 import {AuthenticationService, Authentication} from '../shared';
@@ -34,8 +34,10 @@ describe('component: AuthenticationListComponent', () => {
     beforeEach(() => {
         items = [];
         service = {
-            getAll: stub().returns(items)
+            getAll: sinon.stub()
         };
+
+        service.getAll.returns(items);
     });
 
     beforeEach(async(() => {
