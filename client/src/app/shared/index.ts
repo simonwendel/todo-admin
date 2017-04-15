@@ -18,3 +18,4 @@
  */
 
 export {AuthenticationService} from './authentication.service';
+export {Authentication} from './authentication.model';
