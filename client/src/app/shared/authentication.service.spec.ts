@@ -34,11 +34,11 @@ describe('service: AuthenticationService', () => {
         ];
     });
 
-    it('should be instantiable.', () => {
+    it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('should fetch array of authentication items.', () => {
+    it('(getAll) should fetch array of authentication items.', () => {
         const items = sut.getAll();
 
         expect(items).toEqual(expectedItems);

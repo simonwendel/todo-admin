@@ -21,7 +21,7 @@ import {Authentication} from './authentication.model';
 
 describe('model: Authentication', () => {
 
-    it('should be instantiable without an object to copy.', () => {
+    it('(ctor) should be instantiable without an object to copy.', () => {
         const sut = new Authentication();
 
         expect(sut.appId).toBeUndefined();
@@ -29,7 +29,7 @@ describe('model: Authentication', () => {
         expect(sut.secret).toBeUndefined();
     });
 
-    it('should have a copy constructor for setting properties from an object.', () => {
+    it('(ctor) should have a copy constructor for setting properties from an object.', () => {
         const sut = new Authentication({
             appId: 'it\'s me',
             accountName: 'acct',

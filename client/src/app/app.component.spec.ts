@@ -40,15 +40,15 @@ describe('component: AppComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create the app', async(() => {
+    it('(ctor) should create the app', async(() => {
         expect(sut).toBeTruthy();
     }));
 
-    it(`should have as title 'App works!'`, async(() => {
+    it(`(model) should have as title 'App works!'`, async(() => {
         expect(sut.title).toEqual('App works!');
     }));
 
-    it('should render title in a h1 tag', async(() => {
+    it('(html) should render title in a h1 tag', async(() => {
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('h1').textContent).toContain('App works!');
     }));
