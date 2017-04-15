@@ -39,7 +39,7 @@ describe('service: AuthenticationService', () => {
     });
 
     it('should fetch array of authentication items.', () => {
-        const items = sut.GetAll();
+        const items = sut.getAll();
 
         expect(items).toEqual(expectedItems);
     });

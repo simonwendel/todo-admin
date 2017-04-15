@@ -34,7 +34,7 @@ describe('component: AuthenticationListComponent', () => {
     beforeEach(() => {
         items = [];
         service = {
-            GetAll: stub().returns(items)
+            getAll: stub().returns(items)
         };
     });
 

@@ -33,7 +33,7 @@ export class AuthenticationService {
     constructor() {
     }
 
-    GetAll() {
+    getAll() {
         return this.items;
     }
 }
