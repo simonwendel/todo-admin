@@ -19,6 +19,8 @@
 
 import {Component, OnInit} from '@angular/core';
 
+import {AuthenticationService, Authentication} from '../shared';
+
 @Component({
     selector: 'tc-authentication-list',
     templateUrl: './authentication-list.component.html',
@@ -26,10 +28,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AuthenticationListComponent implements OnInit {
 
-    constructor() {
+    items: Authentication[];
+
+    private readonly authenticationService: AuthenticationService;
+
+    constructor(authenticationService: AuthenticationService) {
+        this.authenticationService = authenticationService;
+        this.items = this.authenticationService.GetAll();
     }
 
     ngOnInit() {
     }
-
 }

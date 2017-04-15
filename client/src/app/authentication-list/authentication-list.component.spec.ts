@@ -18,19 +18,31 @@
  */
 
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {stub} from 'sinon';
 
 import {AuthenticationListComponent} from './authentication-list.component';
+import {AuthenticationService, Authentication} from '../shared';
 
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
     let fixture: ComponentFixture<AuthenticationListComponent>;
 
+    let service: any;
+    let items: Authentication[];
+
+    beforeEach(() => {
+        items = [];
+        service = {
+            GetAll: stub().returns(items)
+        };
+    });
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AuthenticationListComponent]
-        })
-            .compileComponents();
+            declarations: [AuthenticationListComponent],
+            providers: [{provide: AuthenticationService, useValue: service}]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -41,5 +53,10 @@ describe('component: AuthenticationListComponent', () => {
 
     it('should be instantiable.', () => {
         expect(sut).toBeTruthy();
+    });
+
+    it('should retrieve all authentication items from the backend.', () => {
+        expect(sut.items).toEqual(items);
+        expect(service.GetAll.called).toBeTruthy();
     });
 });
