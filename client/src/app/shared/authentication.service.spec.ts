@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {TestBed, inject} from '@angular/core/testing';
-
 import {Authentication} from './authentication.model';
 import {AuthenticationService} from './authentication.service';
 
@@ -28,19 +26,13 @@ describe('service: AuthenticationService', () => {
     let expectedItems: Authentication[];
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [AuthenticationService]
-        });
-    });
-
-    beforeEach(inject([AuthenticationService], (service: AuthenticationService) => {
-        sut = service;
+        sut = new AuthenticationService();
         expectedItems = [
             new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
             new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
             new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
         ];
-    }));
+    });
 
     it('should be instantiable.', () => {
         expect(sut).toBeTruthy();
