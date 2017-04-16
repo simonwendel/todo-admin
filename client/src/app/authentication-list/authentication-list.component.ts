@@ -30,10 +30,7 @@ export class AuthenticationListComponent implements OnInit {
 
     items: Authentication[];
 
-    private readonly authenticationService: AuthenticationService;
-
-    constructor(authenticationService: AuthenticationService) {
-        this.authenticationService = authenticationService;
+    constructor(private readonly authenticationService: AuthenticationService) {
     }
 
     ngOnInit() {
