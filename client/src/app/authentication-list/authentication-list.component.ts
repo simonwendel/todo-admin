@@ -28,7 +28,7 @@ import {AuthenticationService, Authentication} from '../shared';
 })
 export class AuthenticationListComponent implements OnInit {
 
-    items: Authentication[];
+    items: Array<Authentication>;
 
     constructor(private readonly authenticationService: AuthenticationService) {
     }
