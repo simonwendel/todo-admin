@@ -17,40 +17,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import * as sinon from 'sinon';
 
 import {AuthenticationListComponent} from './authentication-list.component';
-import {AuthenticationService, Authentication} from '../shared';
+import {Authentication, AuthenticationService} from '../shared';
 
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
-    let fixture: ComponentFixture<AuthenticationListComponent>;
 
     let service: any;
     let items: Authentication[];
 
     beforeEach(() => {
-        items = [];
+        items = [
+            new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
+            new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
+            new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
+        ];
+
         service = {
             getAll: sinon.stub()
         };
 
         service.getAll.returns(items);
-    });
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [AuthenticationListComponent],
-            providers: [{provide: AuthenticationService, useValue: service}]
-        }).compileComponents();
-    }));
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(AuthenticationListComponent);
-        sut = fixture.componentInstance;
-        fixture.detectChanges();
+        sut = new AuthenticationListComponent(service);
     });
 
     it('(ctor) should be instantiable.', () => {
