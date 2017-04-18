@@ -44,10 +44,6 @@ describe('component: AppComponent', () => {
         expect(sut).toBeTruthy();
     });
 
-    it(`(model) should have as title 'App works!'`, () => {
-        expect(sut.title).toEqual('App works!');
-    });
-
     it('(html) should render title in a h1 tag', () => {
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('h1').textContent).toContain('App works!');
