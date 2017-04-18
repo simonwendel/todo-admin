@@ -17,31 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as sinon from 'sinon';
-
 import {AuthenticationListComponent} from './authentication-list.component';
-import {Authentication, AuthenticationService} from '../shared';
+import {MockAuthenticationService} from '../mocks';
 
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
 
     let service: any;
-    let items: Authentication[];
 
     beforeEach(() => {
-        items = [
-            new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
-            new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
-            new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
-        ];
-
-        service = {
-            getAll: sinon.stub()
-        };
-
-        service.getAll.returns(items);
-
+        service = new MockAuthenticationService();
         sut = new AuthenticationListComponent(service);
     });
 
@@ -56,6 +42,6 @@ describe('component: AuthenticationListComponent', () => {
     it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
         sut.ngOnInit();
 
-        expect(sut.items).toEqual(items);
+        expect(sut.items).toEqual(service.getAll());
     });
 });
