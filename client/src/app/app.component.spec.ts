@@ -18,8 +18,12 @@
  */
 
 import {TestBed, async, ComponentFixture} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
+import {AuthenticationListComponent} from './authentication-list';
+import {AuthenticationService} from './shared';
+import {MockAuthenticationService} from './mocks';
 
 describe('component: AppComponent', () => {
 
@@ -28,9 +32,8 @@ describe('component: AppComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                AppComponent
-            ],
+            declarations: [AppComponent, AuthenticationListComponent],
+            providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
         }).compileComponents();
     }));
 
@@ -44,8 +47,9 @@ describe('component: AppComponent', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('(html) should render title in a h1 tag', () => {
-        const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h1').textContent).toContain('App works!');
+    it('(html) should render an authentication list component.', () => {
+        const compiled = fixture.debugElement;
+
+        expect(compiled.queryAll(By.css('tc-authentication-list')).length).toBe(1);
     });
 });
