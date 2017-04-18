@@ -37,11 +37,13 @@ describe('component: AuthenticationListComponent', () => {
 
     it('(ctor) should retrieve no authentication items when constructed.', () => {
         expect(sut.items).toEqual([]);
+        expect(service.getAll.called).toBeFalsy();
     });
 
     it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
         sut.ngOnInit();
 
-        expect(sut.items).toEqual(service.getAll());
+        expect(sut.items).toEqual(service.items);
+        expect(service.getAll.calledOnce).toBeTruthy();
     });
 });
