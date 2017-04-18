@@ -22,6 +22,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
+import {SharedModule, DataTableModule, DialogModule} from 'primeng/primeng';
+
 import {AppComponent} from './app.component';
 import {AuthenticationService} from './shared';
 import {AuthenticationListComponent} from './authentication-list';
@@ -34,7 +36,11 @@ import {AuthenticationListComponent} from './authentication-list';
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+
+        SharedModule,
+        DataTableModule,
+        DialogModule
     ],
     providers: [AuthenticationService],
     bootstrap: [AppComponent]
