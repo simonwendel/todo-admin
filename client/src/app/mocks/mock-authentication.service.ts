@@ -17,13 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Injectable} from '@angular/core';
-
 import {stub, SinonStub} from 'sinon';
 
 import {Authentication} from '../shared';
 
-@Injectable()
 export class MockAuthenticationService {
 
     getAll: SinonStub;
