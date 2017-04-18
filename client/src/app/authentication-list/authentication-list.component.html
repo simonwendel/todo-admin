@@ -1,3 +1,7 @@
-<p>
-    authentication-list works!
-</p>
+<p-dataTable [value]="items" selectionMode="single" [(selection)]="selectedItem"
+             [paginator]="true" rows="15" [responsive]="true">
+    <p-header>App Authentication</p-header>
+    <p-column styleClass="data-account-name" field="accountName" header="Account Name" [sortable]="true"></p-column>
+    <p-column styleClass="data-app-id" field="appId" header="Application ID" [sortable]="true"></p-column>
+    <p-column styleClass="data-secret" field="secret" header="Secret" [sortable]="true"></p-column>
+</p-dataTable>

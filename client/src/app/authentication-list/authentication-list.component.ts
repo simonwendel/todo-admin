@@ -30,6 +30,8 @@ export class AuthenticationListComponent implements OnInit {
 
     items: Array<Authentication>;
 
+    selectedItem: Authentication;
+
     constructor(private readonly authenticationService: AuthenticationService) {
         this.items = [];
     }

@@ -17,8 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {async, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+
+import {SharedModule, DataTableModule} from 'primeng/primeng';
+
 import {AuthenticationListComponent} from './authentication-list.component';
+import {AuthenticationService, Authentication} from '../shared';
 import {MockAuthenticationService} from '../mocks';
+import {DebugElement} from '@angular/core';
 
 describe('component: AuthenticationListComponent', () => {
 
@@ -30,6 +37,14 @@ describe('component: AuthenticationListComponent', () => {
         service = new MockAuthenticationService();
         sut = new AuthenticationListComponent(service);
     });
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [AuthenticationListComponent],
+            imports: [SharedModule, DataTableModule],
+            providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
+        }).compileComponents();
+    }));
 
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
@@ -46,4 +61,24 @@ describe('component: AuthenticationListComponent', () => {
         expect(sut.items).toEqual(service.items);
         expect(service.getAll.calledOnce).toBeTruthy();
     });
+
+    it('(html) should have a p-datatable containing items from the auth service.', () => {
+        const fixture = TestBed.createComponent(AuthenticationListComponent);
+        const component = fixture.debugElement;
+        fixture.detectChanges();
+
+        expect(getTableElements(component).length).toBe(1);
+        expect(getAccountNamesFromTables(component))
+            .toEqual(service.items.map((item: Authentication) => item.accountName));
+    });
+
+    function getTableElements(component: DebugElement) {
+        return component.queryAll(By.css('p-datatable'));
+    }
+
+    function getAccountNamesFromTables(component: DebugElement) {
+        return component
+            .queryAll(By.css('p-datatable td.data-account-name span.ui-cell-data'))
+            .map((node) => node.nativeElement.innerText);
+    }
 });
