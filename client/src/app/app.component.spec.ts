@@ -20,6 +20,8 @@
 import {TestBed, async, ComponentFixture} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 
+import {SharedModule, DataTableModule} from 'primeng/primeng';
+
 import {AppComponent} from './app.component';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationService} from './shared';
@@ -33,6 +35,7 @@ describe('component: AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [AppComponent, AuthenticationListComponent],
+            imports: [SharedModule, DataTableModule],
             providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
         }).compileComponents();
     }));
