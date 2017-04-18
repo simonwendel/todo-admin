@@ -24,7 +24,7 @@ import {SharedModule, DataTableModule} from 'primeng/primeng';
 
 import {AuthenticationListComponent} from './authentication-list.component';
 import {AuthenticationService, Authentication} from '../shared';
-import {MockAuthenticationService} from '../mocks';
+import {MockAuthenticationService} from '../mocks/authentication.mock.service';
 import {DebugElement} from '@angular/core';
 
 describe('component: AuthenticationListComponent', () => {

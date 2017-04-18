@@ -18,7 +18,7 @@
  */
 
 import {Authentication} from '../shared';
-import {MockAuthenticationService} from './mock-authentication.service';
+import {MockAuthenticationService} from './authentication.mock.service';
 
 describe('test mock: MockAuthenticationService', () => {
 

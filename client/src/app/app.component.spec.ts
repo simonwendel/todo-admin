@@ -23,7 +23,7 @@ import {By} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationService} from './shared';
-import {MockAuthenticationService} from './mocks';
+import {MockAuthenticationService} from './mocks/authentication.mock.service';
 
 describe('component: AppComponent', () => {
 
