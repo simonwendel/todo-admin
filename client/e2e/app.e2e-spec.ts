@@ -19,16 +19,11 @@
 
 import {TodoAdminClientPage} from './app.po';
 
-xdescribe('e2e: Authentication admin page', () => {
+describe('e2e: Authentication admin page', () => {
 
     let adminPage: TodoAdminClientPage;
 
     beforeEach(() => {
         adminPage = new TodoAdminClientPage();
-    });
-
-    it('should display message saying app works', () => {
-        adminPage.navigateTo();
-        expect(adminPage.getParagraphText()).toEqual('App works!');
     });
 });

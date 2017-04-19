@@ -24,8 +24,4 @@ export class TodoAdminClientPage {
     navigateTo() {
         return browser.get('/');
     }
-
-    getParagraphText() {
-        return element(by.css('tc-app-root h1')).getText();
-    }
 }
