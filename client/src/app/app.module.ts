@@ -26,6 +26,7 @@ import {SharedModule, DataTableModule, DialogModule} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
 import {AuthenticationService} from './shared';
+import {MockAuthenticationService} from './mocks/authentication.mock.service';
 import {AuthenticationListComponent} from './authentication-list';
 
 @NgModule({
@@ -42,7 +43,7 @@ import {AuthenticationListComponent} from './authentication-list';
         DataTableModule,
         DialogModule
     ],
-    providers: [AuthenticationService],
+    providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}],
     bootstrap: [AppComponent]
 })
 export class AppModule {
