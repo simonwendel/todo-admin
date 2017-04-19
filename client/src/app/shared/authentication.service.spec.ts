@@ -23,24 +23,16 @@ import {AuthenticationService} from './authentication.service';
 describe('service: AuthenticationService', () => {
 
     let sut: AuthenticationService;
-    let expectedItems: Authentication[];
 
     beforeEach(() => {
         sut = new AuthenticationService();
-        expectedItems = [
-            new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
-            new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
-            new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
-        ];
     });
 
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('(getAll) should fetch array of authentication items.', () => {
-        const items = sut.getAll();
-
-        expect(items).toEqual(expectedItems);
+    it('(getAll) should throw exception.', () => {
+        expect(() => sut.getAll()).toThrow();
     });
 });
