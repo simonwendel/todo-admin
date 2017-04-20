@@ -3,5 +3,9 @@
     <p-header>App Authentication</p-header>
     <p-column styleClass="data-account-name" field="accountName" header="Account Name" [sortable]="true"></p-column>
     <p-column styleClass="data-app-id" field="appId" header="Application ID" [sortable]="true"></p-column>
-    <p-column styleClass="data-secret" field="secret" header="Secret" [sortable]="false"></p-column>
+    <p-column styleClass="data-secret" field="secret" header="Secret" [sortable]="false">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+            <span class="data-secret-val">{{row.secret}}</span>
+        </ng-template>
+    </p-column>
 </p-dataTable>

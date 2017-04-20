@@ -24,4 +24,12 @@ export class TodoAdminClientPage {
     navigateTo() {
         return browser.get('/');
     }
+
+    getNumberOfSecrets() {
+        return element.all(by.css('.data-secret-val')).count();
+    }
+
+    getColorsOfSecrets() {
+        return element.all(by.css('.data-secret-val')).getCssValue('color');
+    }
 }
