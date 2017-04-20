@@ -19,17 +19,19 @@
 
 import {browser, element, by} from 'protractor';
 
+import {WebDriverPromise} from './e2e-types';
+
 export class TodoAdminClientPage {
 
-    navigateTo() {
+    navigateTo(): WebDriverPromise<void> {
         return browser.get('/');
     }
 
-    getNumberOfSecrets() {
+    getNumberOfSecrets(): WebDriverPromise<number> {
         return element.all(by.css('.data-secret-val')).count();
     }
 
-    getColorsOfSecrets() {
+    getColorsOfSecrets(): WebDriverPromise<string> {
         return element.all(by.css('.data-secret-val')).getCssValue('color');
     }
 }
