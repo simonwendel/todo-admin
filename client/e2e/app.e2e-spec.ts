@@ -24,9 +24,9 @@ describe('e2e: Authentication admin page', () => {
     let adminPage: TodoAdminClientPage;
     let numberOfSecrets: number;
 
-    beforeEach(() => {
+    beforeEach(async () => {
         adminPage = new TodoAdminClientPage();
-        adminPage.navigateTo();
+        await adminPage.navigateTo();
     });
 
     it('should have secrets in red.', async () => {
