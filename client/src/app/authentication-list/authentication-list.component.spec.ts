@@ -72,11 +72,11 @@ describe('component: AuthenticationListComponent', () => {
             .toEqual(service.items.map((item: Authentication) => item.accountName));
     });
 
-    function getTableElements(component: DebugElement) {
+    function getTableElements(component: DebugElement): Array<DebugElement> {
         return component.queryAll(By.css('p-datatable'));
     }
 
-    function getAccountNamesFromTables(component: DebugElement) {
+    function getAccountNamesFromTables(component: DebugElement): Array<string> {
         return component
             .queryAll(By.css('p-datatable td.data-account-name span.ui-cell-data'))
             .map((node) => node.nativeElement.innerText);
