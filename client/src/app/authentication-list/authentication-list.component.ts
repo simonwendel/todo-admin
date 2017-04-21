@@ -36,7 +36,7 @@ export class AuthenticationListComponent implements OnInit {
         this.items = [];
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.items = this.authenticationService.getAll();
     }
 }
