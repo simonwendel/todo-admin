@@ -32,8 +32,7 @@ import {
 declare var __karma__: any;
 declare var require: any;
 
-__karma__.loaded = function () {
-};
+__karma__.loaded = () => {};
 
 getTestBed().initTestEnvironment(
     BrowserDynamicTestingModule,
