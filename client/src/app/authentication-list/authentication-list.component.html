@@ -8,4 +8,9 @@
             <span class="data-secret-val">{{row.secret}}</span>
         </ng-template>
     </p-column>
+    <p-footer>
+        <div class="ui-helper-clearfix" style="width:100%">
+            <button type="button" pButton icon="fa-plus" (click)="addNew()" label="Add"></button>
+        </div>
+    </p-footer>
 </p-dataTable>
