@@ -76,6 +76,21 @@ describe('component: AuthenticationListComponent', () => {
             .toEqual(service.items.map((item: Authentication) => item.accountName));
     });
 
+    it('(addNew) should unselect item from datatable.', () => {
+        const selected = new Authentication();
+        sut.selectedItem = selected;
+
+        sut.addNew();
+
+        expect(sut.selectedItem).toBeNull();
+    });
+
+    it('(addNew) should show dialog.', () => {
+        sut.addNew();
+
+        expect(sut.showDialog).toBeTruthy();
+    });
+
     function getTableElements(component: DebugElement): Array<DebugElement> {
         return component.queryAll(By.css('p-datatable'));
     }

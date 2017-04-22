@@ -42,4 +42,9 @@ export class AuthenticationListComponent implements OnInit {
     ngOnInit(): void {
         this.items = this.authenticationService.getAll();
     }
+
+    addNew(): void {
+        this.selectedItem = null;
+        this.showDialog = true;
+    }
 }
