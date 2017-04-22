@@ -25,6 +25,8 @@ export class MockAuthenticationService {
 
     getAll: SinonSpy;
 
+    save: SinonSpy;
+
     items: Array<Authentication> = [
         new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
         new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
@@ -33,9 +35,21 @@ export class MockAuthenticationService {
 
     constructor() {
         this.getAll = spy(this.getAllInternal);
+        this.save = spy(this.saveInternal);
     }
 
     private getAllInternal(): Array<Authentication> {
         return this.items;
+    }
+
+    private saveInternal(item: Authentication): void {
+        const found = this.items.find(i => i.appId === item.appId);
+        if (found) {
+            const index = this.items.indexOf(found);
+            this.items[index] = item;
+            return;
+        }
+
+        this.items.push(item);
     }
 }

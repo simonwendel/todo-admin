@@ -22,6 +22,12 @@ import {MockAuthenticationService} from './authentication.mock.service';
 
 describe('test mock: MockAuthenticationService', () => {
 
+    const items = [
+        new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
+        new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
+        new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
+    ];
+
     let sut: MockAuthenticationService;
 
     beforeEach(() => {
@@ -29,12 +35,30 @@ describe('test mock: MockAuthenticationService', () => {
     });
 
     it('(getAll) should return a bunch of items.', () => {
-        const items = [
-            new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
-            new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
-            new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
-        ];
-
         expect(sut.getAll()).toEqual(items);
+    });
+
+    it('(save) should add new item when saving with new app id.', () => {
+        const newItem = new Authentication(
+            {appId: 'app 4', accountName: 'account 4', secret: 'secret 4'});
+
+        const updatedItems = items.concat(newItem);
+
+        sut.save(newItem);
+
+        expect(sut.items).toEqual(updatedItems);
+    });
+
+    it('(save) should update existing item when saving with old app id.', () => {
+        const existingItem = new Authentication(
+            {appId: 'app 3', accountName: 'account 4', secret: 'secret 4'});
+
+        const updatedItems = items
+            .filter(i => i.appId !== existingItem.appId)
+            .concat(existingItem);
+
+        sut.save(existingItem);
+
+        expect(sut.items).toEqual(updatedItems);
     });
 });
