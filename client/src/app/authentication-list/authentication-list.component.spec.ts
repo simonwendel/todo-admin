@@ -19,13 +19,13 @@
 
 import {async, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {DebugElement} from '@angular/core';
 
 import {SharedModule, DataTableModule} from 'primeng/primeng';
 
 import {AuthenticationListComponent} from './authentication-list.component';
 import {AuthenticationService, Authentication} from '../shared';
 import {MockAuthenticationService} from '../mocks/authentication.mock.service';
-import {DebugElement} from '@angular/core';
 
 describe('component: AuthenticationListComponent', () => {
 
