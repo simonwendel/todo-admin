@@ -17,14 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {async, TestBed} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
-import {DebugElement} from '@angular/core';
-
-import {SharedModule, DataTableModule} from 'primeng/primeng';
-
 import {AuthenticationListComponent} from './authentication-list.component';
-import {AuthenticationService, Authentication} from '../shared';
+import {Authentication} from '../shared';
 import {MockAuthenticationService} from '../mocks/authentication.mock.service';
 
 describe('component: AuthenticationListComponent', () => {
@@ -37,14 +31,6 @@ describe('component: AuthenticationListComponent', () => {
         service = new MockAuthenticationService();
         sut = new AuthenticationListComponent(service);
     });
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [AuthenticationListComponent],
-            imports: [SharedModule, DataTableModule],
-            providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
-        }).compileComponents();
-    }));
 
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
@@ -66,16 +52,6 @@ describe('component: AuthenticationListComponent', () => {
         expect(service.getAll.calledOnce).toBeTruthy();
     });
 
-    it('(html) should have a p-datatable containing items from the auth service.', () => {
-        const fixture = TestBed.createComponent(AuthenticationListComponent);
-        const component = fixture.debugElement;
-        fixture.detectChanges();
-
-        expect(getTableElements(component).length).toBe(1);
-        expect(getAccountNamesFromTables(component))
-            .toEqual(service.items.map((item: Authentication) => item.accountName));
-    });
-
     it('(addNew) should unselect item from datatable.', () => {
         const selected = new Authentication();
         sut.selectedItem = selected;
@@ -90,14 +66,4 @@ describe('component: AuthenticationListComponent', () => {
 
         expect(sut.showDialog).toBeTruthy();
     });
-
-    function getTableElements(component: DebugElement): Array<DebugElement> {
-        return component.queryAll(By.css('p-datatable'));
-    }
-
-    function getAccountNamesFromTables(component: DebugElement): Array<string> {
-        return component
-            .queryAll(By.css('p-datatable td.data-account-name span.ui-cell-data'))
-            .map((node) => node.nativeElement.innerText);
-    }
 });
