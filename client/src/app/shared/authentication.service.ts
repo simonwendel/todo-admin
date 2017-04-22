@@ -18,14 +18,21 @@
  */
 
 import {Injectable} from '@angular/core';
+import {Authentication} from './';
 
 @Injectable()
 export class AuthenticationService {
+
+    private exception: Error = new Error('Not implemented.');
 
     constructor() {
     }
 
     getAll(): never {
-        throw new Error('Not implemented.');
+        throw this.exception;
+    }
+
+    save(item: Authentication): never {
+        throw this.exception;
     }
 }

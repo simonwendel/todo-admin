@@ -33,6 +33,10 @@ describe('service: AuthenticationService', () => {
     });
 
     it('(getAll) should throw exception.', () => {
-        expect(() => sut.getAll()).toThrow();
+        expect(() => sut.getAll()).toThrowError('Not implemented.');
+    });
+
+    it('(save) should throw exception.', () => {
+        expect(() => sut.save(new Authentication())).toThrowError('Not implemented.');
     });
 });
