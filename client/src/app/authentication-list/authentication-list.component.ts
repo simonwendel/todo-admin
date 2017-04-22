@@ -32,8 +32,11 @@ export class AuthenticationListComponent implements OnInit {
 
     selectedItem: Authentication;
 
+    showDialog: boolean;
+
     constructor(private readonly authenticationService: AuthenticationService) {
         this.items = [];
+        this.showDialog = false;
     }
 
     ngOnInit(): void {

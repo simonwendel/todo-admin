@@ -55,6 +55,10 @@ describe('component: AuthenticationListComponent', () => {
         expect(service.getAll.called).toBeFalsy();
     });
 
+    it('(ctor) should hide dialog on construction.', () => {
+        expect(sut.showDialog).toBeFalsy();
+    });
+
     it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
         sut.ngOnInit();
 
