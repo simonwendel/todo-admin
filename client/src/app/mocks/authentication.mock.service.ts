@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {stub, SinonStub} from 'sinon';
+import {spy, SinonSpy} from 'sinon';
 
 import {Authentication} from '../shared';
 
 export class MockAuthenticationService {
 
-    getAll: SinonStub;
+    getAll: SinonSpy;
 
     items: Array<Authentication> = [
         new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
@@ -32,7 +32,10 @@ export class MockAuthenticationService {
     ];
 
     constructor() {
-        this.getAll = stub()
-            .returns(this.items);
+        this.getAll = spy(this.getAllInternal);
+    }
+
+    private getAllInternal(): Array<Authentication> {
+        return this.items;
     }
 }
