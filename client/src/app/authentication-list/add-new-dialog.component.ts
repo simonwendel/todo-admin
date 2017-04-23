@@ -17,5 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationListComponent} from './authentication-list.component';
-export {AddNewDialogComponent} from './add-new-dialog.component';
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+    selector: 'tc-add-new-dialog',
+    templateUrl: './add-new-dialog.component.html',
+    styleUrls: ['./add-new-dialog.component.css']
+})
+export class AddNewDialogComponent implements OnInit {
+
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
+}

@@ -17,5 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationListComponent} from './authentication-list.component';
-export {AddNewDialogComponent} from './add-new-dialog.component';
+import {AddNewDialogComponent} from './add-new-dialog.component';
+
+describe('component: AddNewDialogComponent', () => {
+
+    let sut: AddNewDialogComponent;
+
+    beforeEach(() => {
+        sut = new AddNewDialogComponent();
+    });
+
+    it('(ctor) it should be instantiable.', () => {
+        expect(sut).toBeTruthy();
+    });
+});

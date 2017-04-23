@@ -27,12 +27,13 @@ import {SharedModule, DataTableModule, DialogModule, ButtonModule} from 'primeng
 import {AppComponent} from './app.component';
 import {AuthenticationService} from './shared';
 import {MockAuthenticationService} from './mocks/authentication.mock.service';
-import {AuthenticationListComponent} from './authentication-list';
+import {AuthenticationListComponent, AddNewDialogComponent} from './authentication-list';
 
 @NgModule({
     declarations: [
         AppComponent,
-        AuthenticationListComponent
+        AuthenticationListComponent,
+        AddNewDialogComponent
     ],
     imports: [
         BrowserModule,
