@@ -17,18 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component, OnInit} from '@angular/core';
+import {AuthenticationDialogComponent} from './authentication-dialog.component';
 
-@Component({
-    selector: 'tc-add-new-dialog',
-    templateUrl: './add-new-dialog.component.html',
-    styleUrls: ['./add-new-dialog.component.css']
-})
-export class AddNewDialogComponent implements OnInit {
+describe('component: AuthenticationDialogComponent', () => {
 
-    constructor() {
-    }
+    let sut: AuthenticationDialogComponent;
 
-    ngOnInit() {
-    }
-}
+    beforeEach(() => {
+        sut = new AuthenticationDialogComponent();
+    });
+
+    it('(ctor) it should be instantiable.', () => {
+        expect(sut).toBeTruthy();
+    });
+});

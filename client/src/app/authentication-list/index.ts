@@ -18,4 +18,4 @@
  */
 
 export {AuthenticationListComponent} from './authentication-list.component';
-export {AddNewDialogComponent} from './add-new-dialog.component';
+export {AuthenticationDialogComponent} from './authentication-dialog.component';
