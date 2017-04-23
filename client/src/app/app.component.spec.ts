@@ -46,7 +46,7 @@ describe('component: AppComponent', () => {
         fixture.detectChanges();
     });
 
-    it('(ctor) should create the app', () => {
+    it('(ctor) should create the app.', () => {
         expect(sut).toBeTruthy();
     });
 
