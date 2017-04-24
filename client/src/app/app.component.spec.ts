@@ -17,42 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {TestBed, async, ComponentFixture} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TestBed, async} from '@angular/core/testing';
 
-import {SharedModule, DataTableModule} from 'primeng/primeng';
+import {SharedModule, DataTableModule, ButtonModule, DialogModule} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
-import {AuthenticationListComponent} from './authentication-list';
+import {AuthenticationListComponent, AuthenticationDialogComponent} from './authentication-list';
 import {AuthenticationService} from './shared';
 import {MockAuthenticationService} from './mocks/authentication.mock.service';
 
 describe('component, compiled: AppComponent', () => {
 
     let sut: AppComponent;
-    let fixture: ComponentFixture<AppComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AppComponent, AuthenticationListComponent],
-            imports: [SharedModule, DataTableModule],
+            declarations: [AppComponent, AuthenticationListComponent, AuthenticationDialogComponent],
+            imports: [FormsModule, BrowserAnimationsModule, SharedModule, DataTableModule, ButtonModule, DialogModule],
             providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AppComponent);
+        const fixture = TestBed.createComponent(AppComponent);
         sut = fixture.debugElement.componentInstance;
         fixture.detectChanges();
     });
 
-    it('(ctor) should create the app.', () => {
+    it('(ctor) should be compiling the app and dependencies.', () => {
         expect(sut).toBeTruthy();
-    });
-
-    it('(html) should render an authentication list component.', () => {
-        const compiled = fixture.debugElement;
-
-        expect(compiled.queryAll(By.css('tc-authentication-list')).length).toBe(1);
     });
 });
