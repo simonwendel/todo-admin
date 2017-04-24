@@ -28,7 +28,7 @@ import {AuthenticationListComponent, AuthenticationDialogComponent} from './auth
 import {AuthenticationService} from './shared';
 import {MockAuthenticationService} from './mocks/authentication.mock.service';
 
-describe('component, compiled: AppComponent', () => {
+describe('compiled: AppComponent', () => {
 
     let sut: AppComponent;
 

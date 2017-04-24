@@ -27,7 +27,7 @@ import {stub, SinonStub} from 'sinon';
 import {Authentication} from '../shared';
 import {AuthenticationDialogComponent} from './authentication-dialog.component';
 
-describe('component, object: AuthenticationDialogComponent', () => {
+describe('component: AuthenticationDialogComponent', () => {
 
     let sut: AuthenticationDialogComponent;
 
@@ -72,7 +72,7 @@ describe('component, object: AuthenticationDialogComponent', () => {
     });
 });
 
-describe('component, compiled: AuthenticationDialogComponent', () => {
+describe('compiled: AuthenticationDialogComponent', () => {
 
     let sut: AuthenticationDialogComponent;
     let fixture: ComponentFixture<AuthenticationDialogComponent>;

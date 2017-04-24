@@ -20,7 +20,7 @@
 import {Authentication} from '../shared';
 import {MockAuthenticationService} from './authentication.mock.service';
 
-describe('test mock: MockAuthenticationService', () => {
+describe('mock: MockAuthenticationService', () => {
 
     const items = [
         new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
