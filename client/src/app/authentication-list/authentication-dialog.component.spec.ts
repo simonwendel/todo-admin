@@ -38,21 +38,24 @@ describe('component: AuthenticationDialogComponent', () => {
         sut.deleteFunction = stub();
         sut.authenticationItem = new Authentication();
 
-        expect(() => sut.ngOnInit()).toThrowError();
+        expect(() => sut.ngOnInit()).toThrowError(
+            'Input saveFunction not set on tc-authentication-dialog!');
     });
 
     it('(ngOnInit) should throw if deleteFunction callback is not set.', () => {
         sut.saveFunction = stub();
         sut.authenticationItem = new Authentication();
 
-        expect(() => sut.ngOnInit()).toThrowError();
+        expect(() => sut.ngOnInit()).toThrowError(
+            'Input deleteFunction not set on tc-authentication-dialog!');
     });
 
     it('(ngOnInit) should throw if authenticationItem input is not set.', () => {
         sut.saveFunction = stub();
         sut.deleteFunction = stub();
 
-        expect(() => sut.ngOnInit()).toThrowError();
+        expect(() => sut.ngOnInit()).toThrowError(
+            'Input authenticationItem not set on tc-authentication-dialog!');
     });
 
     it('(ngOnInit) should do nothing if callbacks and item are set.', () => {
