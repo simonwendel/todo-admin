@@ -19,6 +19,8 @@
 
 import {Component, Input, OnInit} from '@angular/core';
 
+import {Authentication} from '../shared';
+
 @Component({
     selector: 'tc-authentication-dialog',
     templateUrl: './authentication-dialog.component.html',
@@ -26,9 +28,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AuthenticationDialogComponent implements OnInit {
 
-    @Input() saveFunction: () => void;
+    @Input() saveFunction: (item: Authentication) => void;
 
-    @Input() deleteFunction: () => void;
+    @Input() deleteFunction: (item: Authentication) => void;
 
     constructor() {
     }
