@@ -17,12 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {stub} from 'sinon';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+
+import {SharedModule, ButtonModule, DialogModule} from 'primeng/primeng';
+import {stub, SinonStub} from 'sinon';
 
 import {Authentication} from '../shared';
 import {AuthenticationDialogComponent} from './authentication-dialog.component';
 
-describe('component: AuthenticationDialogComponent', () => {
+describe('component, object: AuthenticationDialogComponent', () => {
 
     let sut: AuthenticationDialogComponent;
 
@@ -65,4 +68,62 @@ describe('component: AuthenticationDialogComponent', () => {
 
         expect(() => sut.ngOnInit()).not.toThrowError();
     });
+});
+
+describe('component, compiled: AuthenticationDialogComponent', () => {
+
+    let sut: AuthenticationDialogComponent;
+    let fixture: ComponentFixture<AuthenticationDialogComponent>;
+
+    let saveButton: HTMLElement;
+    let deleteButton: HTMLElement;
+
+    let saveFunction: SinonStub;
+    let deleteFunction: SinonStub;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [AuthenticationDialogComponent],
+            imports: [SharedModule, ButtonModule, DialogModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        saveFunction = stub();
+        deleteFunction = stub();
+
+        fixture = TestBed.createComponent(AuthenticationDialogComponent);
+
+        sut = fixture.debugElement.componentInstance;
+        sut.saveFunction = saveFunction;
+        sut.deleteFunction = deleteFunction;
+        sut.authenticationItem = new Authentication();
+
+        fixture.detectChanges();
+    });
+
+    beforeEach(async(() => {
+        saveButton = fixture.nativeElement.querySelector('button.save-button');
+        deleteButton = fixture.nativeElement.querySelector('button.delete-button');
+    }));
+
+    it('(ctor) it should be compilable.', () => {
+        expect(sut).toBeTruthy();
+    });
+
+    it('(saveClicked) should call saveFunction on save button click.', async(() => {
+        saveButton.click();
+
+        expect(saveFunction.calledOnce).toBeTruthy();
+        expect(saveFunction.calledWith(sut.authenticationItem)).toBeTruthy();
+        expect(deleteFunction.called).toBeFalsy();
+    }));
+
+    it('(deleteClicked) should call deleteFunction on delete button click.', async(() => {
+        deleteButton.click();
+
+        expect(deleteFunction.calledOnce).toBeTruthy();
+        expect(deleteFunction.calledWith(sut.authenticationItem)).toBeTruthy();
+        expect(saveFunction.called).toBeFalsy();
+    }));
 });
