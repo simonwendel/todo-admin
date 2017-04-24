@@ -17,12 +17,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
     selector: 'tc-authentication-dialog',
     templateUrl: './authentication-dialog.html',
     styleUrls: ['./authentication-dialog.css']
 })
-export class AuthenticationDialogComponent {
+export class AuthenticationDialogComponent implements OnInit {
+
+    @Input() saveFunction: () => void;
+
+    @Input() deleteFunction: () => void;
+
+    constructor() {
+    }
+
+    ngOnInit() {
+        if (this.saveFunction == null) {
+            throw new Error('Input saveFunction not set on tc-authentication-dialog!');
+        }
+
+        if (this.deleteFunction == null) {
+            throw new Error('Input deleteFunction not set on tc-authentication-dialog!');
+        }
+    }
 }
