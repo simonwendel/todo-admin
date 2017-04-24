@@ -21,8 +21,8 @@ import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
     selector: 'tc-authentication-dialog',
-    templateUrl: './authentication-dialog.html',
-    styleUrls: ['./authentication-dialog.css']
+    templateUrl: './authentication-dialog.component.html',
+    styleUrls: ['./authentication-dialog.component.css']
 })
 export class AuthenticationDialogComponent implements OnInit {
 
