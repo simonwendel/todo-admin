@@ -32,6 +32,8 @@ export class AuthenticationDialogComponent implements OnInit {
 
     @Input() deleteFunction: (item: Authentication) => void;
 
+    @Input() authenticationItem: Authentication;
+
     constructor() {
     }
 
@@ -42,6 +44,10 @@ export class AuthenticationDialogComponent implements OnInit {
 
         if (this.deleteFunction == null) {
             throw new Error('Input deleteFunction not set on tc-authentication-dialog!');
+        }
+
+        if (this.authenticationItem == null) {
+            throw new Error('Input authenticationItem not set on tc-authentication-dialog!');
         }
     }
 }

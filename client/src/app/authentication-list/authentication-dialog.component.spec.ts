@@ -19,6 +19,7 @@
 
 import {stub} from 'sinon';
 
+import {Authentication} from '../shared';
 import {AuthenticationDialogComponent} from './authentication-dialog.component';
 
 describe('component: AuthenticationDialogComponent', () => {
@@ -35,19 +36,29 @@ describe('component: AuthenticationDialogComponent', () => {
 
     it('(ngOnInit) should throw if saveFunction callback is not set.', () => {
         sut.deleteFunction = stub();
+        sut.authenticationItem = new Authentication();
 
         expect(() => sut.ngOnInit()).toThrowError();
     });
 
     it('(ngOnInit) should throw if deleteFunction callback is not set.', () => {
         sut.saveFunction = stub();
+        sut.authenticationItem = new Authentication();
 
         expect(() => sut.ngOnInit()).toThrowError();
     });
 
-    it('(ngOnInit) should do nothing if callbacks are set.', () => {
+    it('(ngOnInit) should throw if authenticationItem input is not set.', () => {
         sut.saveFunction = stub();
         sut.deleteFunction = stub();
+
+        expect(() => sut.ngOnInit()).toThrowError();
+    });
+
+    it('(ngOnInit) should do nothing if callbacks and item are set.', () => {
+        sut.saveFunction = stub();
+        sut.deleteFunction = stub();
+        sut.authenticationItem = new Authentication();
 
         expect(() => sut.ngOnInit()).not.toThrowError();
     });
