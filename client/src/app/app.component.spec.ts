@@ -46,7 +46,7 @@ describe('component, compiled: AppComponent', () => {
         fixture.detectChanges();
     });
 
-    it('(ctor) should be compiling the app and dependencies.', () => {
+    it('(compiling) should be compiling the app and dependencies.', () => {
         expect(sut).toBeTruthy();
     });
 });
