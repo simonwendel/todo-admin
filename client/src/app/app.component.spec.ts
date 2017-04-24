@@ -27,7 +27,7 @@ import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationService} from './shared';
 import {MockAuthenticationService} from './mocks/authentication.mock.service';
 
-describe('component: AppComponent', () => {
+describe('component, compiled: AppComponent', () => {
 
     let sut: AppComponent;
     let fixture: ComponentFixture<AppComponent>;
