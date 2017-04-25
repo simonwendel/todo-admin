@@ -62,10 +62,9 @@ describe('component: AuthenticationListComponent', () => {
     });
 
     it('(addNew) should attach new item to selection.', () => {
+        const emptyItem = new Authentication();
         sut.selectedItem = new Authentication(
             {appId: '1', accountName: '1', secret: '1'});
-
-        const emptyItem = new Authentication();
 
         sut.addNew();
 

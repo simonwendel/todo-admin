@@ -35,7 +35,6 @@ describe('e2e: Authentication admin page', () => {
 
     it('should have secrets in red.', async () => {
         numberOfSecrets = await adminPage.getNumberOfSecrets();
-
         const red = 'rgba(255, 0, 0, 1)';
         const expected = Array(numberOfSecrets).fill(red);
 
