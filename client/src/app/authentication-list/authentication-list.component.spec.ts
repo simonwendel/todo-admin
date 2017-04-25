@@ -53,12 +53,23 @@ describe('component: AuthenticationListComponent', () => {
     });
 
     it('(addNew) should unselect item from datatable.', () => {
-        const selected = new Authentication();
-        sut.selectedItem = selected;
+        const previouslySelected = new Authentication();
+        sut.selectedItem = previouslySelected;
 
         sut.addNew();
 
-        expect(sut.selectedItem).toBeNull();
+        expect(sut.selectedItem).not.toBe(previouslySelected);
+    });
+
+    it('(addNew) should attach new item to selection.', () => {
+        sut.selectedItem = new Authentication(
+            {appId: '1', accountName: '1', secret: '1'});
+
+        const emptyItem = new Authentication();
+
+        sut.addNew();
+
+        expect(sut.selectedItem).toEqual(emptyItem);
     });
 
     it('(addNew) should show dialog.', () => {

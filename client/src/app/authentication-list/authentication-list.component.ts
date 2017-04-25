@@ -44,7 +44,7 @@ export class AuthenticationListComponent implements OnInit {
     }
 
     addNew(): void {
-        this.selectedItem = null;
+        this.selectedItem = new Authentication();
         this.showDialog = true;
     }
 }
