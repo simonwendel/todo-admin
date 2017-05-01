@@ -35,4 +35,8 @@ export class AuthenticationService {
     save(item: Authentication): never {
         throw this.exception;
     }
+
+    deleteItem(item: Authentication): never {
+        throw  this.exception;
+    }
 }

@@ -39,4 +39,8 @@ describe('service: AuthenticationService', () => {
     it('(save) should throw exception.', () => {
         expect(() => sut.save(new Authentication())).toThrowError('Not implemented.');
     });
+
+    it('(deleteItem) should throw exception.', () => {
+        expect(() => sut.deleteItem(new Authentication())).toThrowError('Not implemented.');
+    });
 });
