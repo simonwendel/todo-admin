@@ -17,9 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {AuthenticationListComponent} from './authentication-list.component';
-import {Authentication} from '../shared';
+import {async, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {ButtonModule, DataTableModule, DialogModule, SharedModule} from 'primeng/primeng';
+
 import {MockAuthenticationService} from '../mocks/authentication.mock.service';
+import {Authentication, AuthenticationService} from '../shared';
+import {AuthenticationListComponent, AuthenticationDialogComponent} from './';
 
 describe('component: AuthenticationListComponent', () => {
 
@@ -75,5 +81,28 @@ describe('component: AuthenticationListComponent', () => {
         sut.addNew();
 
         expect(sut.showDialog).toBeTruthy();
+    });
+});
+
+describe('compiled: AuthenticationListComponent', () => {
+
+    let sut: AuthenticationListComponent;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [AuthenticationListComponent, AuthenticationDialogComponent],
+            imports: [FormsModule, BrowserAnimationsModule, SharedModule, DataTableModule, ButtonModule, DialogModule],
+            providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        const fixture = TestBed.createComponent(AuthenticationListComponent);
+        sut = fixture.debugElement.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('(compiling) should be compiling the component and dependencies.', () => {
+        expect(sut).toBeTruthy();
     });
 });
