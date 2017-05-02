@@ -23,7 +23,7 @@ import {Authentication} from '../shared';
 
 export class MockAuthenticationService {
 
-    getAll: SinonSpy;
+    getItems: SinonSpy;
 
     save: SinonSpy;
 
@@ -36,12 +36,12 @@ export class MockAuthenticationService {
     ];
 
     constructor() {
-        this.getAll = spy(this.getAllInternal);
+        this.getItems = spy(this.getItemsInternal);
         this.save = spy(this.saveInternal);
         this.deleteItem = spy(this.deleteItemInternal);
     }
 
-    private getAllInternal(): Array<Authentication> {
+    private getItemsInternal(): Array<Authentication> {
         return this.items;
     }
 

@@ -34,8 +34,8 @@ describe('mock: MockAuthenticationService', () => {
         sut = new MockAuthenticationService();
     });
 
-    it('(getAll) should return a bunch of items.', () => {
-        expect(sut.getAll()).toEqual(items);
+    it('(getItems) should return a bunch of items.', () => {
+        expect(sut.getItems()).toEqual(items);
     });
 
     it('(save) should add new item when saving with new app id.', () => {

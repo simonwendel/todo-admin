@@ -28,7 +28,7 @@ export class AuthenticationService {
     constructor() {
     }
 
-    getAll(): never {
+    getItems(): never {
         throw this.exception;
     }
 

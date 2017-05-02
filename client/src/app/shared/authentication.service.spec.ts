@@ -32,8 +32,8 @@ describe('service: AuthenticationService', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('(getAll) should throw exception.', () => {
-        expect(() => sut.getAll()).toThrowError('Not implemented.');
+    it('(getItems) should throw exception.', () => {
+        expect(() => sut.getItems()).toThrowError('Not implemented.');
     });
 
     it('(save) should throw exception.', () => {
