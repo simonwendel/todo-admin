@@ -32,7 +32,7 @@ export class AuthenticationService {
         throw this.exception;
     }
 
-    save(item: Authentication): never {
+    saveItem(item: Authentication): never {
         throw this.exception;
     }
 

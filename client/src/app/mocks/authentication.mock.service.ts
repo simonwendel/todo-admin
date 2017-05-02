@@ -25,7 +25,7 @@ export class MockAuthenticationService {
 
     getItems: SinonSpy;
 
-    save: SinonSpy;
+    saveItem: SinonSpy;
 
     deleteItem: SinonSpy;
 
@@ -37,7 +37,7 @@ export class MockAuthenticationService {
 
     constructor() {
         this.getItems = spy(this.getItemsInternal);
-        this.save = spy(this.saveInternal);
+        this.saveItem = spy(this.saveItemInternal);
         this.deleteItem = spy(this.deleteItemInternal);
     }
 
@@ -45,7 +45,7 @@ export class MockAuthenticationService {
         return this.items;
     }
 
-    private saveInternal(item: Authentication): void {
+    private saveItemInternal(item: Authentication): void {
         const found = this.items.find(i => i.appId === item.appId);
         if (found) {
             const index = this.items.indexOf(found);

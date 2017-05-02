@@ -38,18 +38,18 @@ describe('mock: MockAuthenticationService', () => {
         expect(sut.getItems()).toEqual(items);
     });
 
-    it('(save) should add new item when saving with new app id.', () => {
+    it('(saveItem) should add new item when saving with new app id.', () => {
         const newItem = new Authentication(
             {appId: 'app 4', accountName: 'account 4', secret: 'secret 4'});
 
         const updatedItems = items.concat(newItem);
 
-        sut.save(newItem);
+        sut.saveItem(newItem);
 
         expect(sut.items).toEqual(updatedItems);
     });
 
-    it('(save) should update existing item when saving with old app id.', () => {
+    it('(saveItem) should update existing item when saving with old app id.', () => {
         const existingItem = new Authentication(
             {appId: 'app 3', accountName: 'account 4', secret: 'secret 4'});
 
@@ -57,7 +57,7 @@ describe('mock: MockAuthenticationService', () => {
             .filter(i => i.appId !== existingItem.appId)
             .concat(existingItem);
 
-        sut.save(existingItem);
+        sut.saveItem(existingItem);
 
         expect(sut.items).toEqual(updatedItems);
     });
