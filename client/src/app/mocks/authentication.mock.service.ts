@@ -27,6 +27,8 @@ export class MockAuthenticationService {
 
     save: SinonSpy;
 
+    deleteItem: SinonSpy;
+
     items: Array<Authentication> = [
         new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
         new Authentication({appId: 'app 2', accountName: 'account 2', secret: 'secret 2'}),
@@ -36,6 +38,7 @@ export class MockAuthenticationService {
     constructor() {
         this.getAll = spy(this.getAllInternal);
         this.save = spy(this.saveInternal);
+        this.deleteItem = spy(this.deleteItemInternal);
     }
 
     private getAllInternal(): Array<Authentication> {
@@ -51,5 +54,9 @@ export class MockAuthenticationService {
         }
 
         this.items.push(item);
+    }
+
+    private deleteItemInternal(item: Authentication): void {
+        this.items = this.items.filter(i => i.appId !== item.appId);
     }
 }

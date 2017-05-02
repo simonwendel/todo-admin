@@ -61,4 +61,27 @@ describe('mock: MockAuthenticationService', () => {
 
         expect(sut.items).toEqual(updatedItems);
     });
+
+    it('(deleteItem) should delete nothing from array when given unknown item.', () => {
+        const existingItem = new Authentication(
+            {appId: 'app 4', accountName: 'account 4', secret: 'secret 4'});
+
+        const itemsBefore = [...items];
+
+        sut.deleteItem(existingItem);
+
+        expect(sut.items).toEqual(itemsBefore);
+    });
+
+    it('(deleteItem) should delete item from array when given existing item.', () => {
+        const existingItem = new Authentication(
+            {appId: 'app 3', accountName: 'account 3', secret: 'secret 3'});
+
+        const updatedItems = items
+            .filter(i => i.appId !== existingItem.appId);
+
+        sut.deleteItem(existingItem);
+
+        expect(sut.items).toEqual(updatedItems);
+    });
 });
