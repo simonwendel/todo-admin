@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
-import {AuthenticationService, Authentication} from '../shared';
+import {Authentication} from '../shared';
 
 @Component({
     selector: 'tc-authentication-list',
@@ -28,23 +28,11 @@ import {AuthenticationService, Authentication} from '../shared';
 })
 export class AuthenticationListComponent implements OnInit {
 
-    items: Array<Authentication>;
-
-    selectedItem: Authentication;
-
-    showDialog: boolean;
-
-    constructor(private readonly authenticationService: AuthenticationService) {
-        this.items = [];
-        this.showDialog = false;
-    }
+    @Input() items: Array<Authentication>;
 
     ngOnInit(): void {
-        this.items = this.authenticationService.getAll();
-    }
-
-    addNew(): void {
-        this.selectedItem = new Authentication();
-        this.showDialog = true;
+        if (this.items == null) {
+            throw new Error('Input items not set on tc-authentication-list!');
+        }
     }
 }

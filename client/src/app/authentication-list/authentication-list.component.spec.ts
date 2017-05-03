@@ -17,92 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {async, TestBed} from '@angular/core/testing';
-import {FormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
-import {ButtonModule, DataTableModule, DialogModule, SharedModule} from 'primeng/primeng';
-
-import {MockAuthenticationService} from '../mocks/authentication.mock.service';
-import {Authentication, AuthenticationService} from '../shared';
-import {AuthenticationListComponent, AuthenticationDialogComponent} from './';
+import {AuthenticationListComponent} from './';
 
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
 
-    let service: any;
-
     beforeEach(() => {
-        service = new MockAuthenticationService();
-        sut = new AuthenticationListComponent(service);
+        sut = new AuthenticationListComponent();
     });
 
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('(ctor) should retrieve no authentication items when constructed.', () => {
-        expect(sut.items).toEqual([]);
-        expect(service.getAll.called).toBeFalsy();
-    });
-
-    it('(ctor) should hide dialog on construction.', () => {
-        expect(sut.showDialog).toBeFalsy();
-    });
-
-    it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
-        sut.ngOnInit();
-
-        expect(sut.items).toEqual(service.items);
-        expect(service.getAll.calledOnce).toBeTruthy();
-    });
-
-    it('(addNew) should unselect item from datatable.', () => {
-        const previouslySelected = new Authentication();
-        sut.selectedItem = previouslySelected;
-
-        sut.addNew();
-
-        expect(sut.selectedItem).not.toBe(previouslySelected);
-    });
-
-    it('(addNew) should attach new item to selection.', () => {
-        const emptyItem = new Authentication();
-        sut.selectedItem = new Authentication(
-            {appId: '1', accountName: '1', secret: '1'});
-
-        sut.addNew();
-
-        expect(sut.selectedItem).toEqual(emptyItem);
-    });
-
-    it('(addNew) should show dialog.', () => {
-        sut.addNew();
-
-        expect(sut.showDialog).toBeTruthy();
-    });
-});
-
-describe('compiled: AuthenticationListComponent', () => {
-
-    let sut: AuthenticationListComponent;
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [AuthenticationListComponent, AuthenticationDialogComponent],
-            imports: [FormsModule, BrowserAnimationsModule, SharedModule, DataTableModule, ButtonModule, DialogModule],
-            providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
-        }).compileComponents();
-    }));
-
-    beforeEach(() => {
-        const fixture = TestBed.createComponent(AuthenticationListComponent);
-        sut = fixture.debugElement.componentInstance;
-        fixture.detectChanges();
-    });
-
-    it('(compiling) should be compiling the component and dependencies.', () => {
-        expect(sut).toBeTruthy();
+    it('(ngOnInit) should throw if items input is not set.', () => {
+        expect(() => sut.ngOnInit()).toThrowError(
+            'Input items not set on tc-authentication-list!');
     });
 });

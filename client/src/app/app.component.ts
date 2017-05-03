@@ -17,12 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Authentication} from './shared/authentication.model';
+import {AuthenticationService} from './shared/authentication.service';
 
 @Component({
     selector: 'tc-app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+    items: Array<Authentication>;
+
+    selectedItem: Authentication;
+
+    showDialog: boolean;
+
+    constructor(private readonly authenticationService: AuthenticationService) {
+        this.items = [];
+        this.showDialog = false;
+    }
+
+    ngOnInit(): void {
+        this.items = this.authenticationService.getItems();
+    }
+
+    addNew(): void {
+        this.showDialog = true;
+        this.selectedItem = new Authentication();
+    }
 }

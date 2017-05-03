@@ -1,1 +1,8 @@
-<tc-authentication-list></tc-authentication-list>
+<tc-authentication-list
+    [items]="items"></tc-authentication-list>
+
+<tc-authentication-dialog
+    *ngIf="showDialog"
+    [saveFunction]="authenticationService.saveItem"
+    [deleteFunction]="authenticationService.deleteItem"
+    [authenticationItem]="selectedItem"></tc-authentication-dialog>

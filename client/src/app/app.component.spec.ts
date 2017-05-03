@@ -17,20 +17,78 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TestBed, async} from '@angular/core/testing';
 
-import {SharedModule, DataTableModule, ButtonModule, DialogModule} from 'primeng/primeng';
+import {ButtonModule, DataTableModule, DialogModule, SharedModule} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
-import {AuthenticationListComponent, AuthenticationDialogComponent} from './authentication-list';
-import {AuthenticationService} from './shared';
 import {MockAuthenticationService} from './mocks/authentication.mock.service';
+import {Authentication, AuthenticationService} from './shared';
+import {AuthenticationListComponent, AuthenticationDialogComponent} from './authentication-list';
+
+describe('component: AppComponent', () => {
+
+    let sut: AppComponent;
+
+    let service: any;
+
+    beforeEach(() => {
+        service = new MockAuthenticationService();
+        sut = new AppComponent(service);
+    });
+
+    it('(ctor) should be instantiable.', () => {
+        expect(sut).toBeTruthy();
+    });
+
+    it('(ctor) should retrieve no authentication items when constructed.', () => {
+        expect(sut.items).toEqual([]);
+        expect(service.getItems.called).toBeFalsy();
+    });
+
+    it('(ctor) should hide dialog on construction.', () => {
+        expect(sut.showDialog).toBeFalsy();
+    });
+
+    it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
+        sut.ngOnInit();
+
+        expect(sut.items).toEqual(service.items);
+        expect(service.getItems.calledOnce).toBeTruthy();
+    });
+
+    it('(addNew) should unselect item from datatable.', () => {
+        const previouslySelected = new Authentication();
+        sut.selectedItem = previouslySelected;
+
+        sut.addNew();
+
+        expect(sut.selectedItem).not.toBe(previouslySelected);
+    });
+
+    it('(addNew) should attach new item to selection.', () => {
+        const emptyItem = new Authentication();
+        sut.selectedItem = new Authentication(
+            {appId: '1', accountName: '1', secret: '1'});
+
+        sut.addNew();
+
+        expect(sut.selectedItem).toEqual(emptyItem);
+    });
+
+    it('(addNew) should show dialog.', () => {
+        sut.addNew();
+
+        expect(sut.showDialog).toBeTruthy();
+    });
+});
 
 describe('compiled: AppComponent', () => {
 
     let sut: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -41,12 +99,31 @@ describe('compiled: AppComponent', () => {
     }));
 
     beforeEach(() => {
-        const fixture = TestBed.createComponent(AppComponent);
+        fixture = TestBed.createComponent(AppComponent);
         sut = fixture.debugElement.componentInstance;
+
         fixture.detectChanges();
     });
 
     it('(compiling) should be compiling the app and dependencies.', () => {
         expect(sut).toBeTruthy();
     });
+
+    it('(compiling) should not display dialog on first init.', () => {
+        const dialog = getDialogElement();
+
+        expect(dialog).toBeFalsy();
+    });
+
+    it('(addNew) should display dialog when add button is toggled.', () => {
+        sut.addNew();
+        const dialog = getDialogElement();
+
+        expect(dialog).toBeTruthy();
+    });
+
+    function getDialogElement(): HTMLElement {
+        fixture.detectChanges();
+        return fixture.nativeElement.querySelector('tc-authentication-dialog');
+    }
 });
