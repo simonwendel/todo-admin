@@ -46,11 +46,11 @@ describe('component: AppComponent', () => {
 
     it('(ctor) should retrieve no authentication items when constructed.', () => {
         expect(sut.items).toEqual([]);
-        expect(service.getItems.called).toBeFalsy();
+        expect(service.getItems.called).toBe(false);
     });
 
     it('(ctor) should hide dialog on construction.', () => {
-        expect(sut.showDialog).toBeFalsy();
+        expect(sut.showDialog).toBe(false);
     });
 
     it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
