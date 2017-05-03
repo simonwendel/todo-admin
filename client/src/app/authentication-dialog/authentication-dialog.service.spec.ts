@@ -34,4 +34,16 @@ describe('service: AuthenticationDialogService', () => {
     it('(ctor) should be hidden on instantiation.', () => {
         expect(sut.isVisible()).toBe(false);
     });
+
+    it('(show) should show dialog.', () => {
+        sut.show();
+
+        expect(sut.isVisible()).toBe(true);
+    });
+
+    it('(hide) should hide dialog.', () => {
+        sut.hide();
+
+        expect(sut.isVisible()).toBe(false);
+    });
 });

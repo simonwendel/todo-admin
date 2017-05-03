@@ -27,4 +27,12 @@ export class AuthenticationDialogService {
   isVisible(): boolean {
       return this.visible;
   }
+
+  show(): void {
+      this.visible = true;
+  }
+
+  hide(): void {
+      this.visible = false;
+  }
 }
