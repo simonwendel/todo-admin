@@ -30,4 +30,8 @@ describe('service: AuthenticationDialogService', () => {
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
     });
+
+    it('(ctor) should be hidden on instantiation.', () => {
+        expect(sut.isVisible()).toBe(false);
+    });
 });

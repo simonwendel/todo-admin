@@ -22,5 +22,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthenticationDialogService {
 
-  constructor() { }
+  private visible = false;
+
+  isVisible(): boolean {
+      return this.visible;
+  }
 }
