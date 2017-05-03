@@ -28,7 +28,7 @@ import {AppComponent} from './app.component';
 import {AuthenticationService} from './shared';
 import {MockAuthenticationService} from './mocks';
 import {AuthenticationListComponent} from './authentication-list';
-import {AuthenticationDialogComponent} from './authentication-dialog';
+import {AuthenticationDialogService, AuthenticationDialogComponent} from './authentication-dialog';
 
 @NgModule({
     declarations: [
@@ -46,7 +46,9 @@ import {AuthenticationDialogComponent} from './authentication-dialog';
         DialogModule,
         ButtonModule
     ],
-    providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}],
+    providers: [
+        {provide: AuthenticationService, useClass: MockAuthenticationService},
+        AuthenticationDialogService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

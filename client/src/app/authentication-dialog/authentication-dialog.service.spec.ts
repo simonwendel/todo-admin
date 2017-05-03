@@ -17,5 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationDialogService} from './authentication-dialog.service';
-export {AuthenticationDialogComponent} from './authentication-dialog.component';
+import {AuthenticationDialogService} from './authentication-dialog.service';
+
+describe('service: AuthenticationDialogService', () => {
+
+    let sut: AuthenticationDialogService;
+
+    beforeEach(() => {
+        sut = new AuthenticationDialogService();
+    });
+
+    it('(ctor) should be instantiable.', () => {
+        expect(sut).toBeTruthy();
+    });
+});

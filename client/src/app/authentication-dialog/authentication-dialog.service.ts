@@ -17,5 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationDialogService} from './authentication-dialog.service';
-export {AuthenticationDialogComponent} from './authentication-dialog.component';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class AuthenticationDialogService {
+
+  constructor() { }
+}
