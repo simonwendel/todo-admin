@@ -26,7 +26,7 @@ import {SharedModule, DataTableModule, DialogModule, ButtonModule} from 'primeng
 
 import {AppComponent} from './app.component';
 import {AuthenticationService} from './shared';
-import {MockAuthenticationService} from './mocks/authentication.mock.service';
+import {MockAuthenticationService} from './mocks';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationDialogComponent} from './authentication-dialog';
 

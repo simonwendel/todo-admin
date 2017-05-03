@@ -24,7 +24,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule, DataTableModule, DialogModule, SharedModule} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
-import {MockAuthenticationService} from './mocks/authentication.mock.service';
+import {MockAuthenticationService} from './mocks';
 import {Authentication, AuthenticationService} from './shared';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationDialogComponent} from './authentication-dialog/authentication-dialog.component';
