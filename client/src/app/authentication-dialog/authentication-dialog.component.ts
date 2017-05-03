@@ -28,6 +28,8 @@ import {Authentication} from '../shared';
 })
 export class AuthenticationDialogComponent implements OnInit {
 
+    @Input() visible: boolean;
+
     @Input() saveFunction: (item: Authentication) => void;
 
     @Input() deleteFunction: (item: Authentication) => void;
