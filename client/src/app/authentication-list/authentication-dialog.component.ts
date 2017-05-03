@@ -37,7 +37,7 @@ export class AuthenticationDialogComponent implements OnInit {
     constructor() {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         if (this.saveFunction == null) {
             throw new Error('Input saveFunction not set on tc-authentication-dialog!');
         }
