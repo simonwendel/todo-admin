@@ -30,7 +30,7 @@ describe('e2e: Authentication admin page', () => {
     });
 
     it('should have a datatable.', () => {
-        expect(adminPage.hasDatatable()).toBeTruthy();
+        expect(adminPage.hasDatatable()).toBe(true);
     });
 
     it('should have secrets in red.', async () => {

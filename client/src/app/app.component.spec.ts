@@ -57,7 +57,7 @@ describe('component: AppComponent', () => {
         sut.ngOnInit();
 
         expect(sut.items).toEqual(service.items);
-        expect(service.getItems.calledOnce).toBeTruthy();
+        expect(service.getItems.calledOnce).toBe(true);
     });
 
     it('(addNew) should unselect item from datatable.', () => {
@@ -82,7 +82,7 @@ describe('component: AppComponent', () => {
     it('(addNew) should show dialog.', () => {
         sut.addNew();
 
-        expect(sut.showDialog).toBeTruthy();
+        expect(sut.showDialog).toBe(true);
     });
 });
 

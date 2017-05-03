@@ -116,16 +116,16 @@ describe('compiled: AuthenticationDialogComponent', () => {
     it('(save button clicked) should call saveFunction on save button click.', async(() => {
         saveButton.click();
 
-        expect(saveFunction.calledOnce).toBeTruthy();
-        expect(saveFunction.calledWith(sut.authenticationItem)).toBeTruthy();
+        expect(saveFunction.calledOnce).toBe(true);
+        expect(saveFunction.calledWith(sut.authenticationItem)).toBe(true);
         expect(deleteFunction.called).toBeFalsy();
     }));
 
     it('(delete button clicked) should call deleteFunction on delete button click.', async(() => {
         deleteButton.click();
 
-        expect(deleteFunction.calledOnce).toBeTruthy();
-        expect(deleteFunction.calledWith(sut.authenticationItem)).toBeTruthy();
+        expect(deleteFunction.calledOnce).toBe(true);
+        expect(deleteFunction.calledWith(sut.authenticationItem)).toBe(true);
         expect(saveFunction.called).toBeFalsy();
     }));
 });
