@@ -27,8 +27,8 @@ export class TodoAdminClientPage {
         return browser.get('/');
     }
 
-    hasDatatable(): WebDriverPromise<boolean> {
-        return element.all(by.css('.data-secret-val')).isDisplayed();
+    dataTableVisibility(): WebDriverPromise<boolean> {
+        return element.all(by.css('p-dataTable')).isDisplayed();
     }
 
     getNumberOfSecrets(): WebDriverPromise<number> {

@@ -29,8 +29,8 @@ describe('e2e: Authentication admin page', () => {
         await adminPage.navigateTo();
     });
 
-    it('should have a datatable.', () => {
-        expect(adminPage.hasDatatable()).toBe(true);
+    it('should have a datatable.', async () => {
+        expect(adminPage.dataTableVisibility()).toEqual([true]);
     });
 
     it('should have secrets in red.', async () => {
