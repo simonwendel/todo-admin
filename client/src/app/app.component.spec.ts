@@ -27,7 +27,7 @@ import {AppComponent} from './app.component';
 import {MockAuthenticationService} from './mocks';
 import {Authentication, AuthenticationService} from './shared';
 import {AuthenticationListComponent} from './authentication-list';
-import {AuthenticationDialogComponent} from './authentication-dialog/authentication-dialog.component';
+import {AuthenticationDialogService, AuthenticationDialogComponent} from './authentication-dialog';
 
 describe('component: AppComponent', () => {
 
@@ -95,7 +95,9 @@ describe('compiled: AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [AppComponent, AuthenticationListComponent, AuthenticationDialogComponent],
             imports: [FormsModule, BrowserAnimationsModule, SharedModule, DataTableModule, ButtonModule, DialogModule],
-            providers: [{provide: AuthenticationService, useClass: MockAuthenticationService}]
+            providers: [
+                {provide: AuthenticationService, useClass: MockAuthenticationService},
+                AuthenticationDialogService]
         }).compileComponents();
     }));
 
