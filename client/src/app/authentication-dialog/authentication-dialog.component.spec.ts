@@ -36,7 +36,7 @@ describe('component: AuthenticationDialogComponent', () => {
         sut = new AuthenticationDialogComponent();
     });
 
-    it('(ctor) it should be instantiable.', () => {
+    it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
     });
 
@@ -111,7 +111,7 @@ describe('compiled: AuthenticationDialogComponent', () => {
         deleteButton = fixture.nativeElement.querySelector('button.delete-button');
     }));
 
-    it('(compiling) it should be compilable.', () => {
+    it('(compiling) should be compilable.', () => {
         expect(sut).toBeTruthy();
     });
 
