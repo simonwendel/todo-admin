@@ -26,6 +26,7 @@ import {stub, SinonStub} from 'sinon';
 
 import {Authentication} from '../shared';
 import {AuthenticationDialogComponent} from './authentication-dialog.component';
+import {AuthenticationDialogService} from './authentication-dialog.service';
 
 describe('component: AuthenticationDialogComponent', () => {
 
@@ -86,7 +87,8 @@ describe('compiled: AuthenticationDialogComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [AuthenticationDialogComponent],
-            imports: [NoopAnimationsModule, FormsModule, SharedModule, ButtonModule, DialogModule]
+            imports: [NoopAnimationsModule, FormsModule, SharedModule, ButtonModule, DialogModule],
+            providers: [AuthenticationDialogService]
         }).compileComponents();
     }));
 
