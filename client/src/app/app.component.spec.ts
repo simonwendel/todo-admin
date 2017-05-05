@@ -49,10 +49,6 @@ describe('component: AppComponent', () => {
         expect(service.getItems.called).toBe(false);
     });
 
-    it('(ctor) should hide dialog on construction.', () => {
-        expect(sut.showDialog).toBe(false);
-    });
-
     it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
         sut.ngOnInit();
 
@@ -77,12 +73,6 @@ describe('component: AppComponent', () => {
         sut.addNew();
 
         expect(sut.selectedItem).toEqual(emptyItem);
-    });
-
-    it('(addNew) should show dialog.', () => {
-        sut.addNew();
-
-        expect(sut.showDialog).toBe(true);
     });
 });
 
@@ -111,22 +101,4 @@ describe('compiled: AppComponent', () => {
     it('(compiling) should be compiling the app and dependencies.', () => {
         expect(sut).toBeTruthy();
     });
-
-    it('(compiling) should not display dialog on first init.', () => {
-        const dialog = getDialogElement();
-
-        expect(dialog).toBeFalsy();
-    });
-
-    it('(addNew) should display dialog when add button is toggled.', () => {
-        sut.addNew();
-        const dialog = getDialogElement();
-
-        expect(dialog).toBeTruthy();
-    });
-
-    function getDialogElement(): HTMLElement {
-        fixture.detectChanges();
-        return fixture.nativeElement.querySelector('tc-authentication-dialog');
-    }
 });

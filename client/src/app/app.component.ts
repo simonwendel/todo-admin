@@ -32,11 +32,9 @@ export class AppComponent implements OnInit {
 
     selectedItem: Authentication;
 
-    showDialog: boolean;
-
     constructor(private readonly authenticationService: AuthenticationService) {
         this.items = [];
-        this.showDialog = false;
+        this.selectedItem = new Authentication();
     }
 
     ngOnInit(): void {
@@ -44,7 +42,6 @@ export class AppComponent implements OnInit {
     }
 
     addNew(): void {
-        this.showDialog = true;
         this.selectedItem = new Authentication();
     }
 }
