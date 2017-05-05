@@ -20,6 +20,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {Authentication} from '../shared';
+import {AuthenticationDialogService} from './authentication-dialog.service';
 
 @Component({
     selector: 'tc-authentication-dialog',
@@ -28,7 +29,7 @@ import {Authentication} from '../shared';
 })
 export class AuthenticationDialogComponent implements OnInit {
 
-    @Input() visible: boolean;
+    private visible: boolean;
 
     @Input() saveFunction: (item: Authentication) => void;
 
@@ -36,7 +37,8 @@ export class AuthenticationDialogComponent implements OnInit {
 
     @Input() authenticationItem: Authentication;
 
-    constructor() {
+    constructor(private readonly dialog: AuthenticationDialogService) {
+        this.visible = this.dialog.isVisible();
     }
 
     ngOnInit(): void {

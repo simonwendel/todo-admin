@@ -31,13 +31,22 @@ import {AuthenticationDialogService} from './authentication-dialog.service';
 describe('component: AuthenticationDialogComponent', () => {
 
     let sut: AuthenticationDialogComponent;
+    let dialog: AuthenticationDialogService;
+    let isVisible: SinonStub;
 
     beforeEach(() => {
-        sut = new AuthenticationDialogComponent();
+        dialog = new AuthenticationDialogService();
+        isVisible = stub(dialog, 'isVisible').returns(false);
+
+        sut = new AuthenticationDialogComponent(dialog);
     });
 
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
+    });
+
+    it('(ctor) should fetch dialog visibility from dialog service.', () => {
+        expect(isVisible.calledOnce).toBe(true);
     });
 
     it('(ngOnInit) should throw if saveFunction callback is not set.', () => {
