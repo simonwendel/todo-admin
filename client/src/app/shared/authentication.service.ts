@@ -19,8 +19,15 @@
 
 import { Injectable } from '@angular/core';
 
+import {AuthenticationStorageService} from './authentication-storage.service';
+import {Authentication} from './authentication.model';
+
 @Injectable()
 export class AuthenticationService {
 
-  constructor() { }
+  constructor(private readonly storage: AuthenticationStorageService) { }
+
+  getItems(): Array<Authentication> {
+      return this.storage.getItems();
+  }
 }
