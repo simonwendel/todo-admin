@@ -18,14 +18,14 @@
  */
 
 import {Authentication} from './authentication.model';
-import {AuthenticationService} from './authentication.service';
+import {AuthenticationStorageService} from './authentication-storage.service';
 
-describe('service: AuthenticationService', () => {
+describe('service: AuthenticationStorageService', () => {
 
-    let sut: AuthenticationService;
+    let sut: AuthenticationStorageService;
 
     beforeEach(() => {
-        sut = new AuthenticationService();
+        sut = new AuthenticationStorageService();
     });
 
     it('(ctor) should be instantiable.', () => {

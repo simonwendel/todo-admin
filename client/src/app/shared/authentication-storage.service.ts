@@ -21,7 +21,7 @@ import {Injectable} from '@angular/core';
 import {Authentication} from './';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationStorageService {
 
     private exception: Error = new Error('Not implemented.');
 

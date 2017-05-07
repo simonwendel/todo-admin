@@ -21,7 +21,7 @@ import {spy, SinonSpy} from 'sinon';
 
 import {Authentication} from '../shared';
 
-export class MockAuthenticationService {
+export class MockAuthenticationStorageService {
 
     getItems: SinonSpy;
 

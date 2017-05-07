@@ -24,8 +24,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule, DataTableModule, DialogModule, SharedModule} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
-import {MockAuthenticationService} from './mocks';
-import {Authentication, AuthenticationService} from './shared';
+import {MockAuthenticationStorageService} from './mocks';
+import {Authentication, AuthenticationStorageService} from './shared';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationDialogService, AuthenticationDialogComponent} from './authentication-dialog';
 
@@ -36,7 +36,7 @@ describe('component: AppComponent', () => {
     let service: any;
 
     beforeEach(() => {
-        service = new MockAuthenticationService();
+        service = new MockAuthenticationStorageService();
         sut = new AppComponent(service);
     });
 
@@ -86,7 +86,7 @@ describe('compiled: AppComponent', () => {
             declarations: [AppComponent, AuthenticationListComponent, AuthenticationDialogComponent],
             imports: [FormsModule, BrowserAnimationsModule, SharedModule, DataTableModule, ButtonModule, DialogModule],
             providers: [
-                {provide: AuthenticationService, useClass: MockAuthenticationService},
+                {provide: AuthenticationStorageService, useClass: MockAuthenticationStorageService},
                 AuthenticationDialogService]
         }).compileComponents();
     }));

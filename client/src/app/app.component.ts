@@ -19,7 +19,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {Authentication} from './shared/authentication.model';
-import {AuthenticationService} from './shared/authentication.service';
+import {AuthenticationStorageService} from './shared/authentication-storage.service';
 
 @Component({
     selector: 'tc-app-root',
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 
     selectedItem: Authentication;
 
-    constructor(private readonly authenticationService: AuthenticationService) {
+    constructor(private readonly authenticationService: AuthenticationStorageService) {
         this.items = [];
         this.selectedItem = new Authentication();
     }

@@ -18,9 +18,9 @@
  */
 
 import {Authentication} from '../shared';
-import {MockAuthenticationService} from './authentication.mock.service';
+import {MockAuthenticationStorageService} from './authentication-storage.mock.service';
 
-describe('mock: MockAuthenticationService', () => {
+describe('mock: MockAuthenticationStorageService', () => {
 
     const items = [
         new Authentication({appId: 'app 1', accountName: 'account 1', secret: 'secret 1'}),
@@ -28,10 +28,10 @@ describe('mock: MockAuthenticationService', () => {
         new Authentication({appId: 'app 3', accountName: 'account 3', secret: 'secret 3'})
     ];
 
-    let sut: MockAuthenticationService;
+    let sut: MockAuthenticationStorageService;
 
     beforeEach(() => {
-        sut = new MockAuthenticationService();
+        sut = new MockAuthenticationStorageService();
     });
 
     it('(getItems) should return a bunch of items.', () => {
