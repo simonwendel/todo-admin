@@ -48,50 +48,12 @@ describe('component: AuthenticationDialogComponent', () => {
     it('(ctor) should fetch dialog visibility from dialog service.', () => {
         expect(isVisible.calledOnce).toBe(true);
     });
-
-    it('(ngOnInit) should throw if saveFunction callback is not set.', () => {
-        sut.deleteFunction = stub();
-        sut.authenticationItem = new Authentication();
-
-        expect(() => sut.ngOnInit()).toThrowError(
-            'Input saveFunction not set on tc-authentication-dialog!');
-    });
-
-    it('(ngOnInit) should throw if deleteFunction callback is not set.', () => {
-        sut.saveFunction = stub();
-        sut.authenticationItem = new Authentication();
-
-        expect(() => sut.ngOnInit()).toThrowError(
-            'Input deleteFunction not set on tc-authentication-dialog!');
-    });
-
-    it('(ngOnInit) should throw if authenticationItem input is not set.', () => {
-        sut.saveFunction = stub();
-        sut.deleteFunction = stub();
-
-        expect(() => sut.ngOnInit()).toThrowError(
-            'Input authenticationItem not set on tc-authentication-dialog!');
-    });
-
-    it('(ngOnInit) should do nothing if callbacks and item are set.', () => {
-        sut.saveFunction = stub();
-        sut.deleteFunction = stub();
-        sut.authenticationItem = new Authentication();
-
-        expect(() => sut.ngOnInit()).not.toThrowError();
-    });
 });
 
 describe('compiled: AuthenticationDialogComponent', () => {
 
     let sut: AuthenticationDialogComponent;
     let fixture: ComponentFixture<AuthenticationDialogComponent>;
-
-    let saveButton: HTMLElement;
-    let deleteButton: HTMLElement;
-
-    let saveFunction: SinonStub;
-    let deleteFunction: SinonStub;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -102,41 +64,15 @@ describe('compiled: AuthenticationDialogComponent', () => {
     }));
 
     beforeEach(() => {
-        saveFunction = stub();
-        deleteFunction = stub();
-
         fixture = TestBed.createComponent(AuthenticationDialogComponent);
 
         sut = fixture.debugElement.componentInstance;
-        sut.saveFunction = saveFunction;
-        sut.deleteFunction = deleteFunction;
         sut.authenticationItem = new Authentication();
 
         fixture.detectChanges();
     });
 
-    beforeEach(async(() => {
-        saveButton = fixture.nativeElement.querySelector('button.save-button');
-        deleteButton = fixture.nativeElement.querySelector('button.delete-button');
-    }));
-
     it('(compiling) should be compilable.', () => {
         expect(sut).toBeTruthy();
     });
-
-    it('(save button clicked) should call saveFunction on save button click.', async(() => {
-        saveButton.click();
-
-        expect(saveFunction.calledOnce).toBe(true);
-        expect(saveFunction.calledWith(sut.authenticationItem)).toBe(true);
-        expect(deleteFunction.called).toBe(false);
-    }));
-
-    it('(delete button clicked) should call deleteFunction on delete button click.', async(() => {
-        deleteButton.click();
-
-        expect(deleteFunction.calledOnce).toBe(true);
-        expect(deleteFunction.calledWith(sut.authenticationItem)).toBe(true);
-        expect(saveFunction.called).toBe(false);
-    }));
 });

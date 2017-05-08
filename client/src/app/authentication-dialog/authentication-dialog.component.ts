@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {Authentication} from '../shared';
 import {AuthenticationDialogService} from './authentication-dialog.service';
@@ -27,31 +27,13 @@ import {AuthenticationDialogService} from './authentication-dialog.service';
     templateUrl: './authentication-dialog.component.html',
     styleUrls: ['./authentication-dialog.component.css']
 })
-export class AuthenticationDialogComponent implements OnInit {
+export class AuthenticationDialogComponent {
 
     private visible: boolean;
 
-    @Input() saveFunction: (item: Authentication) => void;
-
-    @Input() deleteFunction: (item: Authentication) => void;
-
-    @Input() authenticationItem: Authentication;
+    authenticationItem: Authentication;
 
     constructor(private readonly dialog: AuthenticationDialogService) {
         this.visible = this.dialog.isVisible();
-    }
-
-    ngOnInit(): void {
-        if (this.saveFunction == null) {
-            throw new Error('Input saveFunction not set on tc-authentication-dialog!');
-        }
-
-        if (this.deleteFunction == null) {
-            throw new Error('Input deleteFunction not set on tc-authentication-dialog!');
-        }
-
-        if (this.authenticationItem == null) {
-            throw new Error('Input authenticationItem not set on tc-authentication-dialog!');
-        }
     }
 }
