@@ -17,22 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {AuthenticationListComponent} from './';
+import {createStubInstance, SinonStub} from 'sinon';
+
+import {AuthenticationListComponent} from './authentication-list.component';
+import {AuthenticationService} from '../shared';
 
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
+    let getItems: SinonStub;
 
     beforeEach(() => {
-        sut = new AuthenticationListComponent();
+        const service = createStubInstance(AuthenticationService);
+        getItems = service.getItems.returns([]);
+
+        sut = new AuthenticationListComponent(service);
     });
 
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('(ngOnInit) should throw if items input is not set.', () => {
-        expect(() => sut.ngOnInit()).toThrowError(
-            'Input items not set on tc-authentication-list!');
+    it('(ctor) should not fetch items on instantiation.', () => {
+        expect(getItems.called).toBe(false);
+    });
+
+    it('(ngOnInit) should fetch items from service on init event.', () => {
+        sut.ngOnInit();
+
+        expect(getItems.calledOnce).toBe(true);
     });
 });

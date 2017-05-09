@@ -20,6 +20,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 import {Authentication} from '../shared';
+import {AuthenticationService} from '../shared/authentication.service';
 
 @Component({
     selector: 'tc-authentication-list',
@@ -28,11 +29,12 @@ import {Authentication} from '../shared';
 })
 export class AuthenticationListComponent implements OnInit {
 
-    @Input() items: Array<Authentication>;
+    private items: Array<Authentication>;
+
+    constructor(private readonly service: AuthenticationService) {
+    }
 
     ngOnInit(): void {
-        if (this.items == null) {
-            throw new Error('Input items not set on tc-authentication-list!');
-        }
+        this.items = this.service.getItems();
     }
 }
