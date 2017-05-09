@@ -30,4 +30,7 @@ export class AuthenticationService {
   listItems(): Array<Authentication> {
       return this.storage.getItems();
   }
+
+  createNewItem(): void {
+  }
 }

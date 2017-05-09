@@ -26,10 +26,12 @@ describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
     let getItemsFromStorage: SinonStub;
+    let createNewItem: SinonStub;
 
     beforeEach(() => {
         const service = createStubInstance(AuthenticationService);
         getItemsFromStorage = service.listItems.returns([]);
+        createNewItem = service.createNewItem;
 
         sut = new AuthenticationListComponent(service);
     });
@@ -46,5 +48,11 @@ describe('component: AuthenticationListComponent', () => {
         sut.ngOnInit();
 
         expect(getItemsFromStorage.calledOnce).toBe(true);
+    });
+
+    it('(onButtonClick) should call service to create new item.', () => {
+        sut.onButtonClick();
+
+        expect(createNewItem.calledOnce).toBe(true);
     });
 });
