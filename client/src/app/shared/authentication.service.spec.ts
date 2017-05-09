@@ -26,14 +26,14 @@ import {Authentication} from './authentication.model';
 describe('AuthenticationService', () => {
 
     let sut: AuthenticationService;
-    let getItems: SinonStub;
+    let getItemsFromStorage: SinonStub;
     let someItems: Array<Authentication>;
 
     beforeEach(() => {
         const storage = createStubInstance(AuthenticationStorageService);
 
         someItems = [new Authentication(), new Authentication()];
-        getItems = storage.getItems.returns(someItems);
+        getItemsFromStorage = storage.getItems.returns(someItems);
 
         sut = new AuthenticationService(storage);
     });
@@ -43,13 +43,13 @@ describe('AuthenticationService', () => {
     });
 
     it('(ctor) should not get items from storage on instantiation.', () => {
-        expect(getItems.called).toBe(false);
+        expect(getItemsFromStorage.called).toBe(false);
     });
 
     it('(listItems) should get items fom storage.', () => {
         const items = sut.listItems();
 
         expect(items).toBe(someItems);
-        expect(getItems.calledOnce).toBe(true);
+        expect(getItemsFromStorage.calledOnce).toBe(true);
     });
 });

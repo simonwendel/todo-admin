@@ -25,11 +25,11 @@ import {AuthenticationService} from '../shared';
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
-    let getItems: SinonStub;
+    let getItemsFromStorage: SinonStub;
 
     beforeEach(() => {
         const service = createStubInstance(AuthenticationService);
-        getItems = service.listItems.returns([]);
+        getItemsFromStorage = service.listItems.returns([]);
 
         sut = new AuthenticationListComponent(service);
     });
@@ -39,12 +39,12 @@ describe('component: AuthenticationListComponent', () => {
     });
 
     it('(ctor) should not fetch items on instantiation.', () => {
-        expect(getItems.called).toBe(false);
+        expect(getItemsFromStorage.called).toBe(false);
     });
 
     it('(ngOnInit) should fetch items from service on init event.', () => {
         sut.ngOnInit();
 
-        expect(getItems.calledOnce).toBe(true);
+        expect(getItemsFromStorage.calledOnce).toBe(true);
     });
 });
