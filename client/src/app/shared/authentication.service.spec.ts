@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {stub, SinonSpy} from 'sinon';
+import {createStubInstance, SinonStub} from 'sinon';
 
 import {AuthenticationService} from './authentication.service';
 import {AuthenticationStorageService} from './authentication-storage.service';
@@ -26,15 +26,14 @@ import {Authentication} from './authentication.model';
 describe('AuthenticationService', () => {
 
     let sut: AuthenticationService;
-    let getItems: SinonSpy;
+    let getItems: SinonStub;
     let someItems: Array<Authentication>;
-    let storage: AuthenticationStorageService;
 
     beforeEach(() => {
-        storage = new AuthenticationStorageService();
+        const storage = createStubInstance(AuthenticationStorageService);
 
         someItems = [new Authentication(), new Authentication()];
-        getItems = stub(storage, 'getItems').returns(someItems);
+        getItems = storage.getItems.returns(someItems);
 
         sut = new AuthenticationService(storage);
     });
