@@ -27,7 +27,7 @@ export class AuthenticationService {
 
   constructor(private readonly storage: AuthenticationStorageService) { }
 
-  getItems(): Array<Authentication> {
+  listItems(): Array<Authentication> {
       return this.storage.getItems();
   }
 }

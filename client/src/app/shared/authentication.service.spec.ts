@@ -47,8 +47,8 @@ describe('AuthenticationService', () => {
         expect(getItems.called).toBe(false);
     });
 
-    it('(getItems) should get items fom storage.', () => {
-        const items = sut.getItems();
+    it('(listItems) should get items fom storage.', () => {
+        const items = sut.listItems();
 
         expect(items).toBe(someItems);
         expect(getItems.calledOnce).toBe(true);

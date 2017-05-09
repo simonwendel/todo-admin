@@ -29,7 +29,7 @@ describe('component: AuthenticationListComponent', () => {
 
     beforeEach(() => {
         const service = createStubInstance(AuthenticationService);
-        getItems = service.getItems.returns([]);
+        getItems = service.listItems.returns([]);
 
         sut = new AuthenticationListComponent(service);
     });
