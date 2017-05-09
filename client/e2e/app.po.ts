@@ -32,10 +32,10 @@ export class TodoAdminClientPage {
     }
 
     getNumberOfSecrets(): WebDriverPromise<number> {
-        return element.all(by.css('.data-secret-val')).count();
+        return element.all(by.css('.authentication-list__secret-value')).count();
     }
 
     getColorsOfSecrets(): WebDriverPromise<string> {
-        return element.all(by.css('.data-secret-val')).getCssValue('color');
+        return element.all(by.css('.authentication-list__secret-value')).getCssValue('color');
     }
 }

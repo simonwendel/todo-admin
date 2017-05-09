@@ -5,7 +5,7 @@
     <p-column field="appId" header="Application ID" [sortable]="true"></p-column>
     <p-column field="secret" header="Secret" [sortable]="false">
         <ng-template let-col let-row="rowData" pTemplate="body">
-            <span class="data-secret-val">{{row.secret}}</span>
+            <span class="authentication-list__secret-value authentication-list__secret-value--highlighted">{{row.secret}}</span>
         </ng-template>
     </p-column>
     <p-footer>
