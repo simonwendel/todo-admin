@@ -25,56 +25,9 @@ import {ButtonModule, DataTableModule, DialogModule, SharedModule} from 'primeng
 
 import {AppComponent} from './app.component';
 import {MockAuthenticationStorageService} from './mocks';
-import {Authentication, AuthenticationStorageService} from './shared';
+import {AuthenticationService, AuthenticationStorageService} from './shared';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationDialogService, AuthenticationDialogComponent} from './authentication-dialog';
-
-describe('component: AppComponent', () => {
-
-    let sut: AppComponent;
-
-    let service: any;
-
-    beforeEach(() => {
-        service = new MockAuthenticationStorageService();
-        sut = new AppComponent(service);
-    });
-
-    it('(ctor) should be instantiable.', () => {
-        expect(sut).toBeTruthy();
-    });
-
-    it('(ctor) should retrieve no authentication items when constructed.', () => {
-        expect(sut.items).toEqual([]);
-        expect(service.getItems.called).toBe(false);
-    });
-
-    it('(ngOnInit) should retrieve authentication items when when calling ngOnInit.', () => {
-        sut.ngOnInit();
-
-        expect(sut.items).toEqual(service.items);
-        expect(service.getItems.calledOnce).toBe(true);
-    });
-
-    it('(addNew) should unselect item from datatable.', () => {
-        const previouslySelected = new Authentication();
-        sut.selectedItem = previouslySelected;
-
-        sut.addNew();
-
-        expect(sut.selectedItem).not.toBe(previouslySelected);
-    });
-
-    it('(addNew) should attach new item to selection.', () => {
-        const emptyItem = new Authentication();
-        sut.selectedItem = new Authentication(
-            {appId: '1', accountName: '1', secret: '1'});
-
-        sut.addNew();
-
-        expect(sut.selectedItem).toEqual(emptyItem);
-    });
-});
 
 describe('compiled: AppComponent', () => {
 
@@ -87,6 +40,7 @@ describe('compiled: AppComponent', () => {
             imports: [FormsModule, BrowserAnimationsModule, SharedModule, DataTableModule, ButtonModule, DialogModule],
             providers: [
                 {provide: AuthenticationStorageService, useClass: MockAuthenticationStorageService},
+                AuthenticationService,
                 AuthenticationDialogService]
         }).compileComponents();
     }));
