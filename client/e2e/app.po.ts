@@ -28,7 +28,7 @@ export class TodoAdminClientPage {
     }
 
     dataTableVisibility(): WebDriverPromise<boolean> {
-        return element.all(by.css('p-dataTable')).isDisplayed();
+        return element.all(by.css('.authentication-list')).isDisplayed();
     }
 
     getNumberOfSecrets(): WebDriverPromise<number> {
