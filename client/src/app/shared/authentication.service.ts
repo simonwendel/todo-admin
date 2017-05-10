@@ -17,7 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {AuthenticationStorageService} from './authentication-storage.service';
 import {Authentication} from './authentication.model';
@@ -25,12 +28,19 @@ import {Authentication} from './authentication.model';
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private readonly storage: AuthenticationStorageService) { }
+    public readonly todo: Observable<Array<Authentication>>;
 
-  listItems(): Array<Authentication> {
-      return this.storage.getItems();
-  }
+    private readonly todoSubject: BehaviorSubject<Array<Authentication>>;
 
-  createNewItem(): void {
-  }
+    constructor(private readonly storage: AuthenticationStorageService) {
+        this.todoSubject = new BehaviorSubject(this.storage.getItems());
+        this.todo = this.todoSubject.asObservable();
+    }
+
+    listItems(): Array<Authentication> {
+        return this.storage.getItems();
+    }
+
+    createNewItem(): void {
+    }
 }

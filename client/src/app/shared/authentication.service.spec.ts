@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {async} from '@angular/core/testing';
+
 import {createStubInstance, SinonStub} from 'sinon';
 
 import {AuthenticationService} from './authentication.service';
@@ -32,7 +34,10 @@ describe('AuthenticationService', () => {
     beforeEach(() => {
         const storage = createStubInstance(AuthenticationStorageService);
 
-        someItems = [new Authentication(), new Authentication()];
+        const first: Authentication = {appId: '1', accountName: 'n1', secret: 's1'};
+        const second: Authentication = {appId: '2', accountName: 'n2', secret: 's2'};
+
+        someItems = [first, second];
         getItemsFromStorage = storage.getItems.returns(someItems);
 
         sut = new AuthenticationService(storage);
@@ -42,14 +47,13 @@ describe('AuthenticationService', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('(ctor) should not get items from storage on instantiation.', () => {
-        expect(getItemsFromStorage.called).toBe(false);
-    });
-
-    it('(listItems) should get items fom storage.', () => {
-        const items = sut.listItems();
-
-        expect(items).toBe(someItems);
+    it('(ctor) should get items from storage on instantiation.', () => {
         expect(getItemsFromStorage.calledOnce).toBe(true);
     });
+
+    it('(todo) should list items from storage.', async(() => {
+        sut.todo.subscribe(items => {
+            expect(items).toEqual(someItems);
+        });
+    }));
 });
