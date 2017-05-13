@@ -18,8 +18,9 @@
  */
 
 import {async} from '@angular/core/testing';
+import {Subject} from 'rxjs/Subject';
 
-import {createStubInstance, SinonStub} from 'sinon';
+import {spy, createStubInstance, SinonStub} from 'sinon';
 
 import {AuthenticationService} from './authentication.service';
 import {AuthenticationStorageService} from './authentication-storage.service';
@@ -55,5 +56,14 @@ describe('AuthenticationService', () => {
         sut.todo.subscribe(items => {
             expect(items).toEqual(someItems);
         });
+    }));
+
+    it('(createNewItem) should issue new value to subscribers on edited observable.', async(() => {
+        const next = spy(Subject.prototype, 'next');
+
+        sut.createNewItem();
+
+        expect(next.calledOnce).toBe(true);
+        expect(next.calledWithExactly(new Authentication())).toBe(true);
     }));
 });

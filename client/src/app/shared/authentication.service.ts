@@ -21,6 +21,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 
 import {AuthenticationStorageService} from './authentication-storage.service';
 import {Authentication} from './authentication.model';
@@ -30,11 +31,18 @@ export class AuthenticationService {
 
     public readonly todo: Observable<Array<Authentication>>;
 
+    public readonly edited: Observable<Authentication>;
+
     private readonly todoSubject: BehaviorSubject<Array<Authentication>>;
+
+    private readonly editedSubject: Subject<Authentication>;
 
     constructor(private readonly storage: AuthenticationStorageService) {
         this.todoSubject = new BehaviorSubject(this.storage.getItems());
         this.todo = this.todoSubject.asObservable();
+
+        this.editedSubject = new Subject();
+        this.edited = this.editedSubject.asObservable();
     }
 
     listItems(): Array<Authentication> {
@@ -42,5 +50,6 @@ export class AuthenticationService {
     }
 
     createNewItem(): void {
+        this.editedSubject.next(new Authentication());
     }
 }
