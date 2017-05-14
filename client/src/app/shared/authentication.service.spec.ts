@@ -20,7 +20,7 @@
 import {async} from '@angular/core/testing';
 import {Subject} from 'rxjs/Subject';
 
-import {spy, createStubInstance, SinonStub} from 'sinon';
+import {spy, createStubInstance, SinonStub, SinonSpy} from 'sinon';
 
 import {AuthenticationService} from './authentication.service';
 import {AuthenticationStorageService} from './authentication-storage.service';
@@ -31,6 +31,15 @@ describe('AuthenticationService', () => {
     let sut: AuthenticationService;
     let getItemsFromStorage: SinonStub;
     let someItems: Array<Authentication>;
+    let next: SinonSpy;
+
+    beforeAll(() => {
+        next = spy(Subject.prototype, 'next');
+    });
+
+    afterEach(() => {
+        next.reset();
+    });
 
     beforeEach(() => {
         const storage = createStubInstance(AuthenticationStorageService);
@@ -48,6 +57,10 @@ describe('AuthenticationService', () => {
         expect(sut).toBeTruthy();
     });
 
+    it('(ctor) should not issue an edited item on instantiation.', () => {
+        expect(next.called).toBe(false);
+    });
+
     it('(ctor) should get items from storage on instantiation.', () => {
         expect(getItemsFromStorage.calledOnce).toBe(true);
     });
@@ -59,8 +72,6 @@ describe('AuthenticationService', () => {
     }));
 
     it('(createNewItem) should issue new value to subscribers on edited observable.', async(() => {
-        const next = spy(Subject.prototype, 'next');
-
         sut.createNewItem();
 
         expect(next.calledOnce).toBe(true);
