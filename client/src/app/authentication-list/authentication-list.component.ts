@@ -29,13 +29,14 @@ import {AuthenticationService} from '../shared/authentication.service';
 })
 export class AuthenticationListComponent implements OnInit {
 
-    private items: Array<Authentication>;
+    private todo: Array<Authentication>;
 
     constructor(private readonly service: AuthenticationService) {
     }
 
     ngOnInit(): void {
-        this.items = this.service.listItems();
+        this.service.todo.subscribe(serviceValues =>
+            this.todo = serviceValues);
     }
 
     onButtonClick(): void {

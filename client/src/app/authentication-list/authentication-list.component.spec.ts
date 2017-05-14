@@ -17,21 +17,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {createStubInstance, SinonStub} from 'sinon';
+import {Subject} from 'rxjs/Subject';
+
+import {spy, SinonSpy} from 'sinon';
 
 import {AuthenticationListComponent} from './authentication-list.component';
-import {AuthenticationService} from '../shared';
+import {AuthenticationService, AuthenticationStorageService} from '../shared';
+import {MockAuthenticationStorageService} from '../mocks/authentication-storage.mock.service';
 
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
-    let getItemsFromStorage: SinonStub;
-    let createNewItem: SinonStub;
+    let createNewItem: SinonSpy;
+    let subscribe: SinonSpy;
+
+    beforeAll(() => {
+        subscribe = spy(Subject.prototype, 'subscribe');
+    });
+
+    afterEach(() => {
+        subscribe.reset();
+    });
 
     beforeEach(() => {
-        const service = createStubInstance(AuthenticationService);
-        getItemsFromStorage = service.listItems.returns([]);
-        createNewItem = service.createNewItem;
+        const storage: any = new MockAuthenticationStorageService();
+        const service = new AuthenticationService(storage as AuthenticationStorageService);
+
+        createNewItem = spy(service, 'createNewItem');
 
         sut = new AuthenticationListComponent(service);
     });
@@ -40,14 +52,14 @@ describe('component: AuthenticationListComponent', () => {
         expect(sut).toBeTruthy();
     });
 
-    it('(ctor) should not fetch items on instantiation.', () => {
-        expect(getItemsFromStorage.called).toBe(false);
+    it('(ctor) should not subscribe to todo items from service.', () => {
+        expect(subscribe.called).toBe(false);
     });
 
-    it('(ngOnInit) should fetch items from service on init event.', () => {
+    it('(ngOnInit) should subscribe to todo items from service.', () => {
         sut.ngOnInit();
 
-        expect(getItemsFromStorage.calledOnce).toBe(true);
+        expect(subscribe.calledOnce).toBe(true);
     });
 
     it('(onButtonClick) should call service to create new item.', () => {
