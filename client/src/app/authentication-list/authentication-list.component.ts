@@ -23,7 +23,6 @@ import {} from 'primeng/primeng';
 
 import {Authentication} from '../shared';
 import {AuthenticationService} from '../shared/authentication.service';
-import {PrimeEvent} from './prime-event';
 
 @Component({
     selector: 'tc-authentication-list',

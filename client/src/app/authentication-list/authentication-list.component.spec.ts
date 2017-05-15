@@ -24,7 +24,6 @@ import {spy, SinonSpy} from 'sinon';
 import {AuthenticationListComponent} from './authentication-list.component';
 import {AuthenticationService, AuthenticationStorageService} from '../shared';
 import {MockAuthenticationStorageService} from '../mocks/authentication-storage.mock.service';
-import {PrimeEvent} from './prime-event';
 import {Authentication} from '../shared/authentication.model';
 
 describe('component: AuthenticationListComponent', () => {

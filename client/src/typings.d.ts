@@ -22,3 +22,8 @@ declare var module: NodeModule;
 interface NodeModule {
     id: string;
 }
+
+/* Shape of an event raised by PrimeNG components */
+interface PrimeEvent {
+    data: any;
+}
