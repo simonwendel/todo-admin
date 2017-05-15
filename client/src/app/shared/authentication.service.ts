@@ -45,10 +45,6 @@ export class AuthenticationService {
         this.edited = this.editedSubject.asObservable();
     }
 
-    listItems(): Array<Authentication> {
-        return this.storage.getItems();
-    }
-
     createNewItem(): void {
         this.editedSubject.next(new Authentication());
     }
