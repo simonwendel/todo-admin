@@ -31,6 +31,7 @@ describe('AuthenticationService', () => {
     let sut: AuthenticationService;
     let getItemsFromStorage: SinonStub;
     let someItems: Array<Authentication>;
+    let oneItem: Authentication;
     let next: SinonSpy;
 
     beforeAll(() => {
@@ -49,6 +50,8 @@ describe('AuthenticationService', () => {
 
         someItems = [first, second];
         getItemsFromStorage = storage.getItems.returns(someItems);
+
+        oneItem = {appId: '3', accountName: 'n3', secret: 's3'};
 
         sut = new AuthenticationService(storage);
     });
@@ -76,5 +79,12 @@ describe('AuthenticationService', () => {
 
         expect(next.calledOnce).toBe(true);
         expect(next.calledWithExactly(new Authentication())).toBe(true);
+    }));
+
+    it('(editItem) should issue supplied value to subscribers on edited observable.', async(() => {
+        sut.editItem(oneItem);
+
+        expect(next.calledOnce).toBe(true);
+        expect(next.calledWithExactly(oneItem)).toBe(true);
     }));
 });
