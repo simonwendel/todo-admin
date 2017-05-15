@@ -24,12 +24,16 @@ import {spy, SinonSpy} from 'sinon';
 import {AuthenticationListComponent} from './authentication-list.component';
 import {AuthenticationService, AuthenticationStorageService} from '../shared';
 import {MockAuthenticationStorageService} from '../mocks/authentication-storage.mock.service';
+import {PrimeEvent} from './prime-event';
+import {Authentication} from '../shared/authentication.model';
 
 describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
     let createNewItem: SinonSpy;
     let subscribe: SinonSpy;
+    let editItem: SinonSpy;
+    let someItem: Authentication;
 
     beforeAll(() => {
         subscribe = spy(Subject.prototype, 'subscribe');
@@ -44,6 +48,9 @@ describe('component: AuthenticationListComponent', () => {
         const service = new AuthenticationService(storage as AuthenticationStorageService);
 
         createNewItem = spy(service, 'createNewItem');
+
+        editItem = spy(service, 'editItem');
+        someItem = new Authentication({appId: '1', accountName: 'n1', secret: 's1'});
 
         sut = new AuthenticationListComponent(service);
     });
@@ -66,5 +73,19 @@ describe('component: AuthenticationListComponent', () => {
         sut.onButtonClick();
 
         expect(createNewItem.calledOnce).toBe(true);
+    });
+
+    it('(onRowSelect) should call service to edit selected item.', () => {
+        const event: PrimeEvent = {
+            data: someItem
+        };
+
+        sut.onRowSelect(event);
+
+        const arg = editItem.firstCall.args[0];
+
+        expect(editItem.calledOnce).toBe(true);
+        expect(arg).not.toBe(event.data);
+        expect(arg).toEqual(event.data);
     });
 });

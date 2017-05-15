@@ -19,8 +19,11 @@
 
 import {Component, OnInit} from '@angular/core';
 
+import {} from 'primeng/primeng';
+
 import {Authentication} from '../shared';
 import {AuthenticationService} from '../shared/authentication.service';
+import {PrimeEvent} from './prime-event';
 
 @Component({
     selector: 'tc-authentication-list',
@@ -41,5 +44,10 @@ export class AuthenticationListComponent implements OnInit {
 
     onButtonClick(): void {
         this.service.createNewItem();
+    }
+
+    onRowSelect(event: PrimeEvent) {
+        const item = new Authentication(event.data);
+        this.service.editItem(item);
     }
 }
