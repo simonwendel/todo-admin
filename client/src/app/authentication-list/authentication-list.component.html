@@ -1,4 +1,4 @@
-<p-dataTable class="authentication-list" [value]="todo" selectionMode="single" [(selection)]="selectedItem"
+<p-dataTable class="authentication-list" [value]="todo" selectionMode="single" (onRowSelect)="onRowSelect($event)"
              [paginator]="true" rows="15" [responsive]="true">
     <p-header>App Authentication</p-header>
     <p-column field="accountName" header="Account Name" [sortable]="true"></p-column>
