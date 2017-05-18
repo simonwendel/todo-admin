@@ -25,6 +25,7 @@ import {spy, createStubInstance, SinonStub, SinonSpy} from 'sinon';
 import {AuthenticationService} from './authentication.service';
 import {AuthenticationStorageService} from './authentication-storage.service';
 import {Authentication} from './authentication.model';
+import 'rxjs/Rx';
 
 describe('AuthenticationService', () => {
 
@@ -101,6 +102,27 @@ describe('AuthenticationService', () => {
 
         expect(saveItemToStorage.calledWithExactly(oneItem)).toBe(true);
     });
+
+    it('(saveItem) should add a new item to the todo observable.', async(() => {
+        const itemsAfterSave = someItems.concat(oneItem);
+        sut.editItem(oneItem);
+
+        sut.todo.skip(1).subscribe(items => {
+            expect(items).toEqual(itemsAfterSave);
+        });
+
+        sut.saveItem();
+    }));
+
+    it('(saveItem) should not add item to the todo observable when updating.', async(() => {
+        sut.editItem(someItems[0]);
+
+        sut.todo.skip(1).subscribe(items => {
+            expect(items).toEqual(someItems);
+        });
+
+        sut.saveItem();
+    }));
 
     it('(deleteItem) should delete the edited item from storage.', () => {
         sut.editItem(oneItem);

@@ -32,14 +32,17 @@ export class AuthenticationService {
 
     public readonly edited: Observable<Authentication>;
 
-    private editedItem: Authentication;
-
     private readonly todoSubject: BehaviorSubject<Array<Authentication>>;
 
     private readonly editedSubject: Subject<Authentication>;
 
+    private readonly todoItems: Array<Authentication>;
+
+    private editedItem: Authentication;
+
     constructor(private readonly storage: AuthenticationStorageService) {
-        this.todoSubject = new BehaviorSubject(this.storage.getItems());
+        this.todoItems = this.storage.getItems();
+        this.todoSubject = new BehaviorSubject(this.todoItems);
         this.todo = this.todoSubject.asObservable();
 
         this.editedSubject = new Subject();
@@ -58,6 +61,12 @@ export class AuthenticationService {
 
     saveItem(): void {
         this.storage.saveItem(this.editedItem);
+
+        if (this.todoItems.includes(this.editedItem) === false) {
+            this.todoItems.push(this.editedItem);
+        }
+
+        this.todoSubject.next(this.todoItems);
     }
 
     deleteItem(): void {
