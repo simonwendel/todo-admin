@@ -34,6 +34,7 @@ describe('AuthenticationService', () => {
     let oneItem: Authentication;
     let next: SinonSpy;
     let saveItemToStorage: SinonStub;
+    let deleteItemFromStorage: SinonStub;
 
     beforeAll(() => {
         next = spy(Subject.prototype, 'next');
@@ -55,6 +56,8 @@ describe('AuthenticationService', () => {
         oneItem = {appId: '3', accountName: 'n3', secret: 's3'};
 
         saveItemToStorage = storage.saveItem;
+
+        deleteItemFromStorage = storage.deleteItem;
 
         sut = new AuthenticationService(storage);
     });
@@ -97,5 +100,13 @@ describe('AuthenticationService', () => {
         sut.saveItem();
 
         expect(saveItemToStorage.calledWithExactly(oneItem)).toBe(true);
+    });
+
+    it('(deleteItem) should delete the edited item from storage.', () => {
+        sut.editItem(oneItem);
+
+        sut.deleteItem();
+
+        expect(deleteItemFromStorage.calledWithExactly(oneItem)).toBe(true);
     });
 });

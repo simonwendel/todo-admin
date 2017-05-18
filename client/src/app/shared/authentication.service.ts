@@ -59,4 +59,8 @@ export class AuthenticationService {
     saveItem(): void {
         this.storage.saveItem(this.editedItem);
     }
+
+    deleteItem(): void {
+        this.storage.deleteItem(this.editedItem);
+    }
 }
