@@ -131,4 +131,25 @@ describe('AuthenticationService', () => {
 
         expect(deleteItemFromStorage.calledWithExactly(oneItem)).toBe(true);
     });
+
+    it('(deleteItem) should remove an item from the todo observable.', async(() => {
+        const itemsAfterDelete = [someItems[1]];
+        sut.editItem(someItems[0]);
+
+        sut.todo.skip(1).subscribe(items => {
+            expect(items).toEqual(itemsAfterDelete);
+        });
+
+        sut.deleteItem();
+    }));
+
+    it('(deleteItem) should not remove an item from the todo observable if not found.', async(() => {
+        sut.editItem(oneItem);
+
+        sut.todo.skip(1).subscribe(items => {
+            expect(items).toEqual(someItems);
+        });
+
+        sut.deleteItem();
+    }));
 });

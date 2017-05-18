@@ -71,5 +71,12 @@ export class AuthenticationService {
 
     deleteItem(): void {
         this.storage.deleteItem(this.editedItem);
+
+        const index = this.todoItems.indexOf(this.editedItem);
+        if (index >= 0) {
+            this.todoItems.splice(index, 1);
+        }
+
+        this.todoSubject.next(this.todoItems);
     }
 }
