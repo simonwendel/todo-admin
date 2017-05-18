@@ -33,6 +33,7 @@ describe('AuthenticationService', () => {
     let someItems: Array<Authentication>;
     let oneItem: Authentication;
     let next: SinonSpy;
+    let saveItemToStorage: SinonStub;
 
     beforeAll(() => {
         next = spy(Subject.prototype, 'next');
@@ -52,6 +53,8 @@ describe('AuthenticationService', () => {
         getItemsFromStorage = storage.getItems.returns(someItems);
 
         oneItem = {appId: '3', accountName: 'n3', secret: 's3'};
+
+        saveItemToStorage = storage.saveItem;
 
         sut = new AuthenticationService(storage);
     });
@@ -87,4 +90,12 @@ describe('AuthenticationService', () => {
         expect(next.calledOnce).toBe(true);
         expect(next.calledWithExactly(oneItem)).toBe(true);
     }));
+
+    it('(saveItem) should save the edited item to storage.', () => {
+        sut.editItem(oneItem);
+
+        sut.saveItem();
+
+        expect(saveItemToStorage.calledWithExactly(oneItem)).toBe(true);
+    });
 });
