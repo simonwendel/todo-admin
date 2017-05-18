@@ -88,15 +88,15 @@ describe('AuthenticationService', () => {
         expect(next.calledWithExactly(new Authentication())).toBe(true);
     }));
 
-    it('(editItem) should issue supplied value to subscribers on edited observable.', async(() => {
-        sut.editItem(oneItem);
+    it('(useItem) should issue supplied value to subscribers on edited observable.', async(() => {
+        sut.useItem(oneItem);
 
         expect(next.calledOnce).toBe(true);
         expect(next.calledWithExactly(oneItem)).toBe(true);
     }));
 
     it('(saveItem) should save the edited item to storage.', () => {
-        sut.editItem(oneItem);
+        sut.useItem(oneItem);
 
         sut.saveItem();
 
@@ -105,7 +105,7 @@ describe('AuthenticationService', () => {
 
     it('(saveItem) should add a new item to the todo observable.', async(() => {
         const itemsAfterSave = someItems.concat(oneItem);
-        sut.editItem(oneItem);
+        sut.useItem(oneItem);
 
         sut.todo.skip(1).subscribe(items => {
             expect(items).toEqual(itemsAfterSave);
@@ -115,7 +115,7 @@ describe('AuthenticationService', () => {
     }));
 
     it('(saveItem) should not add item to the todo observable when updating.', async(() => {
-        sut.editItem(someItems[0]);
+        sut.useItem(someItems[0]);
 
         sut.todo.skip(1).subscribe(items => {
             expect(items).toEqual(someItems);
@@ -125,7 +125,7 @@ describe('AuthenticationService', () => {
     }));
 
     it('(deleteItem) should delete the edited item from storage.', () => {
-        sut.editItem(oneItem);
+        sut.useItem(oneItem);
 
         sut.deleteItem();
 
@@ -134,7 +134,7 @@ describe('AuthenticationService', () => {
 
     it('(deleteItem) should remove an item from the todo observable.', async(() => {
         const itemsAfterDelete = [someItems[1]];
-        sut.editItem(someItems[0]);
+        sut.useItem(someItems[0]);
 
         sut.todo.skip(1).subscribe(items => {
             expect(items).toEqual(itemsAfterDelete);
@@ -144,7 +144,7 @@ describe('AuthenticationService', () => {
     }));
 
     it('(deleteItem) should not remove an item from the todo observable if not found.', async(() => {
-        sut.editItem(oneItem);
+        sut.useItem(oneItem);
 
         sut.todo.skip(1).subscribe(items => {
             expect(items).toEqual(someItems);

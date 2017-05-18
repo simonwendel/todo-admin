@@ -54,7 +54,7 @@ export class AuthenticationService {
         this.editedSubject.next(this.editedItem);
     }
 
-    editItem(item: Authentication): void {
+    useItem(item: Authentication): void {
         this.editedItem = item;
         this.editedSubject.next(this.editedItem);
     }

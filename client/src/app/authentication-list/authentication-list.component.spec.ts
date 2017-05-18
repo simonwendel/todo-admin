@@ -31,7 +31,7 @@ describe('component: AuthenticationListComponent', () => {
     let sut: AuthenticationListComponent;
     let createNewItem: SinonSpy;
     let subscribe: SinonSpy;
-    let editItem: SinonSpy;
+    let useItem: SinonSpy;
     let someItem: Authentication;
 
     beforeAll(() => {
@@ -48,7 +48,7 @@ describe('component: AuthenticationListComponent', () => {
 
         createNewItem = spy(service, 'createNewItem');
 
-        editItem = spy(service, 'editItem');
+        useItem = spy(service, 'useItem');
         someItem = new Authentication({appId: '1', accountName: 'n1', secret: 's1'});
 
         sut = new AuthenticationListComponent(service);
@@ -81,9 +81,9 @@ describe('component: AuthenticationListComponent', () => {
 
         sut.onRowSelect(event);
 
-        const arg = editItem.firstCall.args[0];
+        const arg = useItem.firstCall.args[0];
 
-        expect(editItem.calledOnce).toBe(true);
+        expect(useItem.calledOnce).toBe(true);
         expect(arg).not.toBe(event.data);
         expect(arg).toEqual(event.data);
     });
