@@ -29,11 +29,8 @@ import {AuthenticationDialogService} from './authentication-dialog.service';
 })
 export class AuthenticationDialogComponent {
 
-    private visible: boolean;
-
     authenticationItem: Authentication;
 
     constructor(private readonly dialog: AuthenticationDialogService) {
-        this.visible = this.dialog.isVisible();
     }
 }

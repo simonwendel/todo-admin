@@ -22,7 +22,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SharedModule, ButtonModule, DialogModule} from 'primeng/primeng';
-import {stub, SinonStub} from 'sinon';
+import {createStubInstance} from 'sinon';
 
 import {Authentication} from '../shared';
 import {AuthenticationDialogComponent} from './authentication-dialog.component';
@@ -31,22 +31,15 @@ import {AuthenticationDialogService} from './authentication-dialog.service';
 describe('component: AuthenticationDialogComponent', () => {
 
     let sut: AuthenticationDialogComponent;
-    let dialog: AuthenticationDialogService;
-    let isVisible: SinonStub;
 
     beforeEach(() => {
-        dialog = new AuthenticationDialogService();
-        isVisible = stub(dialog, 'isVisible').returns(false);
 
-        sut = new AuthenticationDialogComponent(dialog);
+        const service = createStubInstance(AuthenticationDialogService);
+        sut = new AuthenticationDialogComponent(service);
     });
 
     it('(ctor) should be instantiable.', () => {
         expect(sut).toBeTruthy();
-    });
-
-    it('(ctor) should fetch dialog visibility from dialog service.', () => {
-        expect(isVisible.calledOnce).toBe(true);
     });
 });
 
