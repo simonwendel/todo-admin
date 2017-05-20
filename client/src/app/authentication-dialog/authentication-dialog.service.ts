@@ -17,22 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AuthenticationDialogService {
 
-  private visible = false;
+    private visible = false;
 
-  isVisible(): boolean {
-      return this.visible;
-  }
+    isVisible(): boolean {
+        return this.visible;
+    }
 
-  show(): void {
-      this.visible = true;
-  }
+    show(): void {
+        this.visible = true;
+    }
 
-  hide(): void {
-      this.visible = false;
-  }
+    hide(): void {
+        this.visible = false;
+    }
 }
