@@ -50,8 +50,7 @@ export class AuthenticationService {
     }
 
     createNewItem(): void {
-        this.editedItem = new Authentication();
-        this.editedSubject.next(this.editedItem);
+        this.useItem(new Authentication());
     }
 
     useItem(item: Authentication): void {
