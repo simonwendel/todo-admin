@@ -34,15 +34,9 @@ describe('component: AuthenticationListComponent', () => {
     let useItem: SinonSpy;
     let someItem: Authentication;
 
-    beforeAll(() => {
-        subscribe = spy(Subject.prototype, 'subscribe');
-    });
-
-    afterEach(() => {
-        subscribe.reset();
-    });
-
     beforeEach(() => {
+        subscribe = spy(Subject.prototype, 'subscribe');
+
         const storage: any = new MockAuthenticationStorageService();
         const service = new AuthenticationService(storage as AuthenticationStorageService);
 
@@ -52,6 +46,10 @@ describe('component: AuthenticationListComponent', () => {
         someItem = new Authentication({appId: '1', accountName: 'n1', secret: 's1'});
 
         sut = new AuthenticationListComponent(service);
+    });
+
+    afterEach(() => {
+        subscribe.restore();
     });
 
     it('(ctor) should be instantiable.', () => {
