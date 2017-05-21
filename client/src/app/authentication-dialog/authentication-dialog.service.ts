@@ -26,7 +26,9 @@ export class AuthenticationDialogService {
 
     private visible = false;
 
-    constructor(private readonly authenticationService: AuthenticationService) { }
+    constructor(private readonly authenticationService: AuthenticationService) {
+        this.authenticationService.edited.subscribe(this.show);
+    }
 
     isVisible(): boolean {
         return this.visible;

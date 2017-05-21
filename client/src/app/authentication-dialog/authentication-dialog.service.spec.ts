@@ -17,6 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {Observable} from 'rxjs/Observable';
+
+import {spy, SinonSpy} from 'sinon';
+
 import {MockAuthenticationStorageService} from '../mocks';
 import {AuthenticationService} from '../shared';
 import {AuthenticationDialogService} from './authentication-dialog.service';
@@ -25,12 +29,19 @@ describe('service: AuthenticationDialogService', () => {
 
     let sut: AuthenticationDialogService;
     let service: AuthenticationService;
+    let subscribeToObservable: SinonSpy;
 
     beforeEach(() => {
+        subscribeToObservable = spy(Observable.prototype, 'subscribe');
+
         const mock: any = new MockAuthenticationStorageService();
         service = new AuthenticationService(mock);
 
         sut = new AuthenticationDialogService(service);
+    });
+
+    afterEach(() => {
+        subscribeToObservable.restore();
     });
 
     it('(ctor) should be instantiable.', () => {
@@ -39,6 +50,10 @@ describe('service: AuthenticationDialogService', () => {
 
     it('(ctor) should be hidden on instantiation.', () => {
         expect(sut.isVisible()).toBe(false);
+    });
+
+    it('(ctor) should subscribe to edited from authentication service.', () => {
+        expect(subscribeToObservable.calledOn(service.edited)).toBe(true);
     });
 
     it('(show) should show dialog.', () => {
