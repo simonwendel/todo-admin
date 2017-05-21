@@ -24,7 +24,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {SharedModule, ButtonModule, DialogModule} from 'primeng/primeng';
 import {createStubInstance} from 'sinon';
 
-import {Authentication} from '../shared';
+import {MockAuthenticationStorageService} from '../mocks';
+import {Authentication, AuthenticationService, AuthenticationStorageService} from '../shared';
 import {AuthenticationDialogComponent} from './authentication-dialog.component';
 import {AuthenticationDialogService} from './authentication-dialog.service';
 
@@ -52,7 +53,10 @@ describe('compiled: AuthenticationDialogComponent', () => {
         TestBed.configureTestingModule({
             declarations: [AuthenticationDialogComponent],
             imports: [NoopAnimationsModule, FormsModule, SharedModule, ButtonModule, DialogModule],
-            providers: [AuthenticationDialogService]
+            providers: [
+                AuthenticationDialogService,
+                AuthenticationService,
+                {provide: AuthenticationStorageService, useClass: MockAuthenticationStorageService}]
         }).compileComponents();
     }));
 

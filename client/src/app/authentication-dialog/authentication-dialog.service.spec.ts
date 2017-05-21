@@ -17,14 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {createStubInstance} from 'sinon';
+
 import {AuthenticationDialogService} from './authentication-dialog.service';
+import {AuthenticationService} from '../shared/authentication.service';
 
 describe('service: AuthenticationDialogService', () => {
 
     let sut: AuthenticationDialogService;
+    let service: AuthenticationService;
 
     beforeEach(() => {
-        sut = new AuthenticationDialogService();
+        service = createStubInstance(AuthenticationService);
+        sut = new AuthenticationDialogService(service);
     });
 
     it('(ctor) should be instantiable.', () => {

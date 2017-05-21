@@ -19,10 +19,14 @@
 
 import {Injectable} from '@angular/core';
 
+import {AuthenticationService} from '../shared';
+
 @Injectable()
 export class AuthenticationDialogService {
 
     private visible = false;
+
+    constructor(private readonly authenticationService: AuthenticationService) { }
 
     isVisible(): boolean {
         return this.visible;
