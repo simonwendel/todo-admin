@@ -22,7 +22,7 @@ import {Subject} from 'rxjs/Subject';
 import {spy, SinonSpy} from 'sinon';
 
 import {AuthenticationListComponent} from './authentication-list.component';
-import {AuthenticationService, AuthenticationStorageService} from '../shared';
+import {AuthenticationService} from '../shared';
 import {MockAuthenticationStorageService} from '../mocks/authentication-storage.mock.service';
 import {Authentication} from '../shared/authentication.model';
 
@@ -37,8 +37,8 @@ describe('component: AuthenticationListComponent', () => {
     beforeEach(() => {
         subscribe = spy(Subject.prototype, 'subscribe');
 
-        const storage: any = new MockAuthenticationStorageService();
-        const service = new AuthenticationService(storage as AuthenticationStorageService);
+        const mock: any = new MockAuthenticationStorageService();
+        service = new AuthenticationService(mock);
 
         createNewItem = spy(service, 'createNewItem');
 
