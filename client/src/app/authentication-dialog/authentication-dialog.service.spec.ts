@@ -17,10 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {createStubInstance} from 'sinon';
-
+import {MockAuthenticationStorageService} from '../mocks';
+import {AuthenticationService} from '../shared';
 import {AuthenticationDialogService} from './authentication-dialog.service';
-import {AuthenticationService} from '../shared/authentication.service';
 
 describe('service: AuthenticationDialogService', () => {
 
@@ -28,7 +27,9 @@ describe('service: AuthenticationDialogService', () => {
     let service: AuthenticationService;
 
     beforeEach(() => {
-        service = createStubInstance(AuthenticationService);
+        const mock: any = new MockAuthenticationStorageService();
+        service = new AuthenticationService(mock);
+
         sut = new AuthenticationDialogService(service);
     });
 
