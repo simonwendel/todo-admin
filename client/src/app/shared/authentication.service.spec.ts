@@ -27,7 +27,7 @@ import {AuthenticationStorageService} from './authentication-storage.service';
 import {Authentication} from './authentication.model';
 import 'rxjs/Rx';
 
-describe('AuthenticationService', () => {
+describe('service: AuthenticationService', () => {
 
     let sut: AuthenticationService;
     let getItemsFromStorage: SinonStub;
