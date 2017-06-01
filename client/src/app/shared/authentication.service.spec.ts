@@ -37,15 +37,8 @@ describe('AuthenticationService', () => {
     let saveItemToStorage: SinonStub;
     let deleteItemFromStorage: SinonStub;
 
-    beforeAll(() => {
-        next = spy(Subject.prototype, 'next');
-    });
-
-    afterEach(() => {
-        next.reset();
-    });
-
     beforeEach(() => {
+        next = spy(Subject.prototype, 'next');
         const storage = createStubInstance(AuthenticationStorageService);
 
         const first: Authentication = {appId: '1', accountName: 'n1', secret: 's1'};
@@ -61,6 +54,10 @@ describe('AuthenticationService', () => {
         deleteItemFromStorage = storage.deleteItem;
 
         sut = new AuthenticationService(storage);
+    });
+
+    afterEach(() => {
+        next.restore();
     });
 
     it('(ctor) should be instantiable.', () => {
