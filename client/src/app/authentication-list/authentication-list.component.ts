@@ -45,7 +45,7 @@ export class AuthenticationListComponent implements OnInit {
         this.service.createNewItem();
     }
 
-    onRowSelect(event: PrimeEvent) {
+    onRowSelect(event: PrimeEvent): void {
         const item = new Authentication(event.data);
         this.service.useItem(item);
     }
