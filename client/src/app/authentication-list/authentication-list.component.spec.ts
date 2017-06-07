@@ -30,7 +30,7 @@ describe('component: AuthenticationListComponent', () => {
 
     let sut: AuthenticationListComponent;
     let service: AuthenticationService;
-    let createNewItem: SinonSpy;
+    let useNewItem: SinonSpy;
     let subscribeToObservable: SinonSpy;
     let useItem: SinonSpy;
     let someItem: Authentication;
@@ -41,7 +41,7 @@ describe('component: AuthenticationListComponent', () => {
         const mock: any = new MockAuthenticationStorageService();
         service = new AuthenticationService(mock);
 
-        createNewItem = spy(service, 'createNewItem');
+        useNewItem = spy(service, 'useNewItem');
 
         useItem = spy(service, 'useItem');
         someItem = new Authentication({appId: '1', accountName: 'n1', secret: 's1'});
@@ -70,7 +70,7 @@ describe('component: AuthenticationListComponent', () => {
     it('(onButtonClick) should call service to create new item.', () => {
         sut.onButtonClick();
 
-        expect(createNewItem.calledOnce).toBe(true);
+        expect(useNewItem.calledOnce).toBe(true);
     });
 
     it('(onRowSelect) should call service to edit selected item.', () => {

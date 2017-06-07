@@ -49,7 +49,7 @@ export class AuthenticationService {
         this.edited = this.editedSubject.asObservable();
     }
 
-    createNewItem(): void {
+    useNewItem(): void {
         this.useItem(new Authentication());
     }
 

@@ -78,8 +78,8 @@ describe('service: AuthenticationService', () => {
         });
     }));
 
-    it('(createNewItem) should issue new value to subscribers on edited observable.', async(() => {
-        sut.createNewItem();
+    it('(useNewItem) should issue new value to subscribers on edited observable.', async(() => {
+        sut.useNewItem();
 
         expect(next.calledOnce).toBe(true);
         expect(next.calledWithExactly(new Authentication())).toBe(true);

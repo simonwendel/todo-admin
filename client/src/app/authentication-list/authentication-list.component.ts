@@ -42,7 +42,7 @@ export class AuthenticationListComponent implements OnInit {
     }
 
     onButtonClick(): void {
-        this.service.createNewItem();
+        this.service.useNewItem();
     }
 
     onRowSelect(event: PrimeEvent): void {
