@@ -20,6 +20,7 @@
 import {Observable} from 'rxjs/Observable';
 
 import {spy, SinonSpy} from 'sinon';
+import {async} from '@angular/core/testing';
 
 import {MockAuthenticationStorageService} from '../mocks';
 import {AuthenticationService} from '../shared';
@@ -49,22 +50,28 @@ describe('service: AuthenticationDialogService', () => {
     });
 
     it('(ctor) should be hidden on instantiation.', () => {
-        expect(sut.isVisible()).toBe(false);
+        sut.visible.subscribe(visible => {
+            expect(visible).toBe(false);
+        });
     });
 
     it('(ctor) should subscribe to edited from authentication service.', () => {
         expect(subscribeToObservable.calledOn(service.edited)).toBe(true);
     });
 
-    it('(show) should show dialog.', () => {
+    it('(show) should issue new visibility as true.', async(() => {
+        sut.visible.skip(1).subscribe(visible => {
+            expect(visible).toBe(true);
+        });
+
         sut.show();
+    }));
 
-        expect(sut.isVisible()).toBe(true);
-    });
+    it('(hide) should issue new visibility as false.', async(() => {
+        sut.visible.skip(1).subscribe(visible => {
+            expect(visible).toBe(false);
+        });
 
-    it('(hide) should hide dialog.', () => {
         sut.hide();
-
-        expect(sut.isVisible()).toBe(false);
-    });
+    }));
 });

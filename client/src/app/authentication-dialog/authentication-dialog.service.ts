@@ -18,27 +18,30 @@
  */
 
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {AuthenticationService} from '../shared';
 
 @Injectable()
 export class AuthenticationDialogService {
 
-    private visible = false;
+    public readonly visible: Observable<boolean>;
+
+    private readonly visibleSubject: BehaviorSubject<boolean>;
 
     constructor(private readonly authenticationService: AuthenticationService) {
-        this.authenticationService.edited.subscribe(item => this.show());
-    }
+        this.visibleSubject = new BehaviorSubject(false);
+        this.visible = this.visibleSubject.asObservable();
 
-    isVisible(): boolean {
-        return this.visible;
+        this.authenticationService.edited.subscribe(i => this.show());
     }
 
     show(): void {
-        this.visible = true;
+        this.visibleSubject.next(true);
     }
 
     hide(): void {
-        this.visible = false;
+        this.visibleSubject.next(false);
     }
 }
