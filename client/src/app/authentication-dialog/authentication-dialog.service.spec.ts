@@ -29,16 +29,16 @@ import {AuthenticationDialogService} from './authentication-dialog.service';
 describe('service: AuthenticationDialogService', () => {
 
     let sut: AuthenticationDialogService;
-    let service: AuthenticationService;
+    let authenticationService: AuthenticationService;
     let subscribeToObservable: SinonSpy;
 
     beforeEach(() => {
         subscribeToObservable = spy(Observable.prototype, 'subscribe');
 
         const mock: any = new MockAuthenticationStorageService();
-        service = new AuthenticationService(mock);
+        authenticationService = new AuthenticationService(mock);
 
-        sut = new AuthenticationDialogService(service);
+        sut = new AuthenticationDialogService(authenticationService);
     });
 
     afterEach(() => {
@@ -56,7 +56,7 @@ describe('service: AuthenticationDialogService', () => {
     });
 
     it('(ctor) should subscribe to edited from authentication service.', () => {
-        expect(subscribeToObservable.calledOn(service.edited)).toBe(true);
+        expect(subscribeToObservable.calledOn(authenticationService.edited)).toBe(true);
     });
 
     it('(show) should issue new visibility as true.', async(() => {
