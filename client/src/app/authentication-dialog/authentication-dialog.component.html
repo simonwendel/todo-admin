@@ -1,4 +1,4 @@
-<p-dialog header="Authentication Details" [responsive]="true" showEffect="fade" [modal]="true" [visible]="(dialog.visible | async)">
+<p-dialog header="Authentication Details" [responsive]="true" showEffect="fade" [modal]="true" (onHide)="dialog.hide()" [visible]="(dialog.visible | async)">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="authenticationItem">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="accountName">Name</label></div>
