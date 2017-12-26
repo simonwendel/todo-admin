@@ -18,14 +18,13 @@
  */
 
 import {async} from '@angular/core/testing';
-import {Subject} from 'rxjs/Subject';
+import {Observable, Subject} from 'rxjs/Rx';
 
 import {spy, createStubInstance, SinonStub, SinonSpy} from 'sinon';
 
 import {AuthenticationService} from './authentication.service';
 import {AuthenticationStorageService} from './authentication-storage.service';
 import {Authentication} from './authentication.model';
-import 'rxjs/Rx';
 
 describe('service: AuthenticationService', () => {
 

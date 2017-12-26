@@ -18,7 +18,7 @@
  */
 
 import {async} from '@angular/core/testing';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 
 import {spy, SinonSpy} from 'sinon';
 

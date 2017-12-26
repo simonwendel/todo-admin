@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 
 import {stub, SinonStub} from 'sinon';
 import {async} from '@angular/core/testing';

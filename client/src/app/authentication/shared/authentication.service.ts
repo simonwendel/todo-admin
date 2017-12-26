@@ -18,9 +18,7 @@
  */
 
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Subject} from 'rxjs/Subject';
+import {Observable, BehaviorSubject, Subject} from 'rxjs/Rx';
 
 import {AuthenticationStorageService} from './authentication-storage.service';
 import {Authentication} from './authentication.model';

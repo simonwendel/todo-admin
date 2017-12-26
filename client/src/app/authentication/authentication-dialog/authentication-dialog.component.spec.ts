@@ -20,7 +20,7 @@
 import {FormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
+import {Observable} from 'rxjs/Rx';
 import {SharedModule, ButtonModule, DialogModule} from 'primeng/primeng';
 import {spy, stub, SinonSpy, SinonStub, createStubInstance} from 'sinon';
 
@@ -28,7 +28,6 @@ import {MockAuthenticationStorageService} from '../mocks';
 import {Authentication, AuthenticationService, AuthenticationStorageService} from '../shared';
 import {AuthenticationDialogComponent} from './authentication-dialog.component';
 import {AuthenticationDialogService} from './authentication-dialog.service';
-import {Observable} from 'rxjs/Observable';
 
 describe('component: AuthenticationDialogComponent', () => {
 
