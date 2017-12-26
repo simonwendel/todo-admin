@@ -19,7 +19,7 @@
 
 import {Observable} from 'rxjs/Observable';
 
-import {spy, SinonSpy} from 'sinon';
+import {stub, SinonStub} from 'sinon';
 import {async} from '@angular/core/testing';
 
 import {MockAuthenticationStorageService} from '../mocks';
@@ -30,17 +30,17 @@ describe('service: AuthenticationDialogService', () => {
 
     let sut: AuthenticationDialogService;
     let authenticationService: AuthenticationService;
-    let subscribeToObservable: SinonSpy;
-    let hideDialog: SinonSpy;
+    let subscribeToObservable: SinonStub;
+    let hideDialog: SinonStub;
 
     beforeEach(() => {
-        subscribeToObservable = spy(Observable.prototype, 'subscribe');
+        subscribeToObservable = stub(Observable.prototype, 'subscribe');
 
         const mock: any = new MockAuthenticationStorageService();
         authenticationService = new AuthenticationService(mock);
 
         sut = new AuthenticationDialogService(authenticationService);
-        hideDialog = spy(sut, 'hideDialog');
+        hideDialog = stub(sut, 'hideDialog');
     });
 
     afterEach(() => {
