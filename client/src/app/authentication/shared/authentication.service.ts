@@ -54,7 +54,7 @@ export class AuthenticationService {
     }
 
     useItem(item: Authentication): void {
-        this.editedItem = item;
+        this.editedItem = new Authentication(item);
         this.editedSubject.next(this.editedItem);
     }
 
@@ -71,7 +71,9 @@ export class AuthenticationService {
     deleteItem(): void {
         this.storage.deleteItem(this.editedItem);
 
-        const index = this.todoItems.indexOf(this.editedItem);
+        const index = this.todoItems.findIndex(
+            i => i.appId === this.editedItem.appId);
+            
         if (index >= 0) {
             this.todoItems.splice(index, 1);
         }
