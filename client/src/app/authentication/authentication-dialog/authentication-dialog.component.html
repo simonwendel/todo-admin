@@ -48,9 +48,9 @@
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button class="cancel-button" type="button" pButton icon="fa-close" (click)="cancel()" label="Cancel"></button>
+            <button class="cancel-button" type="button" pButton icon="fa-close" (click)="cancelEdit()" label="Cancel"></button>
             <button class="delete-button" type="button" pButton icon="fa-ban" (click)="deleteItem()" label="Delete"></button>
-            <button class="save-button" type="button" pButton icon="fa-check" (click)="dialog.hide()" label="Save"></button>
+            <button class="save-button" type="button" pButton icon="fa-check" (click)="saveItem()" label="Save"></button>
         </div>
     </p-footer>
 </p-dialog>
