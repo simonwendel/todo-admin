@@ -49,4 +49,8 @@ export class AuthenticationDialogService {
     hideDialog(): void {
         this.visibleSubject.next(false);
     }
+
+    cancelEdit(): void {
+        this.hideDialog();
+    }
 }
