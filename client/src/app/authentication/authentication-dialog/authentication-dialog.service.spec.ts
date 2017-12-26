@@ -31,6 +31,7 @@ describe('service: AuthenticationDialogService', () => {
     let sut: AuthenticationDialogService;
     let authenticationService: AuthenticationService;
     let subscribeToObservable: SinonSpy;
+    let hideDialog: SinonSpy;
 
     beforeEach(() => {
         subscribeToObservable = spy(Observable.prototype, 'subscribe');
@@ -39,6 +40,7 @@ describe('service: AuthenticationDialogService', () => {
         authenticationService = new AuthenticationService(mock);
 
         sut = new AuthenticationDialogService(authenticationService);
+        hideDialog = spy(sut, 'hideDialog');
     });
 
     afterEach(() => {
@@ -75,11 +77,8 @@ describe('service: AuthenticationDialogService', () => {
         sut.hideDialog();
     }));
 
-    it('(cancelEdit) should issue new visibility as false.', async(() => {
-        sut.visible.skip(1).subscribe(visible => {
-            expect(visible).toBe(false);
-        });
-
+    it('(cancelEdit) should hide dialog.', async(() => {
         sut.cancelEdit();
+        expect(hideDialog.calledOnce).toBe(true);
     }));
 });
