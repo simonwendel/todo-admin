@@ -32,6 +32,6 @@ export class AuthenticationDialogComponent {
     }
 
     cancel() {
-        this.dialog.hide();
+        this.dialog.hideDialog();
     }
 }

@@ -38,15 +38,15 @@ export class AuthenticationDialogService {
 
         this.authenticationService.edited.subscribe(i => {
             this.authenticationItem = i;
-            this.show();
+            this.showDialog();
         });
     }
 
-    show(): void {
+    showDialog(): void {
         this.visibleSubject.next(true);
     }
 
-    hide(): void {
+    hideDialog(): void {
         this.visibleSubject.next(false);
     }
 }

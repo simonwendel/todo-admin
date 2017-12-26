@@ -59,19 +59,19 @@ describe('service: AuthenticationDialogService', () => {
         expect(subscribeToObservable.calledOn(authenticationService.edited)).toBe(true);
     });
 
-    it('(show) should issue new visibility as true.', async(() => {
+    it('(showDialog) should issue new visibility as true.', async(() => {
         sut.visible.skip(1).subscribe(visible => {
             expect(visible).toBe(true);
         });
 
-        sut.show();
+        sut.showDialog();
     }));
 
-    it('(hide) should issue new visibility as false.', async(() => {
+    it('(hideDialog) should issue new visibility as false.', async(() => {
         sut.visible.skip(1).subscribe(visible => {
             expect(visible).toBe(false);
         });
 
-        sut.hide();
+        sut.hideDialog();
     }));
 });
