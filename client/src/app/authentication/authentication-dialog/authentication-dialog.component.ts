@@ -19,7 +19,6 @@
 
 import {Component} from '@angular/core';
 
-import {Authentication} from '../shared';
 import {AuthenticationDialogService} from './authentication-dialog.service';
 
 @Component({
@@ -28,8 +27,6 @@ import {AuthenticationDialogService} from './authentication-dialog.service';
     styleUrls: ['./authentication-dialog.component.css']
 })
 export class AuthenticationDialogComponent {
-
-    authenticationItem: Authentication;
 
     constructor(private readonly dialog: AuthenticationDialogService) {
     }

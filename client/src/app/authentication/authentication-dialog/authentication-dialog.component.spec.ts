@@ -75,8 +75,7 @@ describe('compiled: AuthenticationDialogComponent', () => {
         fixture = TestBed.createComponent(AuthenticationDialogComponent);
 
         sut = fixture.debugElement.componentInstance;
-        sut.authenticationItem = new Authentication();
-
+        
         fixture.detectChanges();
     });
 
