@@ -22,7 +22,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SharedModule, ButtonModule, DialogModule} from 'primeng/primeng';
-import {spy, SinonSpy, createStubInstance} from 'sinon';
+import {spy, stub, SinonSpy, SinonStub, createStubInstance} from 'sinon';
 
 import {MockAuthenticationStorageService} from '../mocks';
 import {Authentication, AuthenticationService, AuthenticationStorageService} from '../shared';
@@ -34,11 +34,14 @@ describe('component: AuthenticationDialogComponent', () => {
 
     let sut: AuthenticationDialogComponent;
     let subscribeToObservable: SinonSpy;
+    let hideServiceMethod: SinonStub;
 
     beforeEach(() => {
         subscribeToObservable = spy(Observable.prototype, 'subscribe');
 
         const service = createStubInstance(AuthenticationDialogService);
+        hideServiceMethod = service.hide = stub();
+
         sut = new AuthenticationDialogComponent(service);
     });
 
@@ -52,6 +55,11 @@ describe('component: AuthenticationDialogComponent', () => {
 
     it('(ctor) should not subscribe to todo items from service.', () => {
         expect(subscribeToObservable.called).toBe(false);
+    });
+
+    it('(cancel) should call dialog service hide method.', () => {
+        sut.cancel();
+        expect(hideServiceMethod.calledOnce).toBe(true);
     });
 });
 

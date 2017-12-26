@@ -30,4 +30,8 @@ export class AuthenticationDialogComponent {
 
     constructor(private readonly dialog: AuthenticationDialogService) {
     }
+
+    cancel() {
+        this.dialog.hide();
+    }
 }
