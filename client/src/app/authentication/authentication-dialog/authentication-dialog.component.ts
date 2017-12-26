@@ -34,4 +34,8 @@ export class AuthenticationDialogComponent {
     cancel() {
         this.dialog.hideDialog();
     }
+
+    deleteItem() {
+        this.dialog.deleteItem();
+    }
 }
