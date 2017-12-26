@@ -60,5 +60,7 @@ export class AuthenticationDialogService {
     }
 
     saveItem(): void {
+        this.hideDialog();
+        this.authenticationService.saveItem();
     }
 }

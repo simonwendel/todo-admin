@@ -33,6 +33,7 @@ describe('service: AuthenticationDialogService', () => {
     let subscribeToObservable: SinonStub;
     let hideDialog: SinonStub;
     let deleteItem: SinonStub;
+    let saveItem: SinonStub;
 
     beforeEach(() => {
         subscribeToObservable = stub(Observable.prototype, 'subscribe');
@@ -41,6 +42,7 @@ describe('service: AuthenticationDialogService', () => {
         authenticationService = new AuthenticationService(mock);
 
         deleteItem = stub(authenticationService, 'deleteItem');
+        saveItem = stub(authenticationService, 'saveItem');
 
         sut = new AuthenticationDialogService(authenticationService);
         hideDialog = stub(sut, 'hideDialog');
@@ -93,5 +95,15 @@ describe('service: AuthenticationDialogService', () => {
     it('(deleteItem) should call deleteItem.', async(() => {
         sut.deleteItem();
         expect(deleteItem.calledOnce).toBe(true);
+    }));
+
+    it('(saveItem) should hide dialog.', async(() => {
+        sut.saveItem();
+        expect(hideDialog.calledOnce).toBe(true);
+    }));
+
+    it('(saveItem) should call saveItem.', async(() => {
+        sut.saveItem();
+        expect(saveItem.calledOnce).toBe(true);
     }));
 });
