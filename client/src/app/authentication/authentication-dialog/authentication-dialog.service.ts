@@ -56,4 +56,7 @@ export class AuthenticationDialogService {
 
     deleteItem(): void {
     }
+
+    saveItem(): void {
+    }
 }

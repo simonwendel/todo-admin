@@ -36,6 +36,7 @@ describe('component: AuthenticationDialogComponent', () => {
     let subscribeToObservable: SinonSpy;
     let cancelEdit: SinonStub;
     let deleteItem: SinonStub;
+    let saveItem: SinonStub;
 
     beforeEach(() => {
         subscribeToObservable = spy(Observable.prototype, 'subscribe');
@@ -43,6 +44,7 @@ describe('component: AuthenticationDialogComponent', () => {
         const service = createStubInstance(AuthenticationDialogService);
         cancelEdit = service.cancelEdit = stub();
         deleteItem = service.deleteItem = stub();
+        saveItem = service.saveItem = stub();
 
         sut = new AuthenticationDialogComponent(service);
     });
@@ -67,6 +69,11 @@ describe('component: AuthenticationDialogComponent', () => {
     it('(deleteItem) should call dialog service delete method.', () => {
         sut.deleteItem();
         expect(deleteItem.calledOnce).toBe(true);
+    });
+
+    it('(saveItem) should call dialog service delete method.', () => {
+        sut.saveItem();
+        expect(saveItem.calledOnce).toBe(true);
     });
 });
 

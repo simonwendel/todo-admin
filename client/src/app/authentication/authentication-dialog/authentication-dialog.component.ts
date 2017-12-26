@@ -38,4 +38,8 @@ export class AuthenticationDialogComponent {
     deleteItem() {
         this.dialog.deleteItem();
     }
+
+    saveItem() {
+        this.dialog.saveItem();
+    }
 }
