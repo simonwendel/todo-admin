@@ -53,4 +53,7 @@ export class AuthenticationDialogService {
     cancelEdit(): void {
         this.hideDialog();
     }
+
+    deleteItem(): void {
+    }
 }
