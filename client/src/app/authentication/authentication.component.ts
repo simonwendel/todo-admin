@@ -17,7 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationService} from './authentication.service';
-export {AuthenticationStorageService} from './authentication-storage.service';
-export {Authentication} from './authentication.model';
-export {AppConfig} from './app-config';
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'tc-authentication',
+    templateUrl: './authentication.component.html',
+    styleUrls: ['./authentication.component.css']
+})
+export class AuthenticationComponent {
+
+    constructor() {
+    }
+}

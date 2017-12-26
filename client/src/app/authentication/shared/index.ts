@@ -17,15 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {NgModule} from '@angular/core';
-
-import {AppComponent} from './app.component';
-import {AuthenticationModule} from './authentication';
-
-@NgModule({
-    declarations: [AppComponent],
-    imports: [AuthenticationModule],
-    bootstrap: [AppComponent]
-})
-export class AppModule {
-}
+export {AuthenticationService} from './authentication.service';
+export {AuthenticationStorageService} from './authentication-storage.service';
+export {Authentication} from './authentication.model';

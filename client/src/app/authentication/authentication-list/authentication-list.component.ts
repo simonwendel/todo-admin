@@ -19,10 +19,7 @@
 
 import {Component, OnInit} from '@angular/core';
 
-import {} from 'primeng/primeng';
-
-import {Authentication} from '../shared';
-import {AuthenticationService} from '../shared/authentication.service';
+import {AuthenticationService, Authentication} from '../shared';
 
 @Component({
     selector: 'tc-authentication-list',

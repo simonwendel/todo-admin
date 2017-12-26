@@ -18,16 +18,9 @@
  */
 
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {FormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
-import {ButtonModule, DataTableModule, DialogModule, SharedModule} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
-import {MockAuthenticationStorageService} from './mocks';
-import {AuthenticationService, AuthenticationStorageService} from './shared';
-import {AuthenticationListComponent} from './authentication-list';
-import {AuthenticationDialogService, AuthenticationDialogComponent} from './authentication-dialog';
+import {AuthenticationModule} from './authentication';
 
 describe('compiled: AppComponent', () => {
 
@@ -36,12 +29,8 @@ describe('compiled: AppComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AppComponent, AuthenticationListComponent, AuthenticationDialogComponent],
-            imports: [FormsModule, BrowserAnimationsModule, SharedModule, DataTableModule, ButtonModule, DialogModule],
-            providers: [
-                {provide: AuthenticationStorageService, useClass: MockAuthenticationStorageService},
-                AuthenticationService,
-                AuthenticationDialogService]
+            declarations: [AppComponent],
+            imports: [AuthenticationModule]
         }).compileComponents();
     }));
 
