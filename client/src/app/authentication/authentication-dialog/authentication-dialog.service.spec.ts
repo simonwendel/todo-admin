@@ -74,4 +74,12 @@ describe('service: AuthenticationDialogService', () => {
 
         sut.hideDialog();
     }));
+
+    it('(cancelEdit) should issue new visibility as false.', async(() => {
+        sut.visible.skip(1).subscribe(visible => {
+            expect(visible).toBe(false);
+        });
+
+        sut.cancelEdit();
+    }));
 });
