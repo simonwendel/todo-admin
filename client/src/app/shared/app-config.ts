@@ -17,7 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationService} from './authentication.service';
-export {AuthenticationStorageService} from './authentication-storage.service';
-export {Authentication} from './authentication.model';
-export {AppConfig} from './app-config';
+import {Injectable} from '@angular/core';
+
+@Injectable()
+export class AppConfig {
+    public static readonly API_URL = 'http://localhost:5000/api';
+}

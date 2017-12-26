@@ -26,7 +26,7 @@ import {HttpModule} from '@angular/http';
 import {SharedModule, DataTableModule, DialogModule, ButtonModule} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
-import {AuthenticationService, AuthenticationStorageService} from './shared';
+import {AuthenticationService, AuthenticationStorageService, AppConfig} from './shared';
 import {MockAuthenticationStorageService} from './mocks';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationDialogService, AuthenticationDialogComponent} from './authentication-dialog';
@@ -49,6 +49,7 @@ import {AuthenticationDialogService, AuthenticationDialogComponent} from './auth
         ButtonModule
     ],
     providers: [
+        AppConfig,
         {provide: AuthenticationStorageService, useClass: MockAuthenticationStorageService},
         AuthenticationService,
         AuthenticationDialogService],
