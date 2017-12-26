@@ -55,6 +55,8 @@ export class AuthenticationDialogService {
     }
 
     deleteItem(): void {
+        this.hideDialog();
+        this.authenticationService.deleteItem();
     }
 
     saveItem(): void {

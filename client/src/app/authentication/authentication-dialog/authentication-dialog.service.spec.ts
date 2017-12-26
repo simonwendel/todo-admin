@@ -32,12 +32,15 @@ describe('service: AuthenticationDialogService', () => {
     let authenticationService: AuthenticationService;
     let subscribeToObservable: SinonStub;
     let hideDialog: SinonStub;
+    let deleteItem: SinonStub;
 
     beforeEach(() => {
         subscribeToObservable = stub(Observable.prototype, 'subscribe');
 
         const mock: any = new MockAuthenticationStorageService();
         authenticationService = new AuthenticationService(mock);
+
+        deleteItem = stub(authenticationService, 'deleteItem');
 
         sut = new AuthenticationDialogService(authenticationService);
         hideDialog = stub(sut, 'hideDialog');
@@ -80,5 +83,15 @@ describe('service: AuthenticationDialogService', () => {
     it('(cancelEdit) should hide dialog.', async(() => {
         sut.cancelEdit();
         expect(hideDialog.calledOnce).toBe(true);
+    }));
+
+    it('(deleteItem) should hide dialog.', async(() => {
+        sut.deleteItem();
+        expect(hideDialog.calledOnce).toBe(true);
+    }));
+
+    it('(deleteItem) should call deleteItem.', async(() => {
+        sut.deleteItem();
+        expect(deleteItem.calledOnce).toBe(true);
     }));
 });
