@@ -31,15 +31,15 @@ export class AuthenticationDialogComponent {
     constructor(private readonly dialog: AuthenticationDialogService) {
     }
 
-    cancelEdit() {
+    cancelEdit(): void {
         this.dialog.cancelEdit();
     }
 
-    deleteItem() {
+    deleteItem(): void {
         this.dialog.deleteItem();
     }
 
-    saveItem() {
+    saveItem(): void {
         this.dialog.saveItem();
     }
 }
