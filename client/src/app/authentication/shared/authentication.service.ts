@@ -71,7 +71,7 @@ export class AuthenticationService {
 
         const index = this.todoItems.findIndex(
             i => i.appId === this.editedItem.appId);
-            
+
         if (index >= 0) {
             this.todoItems.splice(index, 1);
         }

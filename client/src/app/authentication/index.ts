@@ -17,5 +17,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- export {AuthenticationModule} from './authentication.module';
- 
+export {AuthenticationModule} from './authentication.module';

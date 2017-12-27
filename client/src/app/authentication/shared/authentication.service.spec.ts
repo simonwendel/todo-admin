@@ -104,7 +104,7 @@ describe('service: AuthenticationService', () => {
         sut.useItem(oneItem);
 
         sut.todo.skip(1).subscribe(items => {
-            expect(items.map(i => { return {...i}})).toEqual(itemsAfterSave);
+            expect(items.map(i => {return {...i};})).toEqual(itemsAfterSave);
         });
 
         sut.saveItem();
