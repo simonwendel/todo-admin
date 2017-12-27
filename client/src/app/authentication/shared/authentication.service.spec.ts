@@ -40,13 +40,16 @@ describe('service: AuthenticationService', () => {
         next = spy(Subject.prototype, 'next');
         const storage = createStubInstance(AuthenticationStorageService);
 
-        const first: Authentication = {appId: '1', accountName: 'n1', secret: 's1'};
-        const second: Authentication = {appId: '2', accountName: 'n2', secret: 's2'};
+        const first =
+            new Authentication({appId: '1', accountName: 'n1', secret: 's1'});
+
+        const second =
+            new Authentication({appId: '2', accountName: 'n2', secret: 's2'});
 
         someItems = [first, second];
         getItemsFromStorage = storage.getItems.returns(someItems);
 
-        oneItem = {appId: '3', accountName: 'n3', secret: 's3'};
+        oneItem = new Authentication({appId: '3', accountName: 'n3', secret: 's3'});
 
         saveItemToStorage = storage.saveItem;
 
@@ -104,7 +107,7 @@ describe('service: AuthenticationService', () => {
         sut.useItem(oneItem);
 
         sut.todo.skip(1).subscribe(items => {
-            expect(items.map(i => {return {...i};})).toEqual(itemsAfterSave);
+            expect(items).toEqual(itemsAfterSave);
         });
 
         sut.saveItem();
@@ -114,7 +117,7 @@ describe('service: AuthenticationService', () => {
         sut.useItem(someItems[0]);
 
         sut.todo.skip(1).subscribe(items => {
-            expect(items).toEqual(someItems);
+            expect(items).toBe(someItems);
         });
 
         sut.saveItem();
