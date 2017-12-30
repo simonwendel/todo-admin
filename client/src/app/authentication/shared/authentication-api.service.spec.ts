@@ -17,7 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationService} from './authentication.service';
-export {AuthenticationApiService} from './authentication-api.service';
-export {AuthenticationStorageService} from './authentication-storage.service';
-export {Authentication} from './authentication.model';
+import {AuthenticationApiService} from './authentication-api.service';
+
+describe('service: AuthenticationApiService', () => {
+
+    let sut: AuthenticationApiService;
+
+    beforeEach(() => {
+        sut = new AuthenticationApiService();
+    });
+
+    it('(ctor) should be instantiable.', () => {
+        expect(sut).toBeTruthy();
+    });
+});

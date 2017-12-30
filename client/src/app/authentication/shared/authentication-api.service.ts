@@ -17,7 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {AuthenticationService} from './authentication.service';
-export {AuthenticationApiService} from './authentication-api.service';
-export {AuthenticationStorageService} from './authentication-storage.service';
-export {Authentication} from './authentication.model';
+import {Injectable} from '@angular/core';
+
+@Injectable()
+export class AuthenticationApiService {
+}

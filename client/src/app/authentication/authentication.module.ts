@@ -27,7 +27,7 @@ import {SharedModule, DataTableModule, DialogModule, ButtonModule} from 'primeng
 
 import {AppConfig} from '../app.config';
 import {AuthenticationComponent} from './authentication.component';
-import {AuthenticationService, AuthenticationStorageService} from './shared';
+import {AuthenticationService, AuthenticationApiService, AuthenticationStorageService} from './shared';
 import {MockAuthenticationStorageService} from './mocks';
 import {AuthenticationListComponent} from './authentication-list';
 import {AuthenticationDialogService, AuthenticationDialogComponent} from './authentication-dialog';
@@ -52,6 +52,7 @@ import {AuthenticationDialogService, AuthenticationDialogComponent} from './auth
     providers: [
         AppConfig,
         {provide: AuthenticationStorageService, useClass: MockAuthenticationStorageService},
+        AuthenticationApiService,
         AuthenticationService,
         AuthenticationDialogService],
     exports: [AuthenticationComponent]
