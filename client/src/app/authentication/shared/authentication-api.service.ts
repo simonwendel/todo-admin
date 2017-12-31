@@ -18,12 +18,23 @@
  */
 
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
 
 import {AppConfig} from '../../app.config';
+import {Authentication} from './';
 
 @Injectable()
 export class AuthenticationApiService {
 
-    constructor(private readonly config: AppConfig) {
+    constructor(
+        private readonly config: AppConfig,
+        private readonly http: HttpClient) {
+    }
+
+    getAll(): Observable<Array<Authentication>> {
+        return this.http
+            .get<Array<Authentication>>(this.config.API_AUTHENTICATION_URL)
+            .retry(this.config.API_MAX_RETRIES);
     }
 }
