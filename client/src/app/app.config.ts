@@ -22,7 +22,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class AppConfig {
 
-    public static readonly API_URL = 'http://localhost:5000/api/';
+    public readonly API_URL = 'http://localhost:5000/api/';
 
-    public static readonly API_AUTHENTICATION_URL = AppConfig.API_URL + 'authentication';
+    public readonly API_AUTHENTICATION_URL = this.API_URL + 'authentication';
 }
