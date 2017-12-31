@@ -25,4 +25,6 @@ export class AppConfig {
     public readonly API_URL = 'http://localhost:5000/api/';
 
     public readonly API_AUTHENTICATION_URL = this.API_URL + 'authentication';
+
+    public readonly API_MAX_RETRIES = 3;
 }
